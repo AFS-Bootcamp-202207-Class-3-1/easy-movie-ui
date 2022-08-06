@@ -1,0 +1,44 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Docker Image
+        run: |
+          sha="${{ github.event.pull_request.head.sha }}"
+          commit=${sha: 0: 7}
+          docker build . --file Dockerfile --tag easy-movie-ui:$commit
+      - name: Push To Ali Cloud
+        run: |
+          sha="${{ github.event.pull_request.head.sha }}"
+          commit=${sha: 0: 7}
+          repo_user="${{ secrets.DOCKER_REPOSITORY_USER }}"
+          repo_password="${{ secrets.DOCKER_REPOSITORY_PASSWORD }}"
+          docker login --username=$repo_user -p $repo_password registry.cn-shenzhen.aliyuncs.com
+          docker tag easy-movie-ui:$commit registry.cn-shenzhen.aliyuncs.com/$repo_user/easy-movie-ui:$commit
+          docker push registry.cn-shenzhen.aliyuncs.com/$repo_user/easy-movie-ui:$commit
+      - name: Deploy On My Sever
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          password: ${{ secrets.DEPLOY_PASSWORD }}
+          script: |
+            sha="${{ github.event.pull_request.head.sha }}"
+            commit=${sha: 0: 7}
+            repo_user="${{ secrets.DOCKER_REPOSITORY_USER }}"
+            cd /home/${{ secrets.DEPLOY_USER }}/easy-movie/ui
+            docker-compose down
+            docker login --username=$repo_user -p $repo_password registry.cn-shenzhen.aliyuncs.com >/dev/null 2>&1
+            docker pull registry.cn-shenzhen.aliyuncs.com/$repo_user/easy-movie-ui:$commit
+            COMMIT=$commit docker-compose up -d
