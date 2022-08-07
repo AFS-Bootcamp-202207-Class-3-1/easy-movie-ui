@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.less";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import IndexHeader from "./layout/IndexHeader";
 import IndexFooter from "./layout/IndexFooter";
