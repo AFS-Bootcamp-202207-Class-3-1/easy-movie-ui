@@ -1,5 +1,6 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
+import "./UserAvatar.css";
 
 const UserAvatar = () => {
   return (
