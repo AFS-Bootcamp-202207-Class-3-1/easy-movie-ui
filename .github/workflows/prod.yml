@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI - Production
 
 on:
   pull_request:
@@ -18,7 +18,9 @@ jobs:
           node-version: 16
           cache: 'npm'
           cache-dependency-path: package-lock.json
+      
       - run: npm install
+      
       - run: npm run build
       
       - name: Build Docker Image
@@ -26,6 +28,7 @@ jobs:
           sha="${{ github.event.pull_request.head.sha }}"
           commit=${sha: 0: 7}
           docker build . --file Dockerfile --tag easy-movie-ui:$commit
+      
       - name: Push To Ali Cloud
         run: |
           sha="${{ github.event.pull_request.head.sha }}"
@@ -35,6 +38,7 @@ jobs:
           docker login --username=$repo_user -p $repo_password registry.cn-shenzhen.aliyuncs.com
           docker tag easy-movie-ui:$commit registry.cn-shenzhen.aliyuncs.com/$repo_user/easy-movie-ui:$commit
           docker push registry.cn-shenzhen.aliyuncs.com/$repo_user/easy-movie-ui:$commit
+      
       - name: Deploy On My Sever
         uses: appleboy/ssh-action@master
         with:
