@@ -7,6 +7,7 @@ import MoviePage from "./pages/MoviePage";
 import TheaterPage from "./pages/TheaterPage";
 import { Layout } from "antd";
 import { Route, Routes, Outlet } from "react-router-dom";
+import NotFoundPage from "./pages/NotFoundPage";
 const { Header, Footer, Content } = Layout;
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Header className="header">
           <IndexHeader />
         </Header>
+
         <PerfectScrollbar className="main-content">
           <Content>
             <Routes>
@@ -23,11 +25,12 @@ function App() {
                 <Route index element={<IndexPage />} />
                 <Route path="/movie" element={<MoviePage />} />
                 <Route path="/theater" element={<TheaterPage />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
           </Content>
         </PerfectScrollbar>
-
+        
         <Footer className="footer">
           <IndexFooter />
         </Footer>
