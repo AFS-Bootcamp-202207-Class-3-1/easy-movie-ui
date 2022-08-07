@@ -3,41 +3,48 @@ import {
   VideoCameraOutlined,
   ShopOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu } from "antd";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const items = [
   {
     label: "HOME",
-    key: "index",
+    key: "/",
     icon: <HomeOutlined />,
   },
   {
     label: "MOVIE",
-    key: "movie",
+    key: "/movie",
     icon: <VideoCameraOutlined />,
   },
   {
     label: "THEATER",
-    key: "theater",
+    key: "/theater",
     icon: <ShopOutlined />,
   },
 ];
 
 const Navbar = () => {
-  const [current, setCurrent] = useState("index");
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const onClick = (e) => {
-    console.log("click ", e);
-    setCurrent(e.key);
+  const [current, setCurrent] = useState(location.pathname);
+
+  const toSelectedPage = ({ key }) => {
+    navigate(key);
   };
 
+  useEffect(() => {
+    setCurrent(location.pathname);
+  }, [location.pathname]);
+  
   return (
     <Menu
       style={{
         width: "100%",
       }}
-      onClick={onClick}
+      onClick={toSelectedPage}
       selectedKeys={[current]}
       mode="horizontal"
       items={items}
