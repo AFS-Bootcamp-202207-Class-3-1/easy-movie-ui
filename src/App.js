@@ -5,7 +5,7 @@ import IndexFooter from "./layout/IndexFooter";
 import IndexPage from "./pages/IndexPage";
 import MoviePage from "./pages/MoviePage";
 import TheaterPage from "./pages/TheaterPage";
-import { Layout } from "antd";
+import { Layout, BackTop } from "antd";
 import { Route, Routes, Outlet } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
 const { Header, Footer, Content } = Layout;
@@ -18,7 +18,7 @@ function App() {
           <IndexHeader />
         </Header>
 
-        <PerfectScrollbar className="main-content">
+        <PerfectScrollbar className="main-content-wrapper" id="main-scroller-bar">
           <Content>
             <Routes>
               <Route path="/" element={<Outlet />}>
@@ -28,9 +28,10 @@ function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
+            <BackTop className="back-to-top" target={() => document.getElementById("main-scroller-bar")} />
           </Content>
         </PerfectScrollbar>
-        
+
         <Footer className="footer">
           <IndexFooter />
         </Footer>
