@@ -1,19 +1,40 @@
-import { useEffect } from "react";
-import "./App.css";
-import { findUserById } from "./api/user";
+import "./App.less";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import IndexHeader from "./layout/IndexHeader";
+import IndexFooter from "./layout/IndexFooter";
+import IndexPage from "./pages/IndexPage";
+import MoviePage from "./pages/MoviePage";
+import TheaterPage from "./pages/TheaterPage";
+import { Layout } from "antd";
+import { Route, Routes, Outlet } from "react-router-dom";
+import NotFoundPage from "./pages/NotFoundPage";
+const { Header, Footer, Content } = Layout;
 
 function App() {
-  useEffect(() => {
-    async function fetchData() {
-      await findUserById(1);
-    }
-    let res = fetchData();
-    console.log(res);
-  }, []);
-
   return (
     <div className="app">
-      <h1>We Are Coffee Studio.</h1>
+      <Layout>
+        <Header className="header">
+          <IndexHeader />
+        </Header>
+
+        <PerfectScrollbar className="main-content">
+          <Content>
+            <Routes>
+              <Route path="/" element={<Outlet />}>
+                <Route index element={<IndexPage />} />
+                <Route path="/movie" element={<MoviePage />} />
+                <Route path="/theater" element={<TheaterPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </Content>
+        </PerfectScrollbar>
+        
+        <Footer className="footer">
+          <IndexFooter />
+        </Footer>
+      </Layout>
     </div>
   );
 }
