@@ -1,4 +1,5 @@
 import "./App.css";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import IndexHeader from "./layout/IndexHeader";
 import IndexFooter from "./layout/IndexFooter";
 import IndexPage from "./pages/IndexPage";
@@ -15,15 +16,18 @@ function App() {
         <Header className="header">
           <IndexHeader />
         </Header>
-        <Content className="main-content">
-          <Routes>
-            <Route path="/" element={<Outlet />}>
-              <Route index element={<IndexPage />} />
-              <Route path="/movie" element={<MoviePage />} />
-              <Route path="/theater" element={<TheaterPage />} />
-            </Route>
-          </Routes>
-        </Content>
+        <PerfectScrollbar className="main-content">
+          <Content>
+            <Routes>
+              <Route path="/" element={<Outlet />}>
+                <Route index element={<IndexPage />} />
+                <Route path="/movie" element={<MoviePage />} />
+                <Route path="/theater" element={<TheaterPage />} />
+              </Route>
+            </Routes>
+          </Content>
+        </PerfectScrollbar>
+
         <Footer className="footer">
           <IndexFooter />
         </Footer>
