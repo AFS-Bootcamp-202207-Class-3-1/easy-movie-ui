@@ -1,6 +1,6 @@
 import "./App.css";
 import { Layout } from "antd";
-import Navbar from "./layout/Navbar";
+import IndexHeader from "./layout/IndexHeader";
 const { Header, Footer, Content } = Layout;
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="app">
       <Layout>
         <Header className="header">
-          <Navbar />
+          <IndexHeader />
         </Header>
         <Content className="main-content">Content</Content>
         <Footer className="footer">Footer</Footer>

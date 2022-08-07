@@ -34,6 +34,9 @@ const Navbar = () => {
 
   return (
     <Menu
+      style={{
+        width: "100%",
+      }}
       onClick={onClick}
       selectedKeys={[current]}
       mode="horizontal"
