@@ -1,19 +1,18 @@
-import { useEffect } from "react";
 import "./App.css";
-import { findUserById } from "./api/user";
+import { Layout } from "antd";
+import Navbar from "./layout/Navbar";
+const { Header, Footer, Content } = Layout;
 
 function App() {
-  useEffect(() => {
-    async function fetchData() {
-      await findUserById(1);
-    }
-    let res = fetchData();
-    console.log(res);
-  }, []);
-
   return (
     <div className="app">
-      <h1>We Are Coffee Studio.</h1>
+      <Layout>
+        <Header className="header">
+          <Navbar />
+        </Header>
+        <Content className="main-content">Content</Content>
+        <Footer className="footer">Footer</Footer>
+      </Layout>
     </div>
   );
 }
