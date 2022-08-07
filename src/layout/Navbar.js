@@ -8,17 +8,17 @@ import { Menu } from "antd";
 
 const items = [
   {
-    label: "Home",
+    label: "HOME",
     key: "index",
     icon: <HomeOutlined />,
   },
   {
-    label: "movie",
+    label: "MOVIE",
     key: "movie",
     icon: <VideoCameraOutlined />,
   },
   {
-    label: "theater",
+    label: "THEATER",
     key: "theater",
     icon: <ShopOutlined />,
   },
