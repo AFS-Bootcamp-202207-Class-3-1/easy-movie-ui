@@ -1,44 +1,42 @@
 import { useEffect, useState } from "react";
 import { Pagination } from "antd";
 import MovieGroup from "../features/movieList/MovieGroup";
+import { useLocation } from "react-router-dom";
+import { get, has } from "lodash";
+import { fetchAllMovieList } from "../api/movie";
 import MovieMockList from "../features/movieList/MovieMockList";
-
-import { get } from "lodash";
-
 const MoviePage = () => {
-  const [current, setCurrent] = useState(1);
-  const [defaultPageSize, setDefaultPageSize] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);//
+  const [pageSize, setPageSize] = useState(5);
   const [total, setTotal] = useState(0);
-
+  const location = useLocation();
+  const keyword = has(location, "state.keyWord") ? location.state.keyWord : null;
+  console.log("keyword 有没有触发",keyword)
   const { content } = MovieMockList;
-
   const onChange = (page, pageSize) => {
-    console.log("已经点击了");
-    console.log("page", page);
-    console.log("pageSize", pageSize);
-  };
-  const onShowSizeChange = (current, size) => {
-    console.log("onShowSzieChange", current, size);
+    setCurrentPage(page);
+    setPageSize(pageSize)
   };
   useEffect(() => {
-    console.log("这里准备去获取API", MovieMockList, total);
-    const current = get(MovieMockList, "pageable.pageNumber");
-    console.log("current", current);
-    setCurrent(current);
-    setDefaultPageSize(get(MovieMockList, "pageable.pageSize"));
-    setTotal(get(MovieMockList, "totalElements"));
-  }, []);
+    //拉去列表
+    const params={
+      page: currentPage,
+      pageSize:pageSize,
+      keyword:keyword
+    }
+    fetchAllMovieList(params).then(response=>{
+      console.log("res",response);
+    })
+  }, [currentPage]);
   return (
     <div>
-      <h1>Movie Page</h1>
+      {keyword && <span>返回电影列表</span>}
       <MovieGroup movieList={content}></MovieGroup>
-      <div style={{ textAlign: "center",marginTop:"68px",marginBottom:"30px" }}>
+      <div
+        style={{ textAlign: "center", marginTop: "68px", marginBottom: "30px" }}
+      >
         <Pagination
-          showQuickJumper
-          defaultCurrent={current}
-          onShowSizeChange={onShowSizeChange}
-          defaultPageSize={defaultPageSize}
-          total={total}
+          total={100}
           onChange={onChange}
         />
       </div>

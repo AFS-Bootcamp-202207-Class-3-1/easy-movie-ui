@@ -1,24 +1,30 @@
 #movieItem {
-height: 100%;
-background-color: white;
-/* text-align: center; */
-border-radius: 10px;
-filter: drop-shadow(2px 2px 6px rgba(235, 213, 213, 0.667));
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+  width: 450px;
+  margin-top: 50px;
 }
-.MovieImg { 
-    filter: drop-shadow(2px 2px 6px #000a);
-    border-radius: 10px;
-    cursor:pointer;
-    width: 150px;
-    height:180px
+
+#movieItem:hover {
+  filter: drop-shadow(2px 2px 6px rgba(235, 213, 213, 0.667));
+}
+.MovieImg {
+  border-radius: 10px;
+  cursor: pointer;
+  width: 200px;
+  height: 300px;
+  margin-left: -30px;
+}
+
+.MovieImg:hover {
+  filter: drop-shadow(2px 2px 6px #000a);
 }
 .movieReview {
-
-    height: 100%;
-    display: -webkit-flex; /* Safari */
-    -webkit-flex-direction: row-reverse; /* Safari 6.1+ */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around; /* 行与行之间留有均匀间隔。 */
-
+  height: 100%;
+  display: -webkit-flex; /* Safari */
+  -webkit-flex-direction: row-reverse; /* Safari 6.1+ */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* 行与行之间留有均匀间隔。 */
 }

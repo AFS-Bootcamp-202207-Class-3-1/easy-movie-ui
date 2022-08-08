@@ -5,8 +5,8 @@ import {get} from "lodash"
 // import React from 'react';
 const MovieItem = (props) => {
   const {item}=props;
-  const onClickImage = (event) => {
-    console.log("触发了点击图片的事件", event,"movieId为",get(item,"movie_id"));
+  const onClickImage = () => {
+    
   };
   return (
     <>
@@ -36,7 +36,10 @@ const MovieItem = (props) => {
                 
                 </div>
               <div>{get(item,"movie_types").replaceAll(";","  ")}</div>
-              <div >上映日期 ：{get(item,"release_time")+"  "}{get(item,"release_national")} </div>
+              <div style={{
+                    fontSize:"small",
+                    fontWeight:"lighter",
+              }}>{get(item,"release_time")+"  "}{get(item,"release_national")} </div>
             </div>
           </Col>
         </Row>

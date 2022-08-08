@@ -1,13 +1,10 @@
 import MovieItem from "./MovieItem";
 
-import { useEffect } from "react";
 import { Col, Row } from "antd";
 import "./movieGroup.css";
 const MovieGroup = (props) => {
   const { movieList } = props;
-  useEffect(() => {
-    console.log("movieList", movieList);
-  }, []);
+
   return (
     <>
       <div id="movieGroup">
