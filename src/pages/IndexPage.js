@@ -1,7 +1,10 @@
+import "./IndexPage.css"
+import MovieCarousel from "../features/movieCarousel/MovieCarousel";
+
 const Index = () => {
   return (
-    <div>
-      <h1>Index</h1>
+    <div className="index-page">
+      <MovieCarousel className="movie-carousel-component"/>
     </div>
   );
 }
