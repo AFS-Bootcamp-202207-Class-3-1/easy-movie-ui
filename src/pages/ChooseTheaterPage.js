@@ -1,76 +1,91 @@
-import { useNavigate } from "react-router-dom";
-import { Rate, Button, Image, Avatar,Space, Table, Tag } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import { getTheaterDataReq } from "../api/theater";
+import { getMovieDataReq } from "../api/movie";
+import { Rate, Button } from "antd";
+import { useEffect, useState } from "react";
 import {
   DribbbleOutlined,
   FieldTimeOutlined,
   LineChartOutlined,
-  HeartOutlined,
-  LikeOutlined,
   FireOutlined,
 } from "@ant-design/icons";
 
 import "../layout/ChooseTheaterPage.less";
-import moviePng from "../static/movie.png";
-import photoPng from "../static/photo.png";
-import castPng from "../static/cast.png";
-import BackToMovieList from "../features/backToMovieList/BackToMovieList";
 
 const ChooseTheaterPage = () => {
+  const [data, setData] = useState({});
+  const [theaterList, setTheaterList] = useState([]);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    
+  const onSeeDetailsClicked = () => {
+    navigate("/movieDetail/" + id);
+  };
 
-
+  useEffect(() => {
+    getMovieDataReq(id).then((res) => {
+      setData(res.data);
+    });
+    getTheaterDataReq(id).then((res) => {
+      setTheaterList(res.data);
+    });
+  }, [id]);
 
   return (
     <div className="ChooseTheaterPage">
       {/* 电影信息 开始 */}
       <div className="movieInfo w">
         <div className="left">
-          <img src={moviePng} alt="" srcset="" />
+          <img src={data?.movie?.imageUrl} alt="" />
         </div>
         <div className="right">
           <span className="name_wrap">
             <span className="name">
-              电影名{" "}
+              {data?.movie?.name}
               <span className="hot">
                 <FireOutlined />
                 <span className="num">9.5</span>{" "}
               </span>{" "}
             </span>
           </span>
-          <div className="type">动作 科幻 冒险</div>
+          <div className="type">{data?.movie?.types}</div>
           <div className="time">
             <div className="date_country">
               <DribbbleOutlined />
-              <span>2022-07-31中国大陆</span>
+              <span>
+                {data?.movie?.releaseDate}
+                {data?.movie?.releaseCountry}
+              </span>
               <span className="runtime">
                 <FieldTimeOutlined />
-                <span>99分钟</span>
+                <span>{data?.movie?.duration}分钟</span>
               </span>
             </div>
           </div>
           <span className="ticket">
             <LineChartOutlined />
-            <span>$ 200.78 million </span>
+            <span>$ {data?.movie?.boxOffice} </span>
           </span>
           <div className="score_wrap">
             <div className="totalScore score">
-              <span className="num">4.5</span>
-              <Rate allowHalf disabled value={4.5} />
+              <span className="num">{data?.movie?.score}</span>
+              <Rate allowHalf disabled value={data?.movie?.score} />
               <p className="info">Total Score</p>
             </div>
-            <div className="userScore score">
+            {/* <div className="userScore score">
               <span className="num">4.5</span>
               <Rate allowHalf disabled value={4.5} />
               <p className="info">My Score</p>
-            </div>
+            </div> */}
             <div className="buy_btn">
-              <Button type="primary">See movie details</Button>
+              <Button type="primary" onClick={onSeeDetailsClicked}>
+                See movie details
+              </Button>
             </div>
           </div>
         </div>
-        {/* 电影信息 结束 */}
       </div>
+      {/* 电影信息 结束 */}
       {/* 影院列表 开始 */}
       <div className="theaterList w">
         <div className="title">
@@ -79,23 +94,24 @@ const ChooseTheaterPage = () => {
           <span className="rightLine">————————————</span>
         </div>
         <div className="body">
-            {/* 单条影院 开始 */}
-            <div className="theaterItem w">
-                <div><span>xxx theater</span></div>
-                <div><span className="address">香洲区南屏镇珠海大道3888号华发水岸商业街2层</span></div>
-                <div><span>$41</span></div>
-                <div><Button type="primary">Buy Ticket</Button></div>
-            </div>
-            {/* 单条影院 结束 */}
-                        {/* 单条影院 开始 */}
-                        <div className="theaterItem w">
-                <div><span>xxx theater</span></div>
-                <div><span className="address">香洲区南屏镇珠海大道3888号华发水岸商业街2层</span></div>
-                <div><span>$41</span></div>
-                <div><Button type="primary">Buy Ticket</Button></div>
-            </div>
-            {/* 单条影院 结束 */}
-            
+          {theaterList?.map((theater) => {
+            return (
+              <div className="theaterItem w" key={theater.id}>
+                <div>
+                  <span>{theater.name}</span>
+                </div>
+                <div>
+                  <span className="address">{theater.address}</span>
+                </div>
+                {/* <div>
+              <span>$41</span>
+            </div> */}
+                <div>
+                  <Button type="primary">Buy Ticket</Button>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
       {/* 影院列表 结束 */}
