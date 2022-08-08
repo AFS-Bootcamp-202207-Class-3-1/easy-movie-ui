@@ -1,58 +1,19 @@
 import "./NextMovies.less";
 import NextMovieItem from "./NextMovieItem";
 import { Col, Row } from "antd";
+import { useState, useEffect } from "react";
+import { getNextMovies } from "../../api/movie";
 
 const NextMovies = () => {
-  const nextMovies = [
-    {
-      id: 1,
-      name: "明日战记",
-      imageUrl:
-        "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/160/h/220",
-    },
-    {
-      id: 2,
-      name: "明日战记",
-      imageUrl:
-        "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/160/h/220",
-    },
-    {
-      id: 3,
-      name: "明日战记",
-      imageUrl:
-        "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/160/h/220",
-    },
-    {
-      id: 4,
-      name: "明日战记",
-      imageUrl:
-        "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/160/h/220",
-    },
-    {
-      id: 5,
-      name: "明日战记",
-      imageUrl:
-        "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/160/h/220",
-    },
-    {
-      id: 6,
-      name: "明日战记",
-      imageUrl:
-        "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/160/h/220",
-    },
-    {
-      id: 7,
-      name: "明日战记",
-      imageUrl:
-        "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/160/h/220",
-    },
-    {
-      id: 8,
-      name: "明日战记",
-      imageUrl:
-        "https://p0.pipi.cn/mmdb/25bfd63302f0fa395b07accde068bfd3c361f.jpg?imageView2/1/w/160/h/220",
-    },
-  ];
+  const [nextMovies, setNextMovies] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await getNextMovies();
+      setNextMovies(data);
+    }
+    fetchData();
+  }, []);
 
   const nextMovieList = nextMovies.map((movie) => {
     return (
