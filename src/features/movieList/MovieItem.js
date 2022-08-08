@@ -3,6 +3,7 @@ import { GlobalOutlined } from "@ant-design/icons";
 import { Col, Row, Rate } from "antd";
 import { get } from "lodash";
 import { useNavigate } from "react-router-dom";
+import moment from 'moment'
 // import React from 'react';
 const MovieItem = (props) => {
   const { item } = props;
@@ -48,17 +49,14 @@ const MovieItem = (props) => {
                 {/* {get(item, "score")} */}
                 <Rate
                   defaultValue={Number(get(item, "score"))}
-                  disabled={false}
+                  disabled={true}
                 />
               </div>
               <div>{get(item, "types").replaceAll(";", "  ")}</div>
               <div className="GlobalOutlinedDiv">
                 <GlobalOutlined />
-                {new Date(get(item, "releaseDate"))
-                  .toLocaleDateString()
-                  .split("")
-                  .reverse()
-                  .join("") + "  "}
+
+                {moment(get(item, "releaseDate")).format('YYYY-MM-DD')+"  "}
                 {get(item, "releaseCountry")}{" "}
               </div>
             </div>
