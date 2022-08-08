@@ -19,7 +19,7 @@ function App() {
         </Header>
 
         <PerfectScrollbar className="app-main-content">
-          <Content>
+          <Content className="app-main-content">
             <Routes>
               <Route path="/" element={<Outlet />}>
                 <Route index element={<IndexPage />} />

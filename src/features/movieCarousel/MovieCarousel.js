@@ -2,10 +2,6 @@ import { Carousel, Image } from "antd";
 import "./MovieCarousel.css";
 
 const MovieCarousel = () => {
-  const onChange = (currentSlide) => {
-    console.log(currentSlide);
-  };
-
   const images = [
     "assets/25bfd6022ffddd16bdf2aa147266fd108469a.jpg",
     "assets/531b7d1311fcb84b463e313bd92fc843.jpg",
@@ -19,7 +15,7 @@ const MovieCarousel = () => {
         <Image
           className="image"
           preview={false}
-          width={1200}
+          width="100%"
           height={300}
           src={image}
         />
@@ -28,9 +24,9 @@ const MovieCarousel = () => {
   });
 
   return (
-    <Carousel className="movie-carousel" afterChange={onChange}>
-      {imageList}
-    </Carousel>
+    <div className="movie-carousel">
+      <Carousel autoplay="true">{imageList}</Carousel>
+    </div>
   );
 };
 

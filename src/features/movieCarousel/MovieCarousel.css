@@ -1,5 +1,10 @@
 .movie-carousel {
   margin: 20px 0px 10px;
+  padding: 30px;
+}
+
+.movie-carousel-item {
+  width: 1200px;
 }
 
 .movie-carousel-item .image{
