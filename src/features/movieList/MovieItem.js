@@ -9,7 +9,7 @@ const MovieItem = (props) => {
   const navigate = useNavigate();
   const onClickImage = () => {
     const {id}=item;
-    navigate(`/movieDetails/${id}`);
+    navigate(`/movieDetail/${id}`);
   };
   return (
     <>
