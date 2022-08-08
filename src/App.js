@@ -14,11 +14,11 @@ function App() {
   return (
     <div className="app">
       <Layout>
-        <Header className="header">
+        <Header className="app-header">
           <IndexHeader />
         </Header>
 
-        <PerfectScrollbar className="main-content">
+        <PerfectScrollbar className="app-main-content">
           <Content>
             <Routes>
               <Route path="/" element={<Outlet />}>
@@ -30,8 +30,8 @@ function App() {
             </Routes>
           </Content>
         </PerfectScrollbar>
-        
-        <Footer className="footer">
+
+        <Footer className="app-footer">
           <IndexFooter />
         </Footer>
       </Layout>
