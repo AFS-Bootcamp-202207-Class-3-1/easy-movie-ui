@@ -6,6 +6,7 @@ import IndexPage from "./pages/IndexPage";
 import MoviePage from "./pages/MoviePage";
 import TheaterPage from "./pages/TheaterPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
+import ChooseTheaterPage from "./pages/ChooseTheaterPage";
 import { Layout, BackTop } from "antd";
 import { Route, Routes, Outlet } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/movie" element={<MoviePage />} />
                 <Route path="/theater" element={<TheaterPage />} />
                 <Route path="/movieDetail" element={<MovieDetailPage />} />
+                <Route path="/chooseTheater" element={<ChooseTheaterPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>

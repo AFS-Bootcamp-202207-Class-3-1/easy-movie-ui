@@ -5,7 +5,7 @@ import {
   FieldTimeOutlined,
   LineChartOutlined,
   HeartOutlined,
-  LikeOutlined,
+  LikeOutlined,FireOutlined,
 } from "@ant-design/icons";
 
 import "../layout/MovieDetail.less";
@@ -27,7 +27,8 @@ const MovieDetailPage = () => {
         </div>
         <div className="right">
           <span className="name_wrap">
-            <span className="name">电影名</span>
+            <span className="name">电影名 <span className="hot"><FireOutlined />
+            <span className="num">9.5</span> </span> </span>
           </span>
           <div className="type">动作 科幻 冒险</div>
           <div className="time">
@@ -114,19 +115,19 @@ const MovieDetailPage = () => {
           <div className="content cast">
             <div className="item">
               <img src={castPng} alt="" />
-              <span className="name">导演名</span>
+              <span className="name">Edward</span>
               <br />
               <span className="position">导演</span>
             </div>
             <div className="item">
               <img src={castPng} alt="" />
-              <span className="name">导演名</span>
+              <span className="name">Lewis</span>
               <br />
               <span className="position">导演</span>
             </div>
             <div className="item">
               <img src={castPng} alt="" />
-              <span className="name">导演名</span>
+              <span className="name">Carlos</span>
               <br />
               <span className="position">导演</span>
             </div>
