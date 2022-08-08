@@ -64,7 +64,7 @@ const NextMovies = () => {
 
   return (
     <div className="next-movies">
-      <h1 className="next-movies-title">Next Movies</h1>
+      <h1 className="next-movies-title">Upcoming Movies</h1>
       <Row gutter={[20, 20]}>{nextMovieList}</Row>
     </div>
   );
