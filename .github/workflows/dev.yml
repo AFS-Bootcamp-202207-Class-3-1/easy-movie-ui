@@ -6,9 +6,7 @@ on:
       - dev
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -17,19 +15,21 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: package-lock.json
-      
+
       - run: npm install --force
-      
+
       - run: npm run build
-      
+        env:
+          CI: false
+
       - name: Build Docker Image
         run: |
           sha="${{github.sha}}"
           commit=${sha: 0: 7}
           docker build . --file Dockerfile --tag easy-movie-ui-dev:$commit
-      
+
       - name: Push To Ali Cloud
         run: |
           sha="${{github.sha}}"
@@ -39,7 +39,7 @@ jobs:
           docker login --username=$repo_user -p $repo_password registry.cn-shenzhen.aliyuncs.com
           docker tag easy-movie-ui-dev:$commit registry.cn-shenzhen.aliyuncs.com/$repo_user/easy-movie-ui-dev:$commit
           docker push registry.cn-shenzhen.aliyuncs.com/$repo_user/easy-movie-ui-dev:$commit
-      
+
       - name: Deploy On My Sever
         uses: appleboy/ssh-action@master
         with:
