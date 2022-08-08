@@ -1,12 +1,15 @@
 import "./movieItem.css";
-import { Col, Row } from "antd";
-import {get} from "lodash"
-
+import { GlobalOutlined } from "@ant-design/icons";
+import { Col, Row, Rate } from "antd";
+import { get } from "lodash";
+import { useNavigate } from "react-router-dom";
 // import React from 'react';
 const MovieItem = (props) => {
-  const {item}=props;
+  const { item } = props;
+  const navigate = useNavigate();
   const onClickImage = () => {
-    
+    const {id}=item;
+    navigate(`/movieDetails/${id}`);
   };
   return (
     <>
@@ -14,9 +17,10 @@ const MovieItem = (props) => {
         <Row gutter={[16, 16]}>
           <Col span={12}>
             <img
+              alt={get(item, "imageUrl")}
               onClick={onClickImage}
               className="MovieImg"
-              src="imgs-movie/movieGirl.png"
+              src={get(item, "imageUrl")}
             />
           </Col>
           <Col span={12}>
@@ -28,18 +32,35 @@ const MovieItem = (props) => {
                   fontFamily: "fantasy",
                 }}
               >
-                {get(item,"movie_name")}
-              </div>
-              <div style={{fontSize:"large",color:"#FFB400"}}>
-                
-                {get(item,"socre")}
-                
+                {get(item, "name")}
+                <br></br>
+                <div
+                  style={{
+                    fontSize: "small",
+                    fontWeight: "200",
+                    fontFamily: "normal",
+                  }}
+                >
+                  {get(item, "englishName")}
                 </div>
-              <div>{get(item,"movie_types").replaceAll(";","  ")}</div>
-              <div style={{
-                    fontSize:"small",
-                    fontWeight:"lighter",
-              }}>{get(item,"release_time")+"  "}{get(item,"release_national")} </div>
+              </div>
+              <div style={{ fontSize: "large", color: "#FFB400" }}>
+                {/* {get(item, "score")} */}
+                <Rate
+                  defaultValue={Number(get(item, "score"))}
+                  disabled={false}
+                />
+              </div>
+              <div>{get(item, "types").replaceAll(";", "  ")}</div>
+              <div className="GlobalOutlinedDiv">
+                <GlobalOutlined />
+                {new Date(get(item, "releaseDate"))
+                  .toLocaleDateString()
+                  .split("")
+                  .reverse()
+                  .join("") + "  "}
+                {get(item, "releaseCountry")}{" "}
+              </div>
             </div>
           </Col>
         </Row>

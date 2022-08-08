@@ -7,6 +7,9 @@
     -webkit-box-align: center;
     align-items: center;
     width: 1200px;
-    margin:0 auto;
+    margin:30px auto 0px;
     text-align: center;
+}
+.movieGroupRow{
+    width: 1200px
 }

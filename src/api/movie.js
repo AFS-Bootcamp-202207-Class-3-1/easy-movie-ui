@@ -10,7 +10,7 @@ const getNextMovies = () => {
 
 const fetchAllMovieList=(params)=>{
   const {page,pageSize,keyword}=params;
-
+  // eslint-disable-next-line
   return request.get("/movies"+"?page="+page+"&pageSize="+pageSize+"&keyword="+keyword);
 }
 
