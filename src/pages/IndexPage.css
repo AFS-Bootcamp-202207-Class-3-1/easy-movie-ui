@@ -6,3 +6,7 @@
 .movie-carousel-component {
   margin-top: 20px;
 }
+
+.top-100-and-hot-movie {
+  display: flex;
+}
