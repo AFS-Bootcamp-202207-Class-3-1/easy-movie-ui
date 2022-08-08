@@ -3,6 +3,7 @@ import MovieCarousel from "../features/movieCarousel/MovieCarousel";
 import Top100Movie from "../features/top100Movie/Top100Movie";
 import HotMovies from "../features/hotMovies/HotMovies";
 import { Row, Col } from "antd";
+import NextMovies from "../features/nextMovies/NextMovies";
 
 const Index = () => {
   return (
@@ -13,10 +14,20 @@ const Index = () => {
       <div className="top-100-and-hot-movie">
         <Row gutter={20}>
           <Col span={6}>
-            <Top100Movie className="top-100-and-hot-movie-left" />
+            <Top100Movie />
           </Col>
           <Col span={18}>
-            <HotMovies className="top-100-and-hot-movie-right" />
+            <HotMovies />
+          </Col>
+        </Row>
+      </div>
+      <div className="ad-and-next-movie">
+        <Row gutter={20}>
+          <Col span={6}>
+            <img src="assets/ad.png" alt="ad" />
+          </Col>
+          <Col span={18}>
+            <NextMovies />
           </Col>
         </Row>
       </div>
