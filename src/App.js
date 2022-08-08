@@ -5,6 +5,7 @@ import IndexFooter from "./layout/IndexFooter";
 import IndexPage from "./pages/IndexPage";
 import MoviePage from "./pages/MoviePage";
 import TheaterPage from "./pages/TheaterPage";
+import MovieDetailPage from "./pages/MovieDetailPage";
 import { Layout, BackTop } from "antd";
 import { Route, Routes, Outlet } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -25,6 +26,7 @@ function App() {
                 <Route index element={<IndexPage />} />
                 <Route path="/movie" element={<MoviePage />} />
                 <Route path="/theater" element={<TheaterPage />} />
+                <Route path="/movieDetail" element={<MovieDetailPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
