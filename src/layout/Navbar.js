@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const items = [
+export const items = [
   {
     label: "HOME",
     key: "/",
@@ -32,6 +32,7 @@ const Navbar = () => {
   const [current, setCurrent] = useState(location.pathname);
 
   const toSelectedPage = ({ key }) => {
+    console.log("key",key)
     navigate(key);
   };
 
