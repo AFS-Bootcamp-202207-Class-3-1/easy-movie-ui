@@ -8,10 +8,22 @@ const getNextMovies = () => {
   return request.get("/movies/next");
 };
 
-const fetchAllMovieList=(params)=>{
-  const {page,pageSize,keyword}=params;
-  // eslint-disable-next-line
-  return request.get("/movies"+"?page="+page+"&pageSize="+pageSize+"&keyword="+keyword);
-}
+const fetchAllMovieList = (params) => {
+  const { page, pageSize, keyword } = params;
 
-export { getHotMovies, getNextMovies, fetchAllMovieList };
+  return request.get(
+    "/movies" +
+      "?page=" +
+      page +
+      "&pageSize=" +
+      pageSize +
+      "&keyword=" +
+      keyword
+  );
+};
+
+const getMovieDataReq = (id) => {
+  return request.get("/movies/" + id);
+};
+
+export { getHotMovies, getNextMovies, fetchAllMovieList, getMovieDataReq };
