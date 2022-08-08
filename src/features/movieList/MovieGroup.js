@@ -8,9 +8,9 @@ const MovieGroup = (props) => {
   return (
     <>
       <div id="movieGroup">
-        <Row gutter={[48, 48]}>
+        <Row className="movieGroupRow" gutter={[30, 30]}>
           {movieList.map((item, index) => (
-              <Col key={item.movie_id} span={12}>
+              <Col key={item.id} span={12}>
                 {" "}
                 <MovieItem  item={item} index={index} />{" "}
               </Col>

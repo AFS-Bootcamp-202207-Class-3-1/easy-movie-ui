@@ -1,20 +1,22 @@
 #movieItem {
-  height: 300px;
+  /* height: 280px; */
   background-color: white;
   border-radius: 10px;
-  width: 450px;
-  margin-top: 50px;
+  /* width: 350px; */
+  /* margin-top: 50px; */
 }
 
 #movieItem:hover {
   filter: drop-shadow(2px 2px 6px rgba(235, 213, 213, 0.667));
+  transition: 0.3s 0.1s;
 }
 .MovieImg {
   border-radius: 10px;
   cursor: pointer;
   width: 200px;
   height: 300px;
-  margin-left: -30px;
+  margin-left: -40px;
+  transition: 0.3s 0.1s;
 }
 
 .MovieImg:hover {
@@ -27,4 +29,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around; /* 行与行之间留有均匀间隔。 */
+  text-align: left;
+  margin-left: -30px;
+}
+
+.GlobalOutLinedDiv{
+
+  font-size: small;
+  font-weight: lighter;
+  
+
+}
+.GlobalOutLinedDiv span{
+  margin-right: 20px !important;
+
 }

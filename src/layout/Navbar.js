@@ -32,7 +32,6 @@ const Navbar = () => {
   const [current, setCurrent] = useState(location.pathname);
 
   const toSelectedPage = ({ key }) => {
-    console.log("key",key)
     navigate(key);
   };
 

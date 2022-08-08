@@ -8,10 +8,22 @@ const getNextMovies = () => {
   return request.get("/movies/next");
 };
 
-const fetchAllMovieList=(params)=>{
-  const {page,pageSize,keyword}=params;
+const fetchAllMovieList = (params) => {
+  const { page, pageSize, keyword } = params;
 
-  return request.get("/movies"+"?page="+page+"&pageSize="+pageSize+"&keyword="+keyword);
-}
+  return request.get(
+    "/movies" +
+      "?page=" +
+      page +
+      "&pageSize=" +
+      pageSize +
+      "&keyword=" +
+      keyword
+  );
+};
 
-export { getHotMovies, getNextMovies, fetchAllMovieList };
+const getMovieDataReq = (id) => {
+  return request.get("/movies/" + id);
+};
+
+export { getHotMovies, getNextMovies, fetchAllMovieList, getMovieDataReq };
