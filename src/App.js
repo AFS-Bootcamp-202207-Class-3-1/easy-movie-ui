@@ -10,6 +10,7 @@ import ChooseTheaterPage from "./pages/ChooseTheaterPage";
 import { Layout, BackTop } from "antd";
 import { Route, Routes, Outlet } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
+import PrepareOrderPage from "./pages/PrepareOrderPage";
 const { Header, Footer, Content } = Layout;
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route index element={<IndexPage />} />
                 <Route path="/movie" element={<MoviePage />} />
                 <Route path="/theater" element={<TheaterPage />} />
+                <Route path="/prepareOrder/:orderId" element={<PrepareOrderPage />} />
                 <Route path="/movieDetail/:id" element={<MovieDetailPage />} />
                 <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
                 <Route path="*" element={<NotFoundPage />} />
