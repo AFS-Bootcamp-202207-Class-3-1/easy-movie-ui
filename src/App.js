@@ -28,7 +28,7 @@ function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
-            <BackTop className="back-to-top" target={() => document.getElementById("app-main-scroller-bar")} />
+            <BackTop className="app-back-to-top" target={() => document.getElementById("app-main-scroller-bar")} />
           </Content>
         </PerfectScrollbar>
 
