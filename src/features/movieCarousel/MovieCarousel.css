@@ -1,0 +1,13 @@
+.movie-carousel {
+  margin: 20px 0px 10px;
+}
+
+.movie-carousel-item {
+  width: 1200px;
+}
+
+.movie-carousel-item .image{
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+}

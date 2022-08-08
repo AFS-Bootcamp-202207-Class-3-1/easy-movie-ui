@@ -14,11 +14,11 @@ function App() {
   return (
     <div className="app">
       <Layout>
-        <Header className="header">
+        <Header className="app-header">
           <IndexHeader />
         </Header>
 
-        <PerfectScrollbar className="main-content-wrapper" id="main-scroller-bar">
+        <PerfectScrollbar className="app-main-content-wrapper" id="app-main-scroller-bar">
           <Content>
             <Routes>
               <Route path="/" element={<Outlet />}>
@@ -28,11 +28,11 @@ function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
-            <BackTop className="back-to-top" target={() => document.getElementById("main-scroller-bar")} />
+            <BackTop className="app-back-to-top" target={() => document.getElementById("app-main-scroller-bar")} />
           </Content>
         </PerfectScrollbar>
 
-        <Footer className="footer">
+        <Footer className="app-footer">
           <IndexFooter />
         </Footer>
       </Layout>
