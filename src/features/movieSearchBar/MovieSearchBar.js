@@ -18,7 +18,7 @@ const MovieSearchBar = () => {
   }
   return (
     <div className="movie-search-bar">
-      <Input className="search-input"  value={keyWord} onChange={onChangeKeyWord} placeholder="Enter the movie name" />
+      <Input onPressEnter={onClickSearch} className="search-input"  value={keyWord} onChange={onChangeKeyWord} placeholder="Enter the movie name" />
       <Button type="primary" onClick={onClickSearch} icon={<SearchOutlined />}>
         Search
       </Button>
