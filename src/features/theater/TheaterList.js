@@ -2,6 +2,9 @@ import { Button } from "antd";
 
 const TheaterList = (props) => {
   const { theaterList } = props;
+  const onClickBuyTicket=()=>{
+
+  }
   return (
     <>
       <div className="ChooseTheaterPage">
@@ -22,7 +25,7 @@ const TheaterList = (props) => {
                     <span className="address">{theater.address}</span>
                   </div>
                   <div>
-                    <Button type="primary">Buy Ticket</Button>
+                    <Button onClickBuyTicket={onClickBuyTicket} type="primary">Buy Ticket</Button>
                   </div>
                 </div>
               );
