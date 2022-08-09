@@ -29,6 +29,7 @@ function App() {
                 <Route path="/movie" element={<MoviePage />} />
                 <Route path="/theater" element={<TheaterPage />} />
                 <Route path="/theaterDetail/:theaterId/:movieId" element={<TheaterPageDetail />} />
+                <Route path="/theaterDetail/:theaterId" element={<TheaterPageDetail />} />
                 <Route path="/prepareOrder/:orderId" element={<PrepareOrderPage />} />
                 <Route path="/afterPay/:orderId" element={<AfterPayPage />} />
                 <Route path="/movieDetail/:id" element={<MovieDetailPage />} />

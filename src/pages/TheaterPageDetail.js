@@ -17,7 +17,9 @@ const TheaterPageDetail = (props) => {
   const [theater, setTheater] = useState({});
 
   const dispatch = useDispatch();
-  const { theaterId, movieId } = useParams();
+  const params = useParams();
+  const theaterId = params.theaterId;
+  const movieId = params.movieId || 1;
 
   useEffect(() => {
     async function fetchData() {
