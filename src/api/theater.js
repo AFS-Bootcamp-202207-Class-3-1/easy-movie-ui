@@ -4,4 +4,9 @@ const getTheaterDataReq = (movieId) => {
   return request.get("/theater/movie/" + movieId);
 };
 
-export { getTheaterDataReq };
+
+const getTheaterByPage=(params)=>{
+    const {page,pageSize}=params;
+    return request.get("/theater"+`?page=${page}&pageSize=${pageSize}`);
+}
+export { getTheaterDataReq ,getTheaterByPage};

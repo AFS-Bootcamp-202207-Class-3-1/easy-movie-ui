@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pagination, Empty } from "antd";
 import MovieGroup from "../features/movieList/MovieGroup";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { get, has } from "lodash";
 import { fetchAllMovieList } from "../api/movie";
 import { RollbackOutlined } from "@ant-design/icons";
@@ -15,7 +15,8 @@ const MoviePage = () => {
   const location = useLocation();
   const [content, setContent] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  
   const onChange = (page, pageSize) => {
     setCurrentPage(page);
     setPageSize(pageSize);
@@ -42,16 +43,18 @@ const MoviePage = () => {
     });
   }, [currentPage, keyword, pageSize, location]);
 
-  const returnMovieList=(event)=>{
-        event.preventDefault();
-        navigate(items[1].key)
-  }
+  const returnMovieList = (event) => {
+    event.preventDefault();
+    navigate(items[1].key);
+  };
   return (
     <div>
       {keyword && (
         <div className="RollbackOutlinedDev">
           <RollbackOutlined />
-          <a href ="/#"onClick={returnMovieList}>返回电影列表</a>
+          <a href="/#" onClick={returnMovieList}>
+            返回电影列表
+          </a>
         </div>
       )}
       {isEmpty && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
