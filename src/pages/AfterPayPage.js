@@ -2,7 +2,6 @@
 import {Steps, Card} from "antd";
 import "./AfterPayPage.less";
 import AfterPayDetail from "../features/afterPayDetail/AfterPayDetail";
-import {useState} from "react";
 
 const { Step } = Steps;
 

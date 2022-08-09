@@ -1,5 +1,4 @@
 import "./App.less";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import IndexHeader from "./layout/IndexHeader";
 import IndexFooter from "./layout/IndexFooter";
 import IndexPage from "./pages/IndexPage";
@@ -8,7 +7,7 @@ import TheaterPage from "./pages/TheaterPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
 import ChooseTheaterPage from "./pages/ChooseTheaterPage";
 import TheaterPageDetail from "./pages/TheaterPageDetail";
-import { Layout, BackTop } from "antd";
+import { Layout } from "antd";
 import { Route, Routes, Outlet } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
 import PrepareOrderPage from "./pages/PrepareOrderPage";
@@ -23,8 +22,7 @@ function App() {
           <IndexHeader />
         </Header>
 
-        <PerfectScrollbar className="app-main-content-wrapper" id="app-main-scroller-bar">
-          <Content>
+          <Content className="app-main-content-wrapper">
             <Routes>
               <Route path="/" element={<Outlet />}>
                 <Route index element={<IndexPage />} />
@@ -38,9 +36,7 @@ function App() {
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
-            <BackTop className="app-back-to-top" target={() => document.getElementById("app-main-scroller-bar")} />
           </Content>
-        </PerfectScrollbar>
 
         <Footer className="app-footer">
           <IndexFooter />

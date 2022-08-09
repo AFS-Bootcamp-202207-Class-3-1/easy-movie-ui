@@ -9,6 +9,8 @@ import {
 } from "../features/theatreInfo/TheatreOnMovieClickSlice";
 import TheaterHeader from "../features/theatreInfo/TheaterHeader";
 import MovieSelecter from "../features/theatreInfo/MovieSelecter";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import {BackTop} from "antd";
 
 const TheaterPageDetail = (props) => {
   const [movieList, setmovieList] = useState([]);
@@ -28,7 +30,7 @@ const TheaterPageDetail = (props) => {
       setTheater(theaterRes.data.theater);
     }
     fetchData();
-  }, []);
+  }, [theaterId, movieId, dispatch]);
 
   if (movieList[0]) {
     if (props.choosedMovieId) {
@@ -38,10 +40,14 @@ const TheaterPageDetail = (props) => {
   }
 
   return (
-    <>
+    <PerfectScrollbar id="app-main-scroller-bar">
       <TheaterHeader theater={theater} />
       <MovieSelecter movieList={movieList} />
-    </>
+      <BackTop
+        className="app-back-to-top"
+        target={() => document.getElementById("app-main-scroller-bar")}
+      />
+    </PerfectScrollbar>
   );
 };
 
