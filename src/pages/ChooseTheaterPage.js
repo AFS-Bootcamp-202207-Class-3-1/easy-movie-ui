@@ -9,8 +9,9 @@ import {
   LineChartOutlined,
   FireOutlined,
 } from "@ant-design/icons";
+import moment from 'moment'
 
-import "../layout/ChooseTheaterPage.less";
+import "./ChooseTheaterPage.less";
 
 const ChooseTheaterPage = () => {
   const [data, setData] = useState({});
@@ -23,8 +24,10 @@ const ChooseTheaterPage = () => {
   };
 
   useEffect(() => {
-    getMovieDataReq(id).then((res) => {
-      setData(res.data);
+    getMovieDataReq(id).then(({data}) => {
+      data.movie.releaseDate = moment(data.movie.releaseDate).format('YYYY-MM-DD')
+      data.movie.score = data.movie.score.toFixed(1)
+      setData(data);
     });
     getTheaterDataReq(id).then((res) => {
       setTheaterList(res.data);

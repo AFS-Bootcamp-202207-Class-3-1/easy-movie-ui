@@ -8,8 +8,9 @@ import {
   LikeOutlined,
   FireOutlined,
 } from "@ant-design/icons";
+import moment from 'moment'
 
-import "../layout/MovieDetail.less";
+import "./MovieDetail.less";
 import photoPng from "../static/photo.png";
 import BackToMovieList from "../features/backToMovieList/BackToMovieList";
 import { getMovieDataReq } from "../api/movie";
@@ -24,8 +25,10 @@ const MovieDetailPage = () => {
   };
 
   useEffect(() => {
-    getMovieDataReq(id).then((res) => {
-      setData(res.data);
+    getMovieDataReq(id).then(({data}) => {
+    data.movie.releaseDate = moment(data.movie.releaseDate).format('YYYY-MM-DD')
+    data.movie.score = data.movie.score.toFixed(1)
+      setData(data);
     });
   }, [id]);
 
@@ -60,7 +63,7 @@ const MovieDetailPage = () => {
           </div>
           <span className="ticket">
             <LineChartOutlined />
-            <span>$ {data?.movie?.boxOffice} </span>
+            <span>${data?.movie?.boxOffice} </span>
           </span>
           <div className="score_wrap">
             <div className="totalScore score">
@@ -68,11 +71,6 @@ const MovieDetailPage = () => {
               <Rate allowHalf disabled value={data?.movie?.score} />
               <p className="info">Total Score</p>
             </div>
-            {/* <div className="userScore score">
-              <span className="num">4.5</span>
-              <Rate allowHalf disabled value={4.5} />
-              <p className="info">My Score</p>
-            </div> */}
             <div className="buy_btn">
               <Button type="primary" onClick={onBuyTicketClicked}>
                 Buy Ticket
@@ -108,11 +106,11 @@ const MovieDetailPage = () => {
           </div>
         </li>
         {/* 剧情简介 结束 */}
-        {/* CAST 开始 */}
+        {/* cast 开始 */}
         <li className="detailItem">
           <div className="title">
             <i className="before"></i>
-            <span className="titleName">CAST</span>
+            <span className="titleName">Cast</span>
           </div>
           <div className="content cast">
             {data?.directorList?.map((director) => {
@@ -137,7 +135,7 @@ const MovieDetailPage = () => {
             })}
           </div>
         </li>
-        {/* CAST 结束 */}
+        {/* cast 结束 */}
         {/* 热门评价 开始 */}
         <li className="detailItem">
           <div className="title">

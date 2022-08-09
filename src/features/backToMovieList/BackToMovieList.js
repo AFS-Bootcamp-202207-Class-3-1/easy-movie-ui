@@ -9,7 +9,7 @@ const BackToMovieList = () =>{
 
     return(
         <div className="backToList w" >
-        <NavLink to="/movie"><RollbackOutlined /><div>back To Movie list</div></NavLink>
+        <NavLink to="/movie"><RollbackOutlined /><div>Back To Movie List</div></NavLink>
         </div>
     )
 }
