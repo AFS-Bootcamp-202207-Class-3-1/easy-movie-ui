@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import moment from 'moment';
-import { groupBy } from "lodash";
 
 const initialState = {
     choosedMovieId: 1,

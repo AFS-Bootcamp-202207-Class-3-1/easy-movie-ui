@@ -1,5 +1,5 @@
 import "./AfterPayDetail.less";
-import {Col, Divider, Image, Row} from "antd";
+import {Col, Row} from "antd";
 import {useNavigate} from "react-router-dom";
 import {QRCodeSVG} from "qrcode.react";
 import {

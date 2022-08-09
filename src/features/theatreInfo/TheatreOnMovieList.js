@@ -4,7 +4,7 @@ import TheatreOnMovieListItem from "./TheatreOnMovieListItem";
 
 function TheatreOnMovieList(props) {
 
-    var onMovieList = props.movieList.filter((item) => item.releaseStatus == 1)
+    var onMovieList = props.movieList.filter((item) => item.releaseStatus === 1)
 
 
     return (<>

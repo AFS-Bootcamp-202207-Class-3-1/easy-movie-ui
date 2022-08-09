@@ -1,4 +1,4 @@
-import { Divider, Card, Button, Space } from "antd";
+import { Divider, Button, Space } from "antd";
 import "../../pages/TheaterPage.css";
 import "../../pages/sessionList.less";
 import { useSelector } from "react-redux";

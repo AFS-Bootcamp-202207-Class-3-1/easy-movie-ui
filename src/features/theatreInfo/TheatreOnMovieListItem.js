@@ -36,6 +36,7 @@ function TheatreOnMovieListItem(props) {
           }
           onClick={choiceMovie}
           src={props.imageUrl}
+          alt="example"
         ></img>
       }
     </>
