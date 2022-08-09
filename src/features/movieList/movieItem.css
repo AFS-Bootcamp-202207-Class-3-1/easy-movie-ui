@@ -7,7 +7,8 @@
 }
 
 #movieItem:hover {
-  filter: drop-shadow(2px 2px 6px rgba(235, 213, 213, 0.667));
+  /* filter: drop-shadow(2px 2px 6px rgba(235, 213, 213, 0.667)); */
+    filter: drop-shadow(2px 2px 6px #000a);
   transition: 0.3s 0.1s;
 }
 .MovieImg {
@@ -20,7 +21,7 @@
 }
 
 .MovieImg:hover {
-  filter: drop-shadow(2px 2px 6px #000a);
+  /* filter: drop-shadow(2px 2px 6px #000a); */
 }
 .movieReview {
   height: 100%;
@@ -31,6 +32,7 @@
   justify-content: space-around; /* 行与行之间留有均匀间隔。 */
   text-align: left;
   margin-left: -30px;
+  cursor: pointer;
 }
 
 .GlobalOutLinedDiv{
