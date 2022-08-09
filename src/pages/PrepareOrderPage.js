@@ -1,12 +1,18 @@
-import { useParams } from "react-router-dom";
 import { Steps, Card, Button } from "antd";
 import "./PrepareOrderPage.less";
 import PrepareOrderDetail from "../features/prepareOrderDetail/PrepareOrderDetail";
+import {useNavigate, useParams} from "react-router-dom";
 
 const { Step } = Steps;
 
 const PrepareOrderPage = () => {
   const { orderId } = useParams();
+  const navigate = useNavigate();
+
+  const goToAfterPayPage = () => {
+    navigate(`/afterPay/${orderId}`)
+  }
+
   return (
     <div className="prepare-order-page">
       <Card>
@@ -31,7 +37,7 @@ const PrepareOrderPage = () => {
               &yen; 117
             </span>
           </div>
-          <Button type="primary">Pay</Button>
+          <Button type="primary" onClick={goToAfterPayPage}>Pay</Button>
         </div>
         <div className="prepare-order-page-help">
           Encounter payment difficulties?
