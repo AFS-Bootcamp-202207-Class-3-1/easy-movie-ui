@@ -1,0 +1,76 @@
+.personal {
+  padding-bottom: 100px;
+  padding-top: 50px;
+  .w {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  &-box {
+    border: 1px solid #999;
+    overflow: hidden;
+    height: 750px;
+    margin-top: 50px;
+    border-radius: 50px;
+    background-color: #fff;
+    display: flex;
+    &-left {
+      flex: 1;
+      margin: 75px 0;
+      border-right: 1px solid #aaa;
+      height: 80%;
+      text-align: center;
+      padding: 50px 0 0 0;
+      overflow: hidden;
+      .ant-menu {
+        float: right;
+        width: 300px;
+      }
+    }
+    &-right {
+      flex: 2;
+      margin: 75px 0;
+      padding: 0 30px;
+      height: 80%;
+      &-info {
+        height: 100%;
+        display: flex;
+        &-img {
+          flex: 1;
+          img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+          }
+        }
+        &-list {
+          flex: 5;
+          height: 100%;
+          display: inline-block;
+          .head {
+            height: 80px;
+          }
+          &-item {
+            display: flex;
+            height: 60px;
+            align-items: center;
+            .nickname{
+                font-size: 24px;
+            }
+            &-title {
+              flex: 1;
+              text-align: left;
+              .anticon{
+                  margin-right: 10px;
+                  color: rgb(250, 84, 28);
+              }
+            }
+            &-content {
+              flex: 2;
+              padding-left: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

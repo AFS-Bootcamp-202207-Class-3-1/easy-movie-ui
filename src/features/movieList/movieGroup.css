@@ -1,0 +1,15 @@
+#movieGroup {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 1200px;
+    margin:30px auto 0px;
+    text-align: center;
+}
+.movieGroupRow{
+    width: 1200px
+}

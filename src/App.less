@@ -1,4 +1,4 @@
-@import "~antd/dist/antd.less";
+@import '~antd/dist/antd.less';
 
 .app {
 
@@ -8,13 +8,22 @@
     padding: 0 12.5rem;
   }
 
-  &-main-content {
+  &-main-content-wrapper {
     height: calc(100vh - 64px - 70px);
     width: 100%;
   }
-  
+
   &-footer {
     background-color: #fff;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  &-back-to-top {
+    bottom: 100px;
+  }
+
+  .w {
+    margin: 0 auto;
+    width: 1400px;
   }
 }
