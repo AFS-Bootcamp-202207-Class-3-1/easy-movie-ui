@@ -36,7 +36,7 @@ const PrepareOrderPage = () => {
             <div className="prepare-order-page-payment-price">
               total:
               <span className="prepare-order-page-payment-price-yen">
-                &yen; 117
+                &yen; 55
               </span>
             </div>
             <Button type="primary" onClick={goToAfterPayPage}>

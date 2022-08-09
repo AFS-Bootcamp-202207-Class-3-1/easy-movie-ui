@@ -32,10 +32,11 @@ const columns = [
 const data = [
   {
     key: "1",
+    schedule: "2022-08-08 20:48",
     movieName: "流浪地球",
-    theater: "中影国际影城",
-    seat: "五楼5号厅 2排1座 | 2排2座",
-    price: "25",
+    theater: "Coffee Studio",
+    seat: "贵宾厅2",
+    price: "55",
   },
 ];
 
@@ -43,7 +44,7 @@ const PrepareOrderDetail = () => {
   return (
     <div>
       <Table columns={columns} dataSource={data} />
-      <Descriptions
+      {/* <Descriptions
         column={1}
         title={
           <div
@@ -57,7 +58,7 @@ const PrepareOrderDetail = () => {
       >
         <Descriptions.Item label="爆米花&times;2">&yen;25</Descriptions.Item>
         <Descriptions.Item label="可乐&times;2">&yen;20</Descriptions.Item>
-      </Descriptions>
+      </Descriptions> */}
     </div>
   );
 };

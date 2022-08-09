@@ -6,11 +6,14 @@ import "./MovieSessionList.less";
 import { useEffect, useState } from "react";
 import { groupBy, cloneDeep } from "lodash";
 import moment from "moment";
+import {useNavigate} from 'react-router-dom';
 
 function MovieSessionList() {
   const sessionList = useSelector(
     (state) => state.theatreOnMovieClick.sessionList
   );
+
+  const navigate = useNavigate();
 
   const sessionMap = groupBy(
     cloneDeep(sessionList).map((session) => {
@@ -41,6 +44,10 @@ function MovieSessionList() {
     setCurrentDay(moment(sessionList[0]?.startTime).format("MM-DD"));
   }, [sessionList]);
 
+  const toPrepareOrderPage = () => {
+    navigate("/prepareOrder/1");
+  }
+
   if (sessionList.length > 0) {
     return (
       <>
@@ -70,7 +77,7 @@ function MovieSessionList() {
               <span>{item.price}￥</span>
             </div>
             <div>
-              <Button type="primary">Buy Ticket</Button>
+              <Button type="primary" onClick={toPrepareOrderPage}>Buy Ticket</Button>
             </div>
           </div>
         ))}
