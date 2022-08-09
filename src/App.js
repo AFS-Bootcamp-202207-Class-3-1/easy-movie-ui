@@ -27,7 +27,7 @@ function App() {
               <Route path="/" element={<Outlet />}>
                 <Route index element={<IndexPage />} />
                 <Route path="/movie" element={<MoviePage />} />
-                <Route path="/theater" element={<TheaterPage />} />
+                <Route path="/theaterDetail/:theaterId/:movieId" element={<TheaterPage />} />
                 <Route path="/prepareOrder/:orderId" element={<PrepareOrderPage />} />
                 <Route path="/movieDetail/:id" element={<MovieDetailPage />} />
                 <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
