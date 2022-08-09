@@ -1,0 +1,49 @@
+.movie-session-list {
+  font-size: 18px;
+  display: flex;
+  height: 100px;
+
+  &-day-divider {
+    background-color: black;
+    height: 15px;
+    width: 2px;
+  }
+}
+
+.movie-session-list-day-item {
+  width: 200px;
+  text-align: center;
+}
+
+.movie-session-list-sessionItem {
+  font-size: 18px;
+  display: flex;
+  height: 100px;
+  border: 1px solid #999;
+  margin-bottom: 5px;
+
+  &-address {
+    color: rgb(17, 17, 17);
+  }
+
+  div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      text-align: center;
+      padding: 0 20px;
+      border-right: 1px solid #999;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .ant-btn {
+      span {
+        border: 0 solid #000;
+      }
+    }
+  }
+}

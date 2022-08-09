@@ -12,13 +12,7 @@ const fetchAllMovieList = (params) => {
   const { page, pageSize, keyword } = params;
 
   return request.get(
-    "/movies" +
-      "?page=" +
-      page +
-      "&pageSize=" +
-      pageSize +
-      "&keyword=" +
-      keyword
+    `/movies?page=${page}&pageSize=${pageSize}&keyword=${keyword}`
   );
 };
 

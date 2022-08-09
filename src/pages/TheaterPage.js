@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Pagination, Empty } from "antd";
+import { Pagination, Empty, BackTop } from "antd";
 import { get } from "lodash";
 import { getTheaterByPage } from "../api/theater";
 import TheaterList from "../../src/features/theater/TheaterList.js";
 import "./theaterPage.less";
+import PerfectScrollbar from "react-perfect-scrollbar";
+
 const TheaterPage = () => {
   const [isEmpty, setIsEmpty] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,7 +38,7 @@ const TheaterPage = () => {
   };
 
   return (
-    <>
+    <PerfectScrollbar id="app-main-scroller-bar">
       <div className="imgDiv">
         <img className="imgDiv-img" src="assets/theater_imgs/live_bg.png" alt="assets/theater_imgs/live_bg.png"></img>
       </div>
@@ -59,7 +61,11 @@ const TheaterPage = () => {
           onChange={onChange}
         />
       </div>
-    </>
+      <BackTop
+        className="app-back-to-top"
+        target={() => document.getElementById("app-main-scroller-bar")}
+      />
+    </PerfectScrollbar>
   );
 };
 

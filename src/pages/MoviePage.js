@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { Pagination, Empty } from "antd";
+import { Pagination, Empty, BackTop } from "antd";
 import MovieGroup from "../features/movieList/MovieGroup";
 import { useNavigate, useLocation } from "react-router-dom";
 import { get, has } from "lodash";
 import { fetchAllMovieList } from "../api/movie";
 import { RollbackOutlined } from "@ant-design/icons";
 import { items } from "../layout/Navbar";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import "./moviePage.css";
+
 const MoviePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
@@ -48,28 +50,34 @@ const MoviePage = () => {
     navigate(items[1].key);
   };
   return (
-    <div>
-      {keyword && (
-        <div className="RollbackOutlinedDev">
-          <RollbackOutlined />
-          <a href="/#" onClick={returnMovieList}>
-            返回电影列表
-          </a>
+    <PerfectScrollbar id="app-main-scroller-bar">
+      <div>
+        {keyword && (
+          <div className="RollbackOutlinedDev">
+            <RollbackOutlined />
+            <a href="/#" onClick={returnMovieList}>
+              返回电影列表
+            </a>
+          </div>
+        )}
+        {isEmpty && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+        {!isEmpty && <MovieGroup movieList={content}></MovieGroup>}
+        <div
+          style={{ textAlign: "center", marginTop: "68px", marginBottom: "30px" }}
+        >
+          <Pagination
+            defaultCurrent={currentPage}
+            total={total}
+            defaultPageSize={pageSize}
+            onChange={onChange}
+          />
         </div>
-      )}
-      {isEmpty && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-      {!isEmpty && <MovieGroup movieList={content}></MovieGroup>}
-      <div
-        style={{ textAlign: "center", marginTop: "68px", marginBottom: "30px" }}
-      >
-        <Pagination
-          defaultCurrent={currentPage}
-          total={total}
-          defaultPageSize={pageSize}
-          onChange={onChange}
-        />
       </div>
-    </div>
+      <BackTop
+        className="app-back-to-top"
+        target={() => document.getElementById("app-main-scroller-bar")}
+      />
+    </PerfectScrollbar>
   );
 };
 

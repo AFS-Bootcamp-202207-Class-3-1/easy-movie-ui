@@ -1,4 +1,4 @@
-import { Space, Table, Tag, Descriptions } from "antd";
+import { Table, Descriptions } from "antd";
 
 const columns = [
   {
