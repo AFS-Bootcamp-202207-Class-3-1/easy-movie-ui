@@ -2,14 +2,17 @@ import "./MovieSelecter.less";
 import TheatreOnMovieList from "../theatreInfo/TheatreOnMovieList";
 import ChooseMovieInfo from "../theatreInfo/ChooseMovieInfo";
 import MovieSessionList from "../theatreInfo/MovieSessionList";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 const MovieSelecter = ({ movieList }) => {
   return (
     <div className="movie-selecter">
       <div className="movie-selecter-movie-list-container">
-        <div className="movie-selecter-movie-list-container-movie-list">
-          <TheatreOnMovieList movieList={movieList} />
-        </div>
+        {/* <div className="movie-selecter-movie-list-container-movie-list"> */}
+          <PerfectScrollbar>
+            <TheatreOnMovieList movieList={movieList} />
+          </PerfectScrollbar>
+        {/* </div> */}
       </div>
       <ChooseMovieInfo movieList={movieList} />
 
@@ -19,7 +22,7 @@ const MovieSelecter = ({ movieList }) => {
             <span className="movie-selecter-session-list-container-sessionList-title-leftLine">
               ————————————
             </span>
-            <span>放映场次</span>
+            <span>Screening Schedule</span>
             <span className="movie-selecter-session-list-container-sessionList-title-rightLine">
               ————————————
             </span>

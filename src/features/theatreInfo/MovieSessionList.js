@@ -1,4 +1,4 @@
-import { Divider, Button, Space } from "antd";
+import { Divider, Space } from "antd";
 import "../../pages/TheaterPage.css";
 import "../../pages/sessionList.less";
 import { useSelector } from "react-redux";
@@ -6,14 +6,12 @@ import "./MovieSessionList.less";
 import { useEffect, useState } from "react";
 import { groupBy, cloneDeep } from "lodash";
 import moment from "moment";
-import {useNavigate} from 'react-router-dom';
+import MovieSessionItem from "./MoiveSessionItem";
 
 function MovieSessionList() {
   const sessionList = useSelector(
     (state) => state.theatreOnMovieClick.sessionList
   );
-
-  const navigate = useNavigate();
 
   const sessionMap = groupBy(
     cloneDeep(sessionList).map((session) => {
@@ -44,10 +42,6 @@ function MovieSessionList() {
     setCurrentDay(moment(sessionList[0]?.startTime).format("MM-DD"));
   }, [sessionList]);
 
-  const toPrepareOrderPage = () => {
-    navigate("/prepareOrder/1");
-  }
-
   if (sessionList.length > 0) {
     return (
       <>
@@ -63,23 +57,8 @@ function MovieSessionList() {
             {dayComponetList}
           </Space>
         </div>
-        {sessionMap[currentDay]?.map((item) => (
-          <div className="movie-session-list-sessionItem fix-center-width" key={item.id}>
-            <div>
-              <span>{item.startSchedule}</span>
-            </div>
-            <div>
-              <span className="movie-session-list-sessionItem-address">
-                英语2D 贵宾厅2
-              </span>
-            </div>
-            <div>
-              <span>{item.price}￥</span>
-            </div>
-            <div>
-              <Button type="primary" onClick={toPrepareOrderPage}>Buy Ticket</Button>
-            </div>
-          </div>
+        {sessionMap[currentDay]?.map((session) => (
+          <MovieSessionItem session={session} />
         ))}
       </>
     );
