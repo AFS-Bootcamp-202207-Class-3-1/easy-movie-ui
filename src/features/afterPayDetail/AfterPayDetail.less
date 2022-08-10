@@ -1,28 +1,32 @@
 .after-pay-detail{
-  width: 50%;
+  background: #fff;
+  width: 600px;
   border-radius: 20px;
   border: 1px solid black;
-  margin: 0 auto;
-  padding: 15px 0px;
+  margin: 20px auto;
+  padding: 15px 0;
   &-movieTicket {
     text-align: center;
-    margin: 10px 0px;
+    margin: 10px 0;
     color: #B3AAAA;
   }
   &-divider {
-    margin: 0px 70px;
+    margin: 0 70px;
     color: #333333;
   }
   &-movieInfo{
+    display: flex;
     margin-top: 30px;
     margin-bottom: 30px;
-    margin-left: 100px;
     border-radius: 10px;
+    align-items: center;
+    justify-content: center;
     &-image {
       cursor: pointer;
+      margin: 0 20px;
     }
     &-describe {
-      margin: 20px 0px;
+      margin: 20px;
       &-content {
         margin: 15px 0;
         display: block;
@@ -31,9 +35,10 @@
     }
   }
   &-qrcode {
-    display: inline-block;
     margin: 30px 250px;
-    vertical-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   &-orderTime {
     margin-left: 25px;

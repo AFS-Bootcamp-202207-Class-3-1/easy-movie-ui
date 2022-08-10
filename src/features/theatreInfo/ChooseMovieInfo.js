@@ -23,7 +23,7 @@ function ChooseMovieInfo(props) {
           <GlobalOutlined /> &ensp;{formatReleaseDate} {releaseCountry}
           &ensp;&ensp;&ensp;&ensp;
           <HistoryOutlined />
-          &ensp;{duration}分钟
+          &ensp;{duration} Minutes
         </div>
       </>
     );

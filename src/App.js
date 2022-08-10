@@ -18,8 +18,12 @@ import { Route, Routes, Outlet } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
 import PrepareOrderPage from "./pages/PrepareOrderPage";
 import AfterPayPage from "./pages/AfterPayPage";
+import OrderHistory from "./pages/OrderHistory";
+import AfterPayDetail from "./features/afterPayDetail/AfterPayDetail";
 import { saveUserData } from "./features/userSlice";
 import {  savePurchasePoint } from "./features/purchasePointSlice";
+import SelectSeatPage from './pages/selectSeatPage/SelectSeatPage';
+
 const { Header, Footer, Content } = Layout;
 
 function App() {
@@ -42,31 +46,26 @@ function App() {
           <IndexHeader />
         </Header>
 
-        <Content className="app-main-content-wrapper">
-          <Routes>
-            <Route path="/" element={<Outlet />}>
-              <Route index element={<IndexPage />} />
-              <Route path="/movie" element={<MoviePage />} />
-              <Route path="/theater" element={<TheaterPage />} />
-              <Route
-                path="/theaterDetail/:theaterId/:movieId"
-                element={<TheaterPageDetail />}
-              />
-              <Route
-                path="/prepareOrder/:orderId"
-                element={<PrepareOrderPage />}
-              />
-              <Route path="/afterPay/:orderId" element={<AfterPayPage />} />
-              <Route path="/movieDetail/:id" element={<MovieDetailPage />} />
-              <Route
-                path="/chooseTheater/:id"
-                element={<ChooseTheaterPage />}
-              />
-              <Route path="/personal" element={<PersonalPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </Content>
+          <Content className="app-main-content-wrapper">
+            <Routes>
+              <Route path="/" element={<Outlet />}>
+                <Route index element={<IndexPage />} />
+                <Route path="/movie" element={<MoviePage />} />
+                <Route path="/theater" element={<TheaterPage />} />
+                <Route path="/theaterDetail/:theaterId/:movieId" element={<TheaterPageDetail />} />
+                <Route path="/theaterDetail/:theaterId" element={<TheaterPageDetail />} />
+                <Route path="/prepareOrder/:orderId" element={<PrepareOrderPage />} />
+                <Route path="/afterPay/:orderId" element={<AfterPayPage />} />
+                <Route path="/orderHistory/:orderId" element={<AfterPayDetail />} />
+                <Route path="/orderHistory" element={<OrderHistory />} />
+                <Route path="/movieDetail/:id" element={<MovieDetailPage />} />
+                <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
+                <Route path="/personal" element={<PersonalPage />} />
+                <Route path='/selectSeat/:orderId' element={<SelectSeatPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </Content>
 
         <Footer className="app-footer">
           <IndexFooter />

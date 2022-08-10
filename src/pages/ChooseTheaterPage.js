@@ -35,6 +35,10 @@ const ChooseTheaterPage = () => {
     });
   }, [id]);
 
+  const toTheaterDetail = (theaterId, movieId) => {
+    navigate(`/theaterDetail/${theaterId}/${movieId}`);
+  }
+
   return (
     <PerfectScrollbar id="app-main-scroller-bar">
       <div className="ChooseTheaterPage">
@@ -112,7 +116,7 @@ const ChooseTheaterPage = () => {
                 <span>$41</span>
               </div> */}
                   <div>
-                    <Button type="primary">Buy Ticket</Button>
+                    <Button type="primary" onClick={() => {toTheaterDetail(theater.id, id)}}>Buy Ticket</Button>
                   </div>
                 </div>
               );

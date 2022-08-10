@@ -1,10 +1,14 @@
 import { Button } from "antd";
+import {useNavigate} from 'react-router-dom'
 
 const TheaterList = (props) => {
   const { theaterList } = props;
-  const onClickBuyTicket=()=>{
+  const navigate = useNavigate();
 
+  const onClickBuyTicket=(theaterId)=>{
+    navigate(`/theaterDetail/${theaterId}`)
   }
+  
   return (
     <>
       <div className="ChooseTheaterPage">
@@ -25,7 +29,7 @@ const TheaterList = (props) => {
                     <span className="address">{theater.address}</span>
                   </div>
                   <div>
-                    <Button onClickBuyTicket={onClickBuyTicket} type="primary">Buy Ticket</Button>
+                    <Button onClick={() => {onClickBuyTicket(theater.id)}} type="primary">Buy Ticket</Button>
                   </div>
                 </div>
               );

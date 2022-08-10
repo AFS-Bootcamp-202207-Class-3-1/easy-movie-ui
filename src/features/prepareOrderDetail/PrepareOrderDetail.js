@@ -1,4 +1,4 @@
-import { Table, Descriptions } from "antd";
+import { Table } from "antd";
 
 const columns = [
   {
@@ -29,21 +29,11 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    movieName: "流浪地球",
-    theater: "中影国际影城",
-    seat: "五楼5号厅 2排1座 | 2排2座",
-    price: "25",
-  },
-];
-
-const PrepareOrderDetail = () => {
+const PrepareOrderDetail = ({orderDetail}) => {
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
-      <Descriptions
+      <Table columns={columns} dataSource={[orderDetail]} pagination={false}/>
+      {/* <Descriptions
         column={1}
         title={
           <div
@@ -57,7 +47,7 @@ const PrepareOrderDetail = () => {
       >
         <Descriptions.Item label="爆米花&times;2">&yen;25</Descriptions.Item>
         <Descriptions.Item label="可乐&times;2">&yen;20</Descriptions.Item>
-      </Descriptions>
+      </Descriptions> */}
     </div>
   );
 };

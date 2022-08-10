@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useState, useEffect} from "react";
 import {
   UserOutlined,
   SnippetsOutlined,
@@ -20,6 +20,7 @@ import {
   message,
   Form,
   Input,
+  BackTop,
 } from "antd";
 import { useSelector } from "react-redux";
 import moment from "moment";
@@ -30,50 +31,55 @@ import { useDispatch } from "react-redux";
 import { setPurchasePointReq } from "../api/purchasePoint";
 
 import "./PersonalPage.less";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 const PersonalPage = () => {
-  const items = [
-    {
-      label: "Personal Information",
-      key: "/personal",
-      icon: <UserOutlined />,
-    },
-    {
-      label: "My Order",
-      key: "/myOrder",
-      icon: <SnippetsOutlined />,
-    },
-  ];
 
-  const handleMenuClick = () => {};
-  const location = useLocation();
+    const navigate = useNavigate();
+    const items = [
+        {
+            label: "Personal Information",
+            key: "/personal",
+            icon: <UserOutlined/>,
+        },
+        {
+            label: "My Order",
+            key: "/myOrder",
+            icon: <SnippetsOutlined/>,
+        },
+    ];
 
-  const [current, setCurrent] = useState(location.pathname);
+    const handleMenuClick = () => {
+        navigate(`/orderHistory`);
+    };
+    const location = useLocation();
+
+    const [current, setCurrent] = useState(location.pathname);
 
   const userInfo = useSelector((state) => state.userInfo);
   const purchasePoint = useSelector((state) => state.purchasePoint);
 
-  const [gender, setGender] = useState(userInfo.gender);
-  const [birthday, setBirthday] = useState(moment(userInfo.birthday));
+    const [gender, setGender] = useState(userInfo.gender);
+    const [birthday, setBirthday] = useState(moment(userInfo.birthday));
 
-  useEffect(() => {
-    setGender(userInfo.gender);
-    setBirthday(moment(userInfo.birthday));
-  }, [userInfo]);
+    useEffect(() => {
+        setGender(userInfo.gender);
+        setBirthday(moment(userInfo.birthday));
+    }, [userInfo]);
 
   useEffect(() => {
     setCurrent(location.pathname);
   }, [location.pathname]);
 
-  const handleDateChanged = (date, dateString) => {
-    setBirthday(date);
-  };
+    const handleDateChanged = (date, dateString) => {
+        setBirthday(date);
+    };
 
-  const handleGenderChanged = (event) => {
-    setGender(event.target.value);
-  };
+    const handleGenderChanged = (event) => {
+        setGender(event.target.value);
+    };
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
   const handleSaveClicked = () => {
     if (
@@ -131,8 +137,9 @@ const PersonalPage = () => {
     setIsModalVisible(false);
   };
 
-  return (
-    <div className="personal">
+    return (
+        <PerfectScrollbar id="app-main-scroller-bar">
+            <div className="personal">
       <div className="personal-box w">
         <div className="personal-box-left">
           <Menu
@@ -275,7 +282,12 @@ const PersonalPage = () => {
         {/* 右边个人信息 结束 */}
       </div>
     </div>
-  );
+            <BackTop
+                className="app-back-to-top"
+                target={() => document.getElementById("app-main-scroller-bar")}
+            />
+        </PerfectScrollbar>
+    );
 };
 
 export default PersonalPage;
