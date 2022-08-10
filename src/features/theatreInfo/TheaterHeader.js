@@ -8,8 +8,8 @@ const TheaterHeader = ({ theater }) => {
       <div className="theater-info-header-banner">
         <div className="theater-info-header-banner-box">
           <div className="theater-info-header-banner-box-left">
-            <div className="theater-info-header-banner-box-left-avatar-shadow">
-              <img src={theater.imageUrl} alt="theater"></img>
+            <div className="theater-info-header-banner-box-left-avatar">
+              <img src={theater.imageUrl} alt="theater" className="theater-info-header-banner-box-left-avatar-img"></img>
             </div>
           </div>
           <div className="theater-info-header-banner-box-main">
@@ -39,7 +39,6 @@ const TheaterHeader = ({ theater }) => {
                     width={160}
                     alt="Recommended discount"
                   ></img>
-                  <Divider type="vertical" />
                 </div>
               </div>
             </div>
