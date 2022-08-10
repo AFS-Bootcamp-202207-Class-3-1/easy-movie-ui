@@ -18,9 +18,10 @@ import { Route, Routes, Outlet } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
 import PrepareOrderPage from "./pages/PrepareOrderPage";
 import AfterPayPage from "./pages/AfterPayPage";
+import OrderHistory from "./pages/OrderHistory";
+import AfterPayDetail from "./features/afterPayDetail/AfterPayDetail";
 import{saveUserData} from './features/userSlice'
 const { Header, Footer, Content } = Layout;
-
 
 function App() {
 
@@ -50,6 +51,8 @@ useEffect(() => {
                 <Route path="/theaterDetail/:theaterId" element={<TheaterPageDetail />} />
                 <Route path="/prepareOrder/:orderId" element={<PrepareOrderPage />} />
                 <Route path="/afterPay/:orderId" element={<AfterPayPage />} />
+                <Route path="/orderHistory/:orderId" element={<AfterPayDetail />} />
+                <Route path="/orderHistory" element={<OrderHistory />} />
                 <Route path="/movieDetail/:id" element={<MovieDetailPage />} />
                 <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
                 <Route path="/personal" element={<PersonalPage />} />
