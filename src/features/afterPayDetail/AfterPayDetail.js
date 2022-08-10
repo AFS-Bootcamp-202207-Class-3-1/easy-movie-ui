@@ -1,6 +1,5 @@
 import "./AfterPayDetail.less";
-import {Col, Row} from "antd";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {QRCodeSVG} from "qrcode.react";
 import {
     AppstoreTwoTone,
@@ -17,7 +16,8 @@ import moment from "moment";
 
 const AfterPayDetail = (props) => {
     const navigate = useNavigate();
-    const orderId = props.orderId
+    const {orderId} = useParams() || props.orderId;
+    // const orderId = props.orderId ;
 
     const [orderDetail, setOrderDetail] = useState({});
     useEffect(() => {
@@ -41,10 +41,6 @@ const AfterPayDetail = (props) => {
 
         }
         fetchData();
-        // getOrderById(orderId).then((response) => {
-        //     console.log(response.data)
-        //     setData(response.data)
-        // })
     },[]);
     const onClickCard = () => {
         navigate(`/movieDetail/${orderDetail.orderId}`);
@@ -56,11 +52,11 @@ const AfterPayDetail = (props) => {
               <div className="after-pay-detail-movieTicket">电影票</div>
               <hr className="after-pay-detail-divider" />
               <div className="after-pay-detail-movieInfo">
-                  <Row>
-                      <Col span={12}>
+                  {/*<Row>*/}
+                      {/*<Col span={12}>*/}
                           <img alt="" width="200px" className="after-pay-detail-movieInfo-image" src={orderDetail.imageUrl} onClick={onClickCard}/>
-                      </Col>
-                      <Col span={12}>
+                      {/*</Col>*/}
+                      {/*<Col span={12}>*/}
                           <div className="after-pay-detail-movieInfo-describe">
                               <div className="after-pay-detail-movieInfo-describe-content">
                                   <VideoCameraTwoTone twoToneColor="#FA541C" />&nbsp;&nbsp;
@@ -87,8 +83,8 @@ const AfterPayDetail = (props) => {
                                   <span>{orderDetail.price}</span>
                               </div>
                           </div>
-                      </Col>
-                  </Row>
+                      {/*</Col>*/}
+                  {/*</Row>*/}
               </div>
               <div className="after-pay-detail-movieTicket">取票</div>
               <hr className="after-pay-detail-divider" />
