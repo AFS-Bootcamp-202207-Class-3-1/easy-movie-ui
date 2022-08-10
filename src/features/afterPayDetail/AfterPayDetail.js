@@ -36,7 +36,7 @@ const AfterPayDetail = (props) => {
                 seat: schedule.screenText,
                 price: schedule.price,
                 qrCode:order.quickMarkKey,
-                createTime: order.createTime
+                createTime: moment(order.createTime).format("YYYY-MM-DD HH:mm:ss")
             });
 
         }
