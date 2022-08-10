@@ -71,8 +71,8 @@ const OrderHistory = () => {
         setCurrent(event);
     }
     const handleMenuClick = ({key}) => {
-        if(key === '/orderHistory'){
-          navigate(`/orderHistory`);
+        if(key === '/personal'){
+          navigate(`/personal`);
         }
       };
     return (
