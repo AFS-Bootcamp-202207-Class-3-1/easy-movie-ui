@@ -1,4 +1,4 @@
-import { Divider, Space, Segmented } from "antd";
+import { Segmented } from "antd";
 import "../../pages/TheaterPage.css";
 import "../../pages/sessionList.less";
 import { useSelector } from "react-redux";
@@ -25,18 +25,6 @@ function MovieSessionList() {
   let dayList = Object.keys(sessionMap || {});
 
   const [currentDay, setCurrentDay] = useState(dayList ? dayList[0] : "");
-
-  const dayComponetList = dayList.map((day) => {
-    return (
-      <div
-        key={day}
-        onClick={() => setCurrentDay(day)}
-        className="movie-session-list-day-item"
-      >
-        {day}
-      </div>
-    );
-  });
 
   useEffect(() => {
     setCurrentDay(moment(sessionList[0]?.startTime).format("MM-DD"));
