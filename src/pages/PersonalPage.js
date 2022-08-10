@@ -44,13 +44,15 @@ const PersonalPage = () => {
         },
         {
             label: "My Order",
-            key: "/myOrder",
+            key: "/orderHistory",
             icon: <SnippetsOutlined/>,
         },
     ];
 
-    const handleMenuClick = () => {
+    const handleMenuClick = ({key}) => {
+      if(key === '/orderHistory'){
         navigate(`/orderHistory`);
+      }
     };
     const location = useLocation();
 

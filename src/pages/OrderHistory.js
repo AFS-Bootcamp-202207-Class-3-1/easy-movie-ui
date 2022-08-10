@@ -70,9 +70,11 @@ const OrderHistory = () => {
     const onChange = (event) => {
         setCurrent(event);
     }
-    const handleMenuClick = () => {
-        navigate(`/personal`);
-    };
+    const handleMenuClick = ({key}) => {
+        if(key === '/orderHistory'){
+          navigate(`/orderHistory`);
+        }
+      };
     return (
         <PerfectScrollbar id="app-main-scroller-bar">
             <div className="order-history">

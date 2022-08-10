@@ -8,6 +8,7 @@ import {
   LikeOutlined,
   FireOutlined,
 } from "@ant-design/icons";
+
 import moment from 'moment'
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "./MovieDetail.less";
@@ -148,7 +149,7 @@ const MovieDetailPage = () => {
               <li className="commentItem">
                 <div className="head">
                   <img src={photoPng} alt="" />
-                  <span className="name"> Melenie</span>
+                  <span className="name"> Melanie</span>
                   <span className="time"> a few seconds ago</span>
                 </div>
                 <div className="body">
@@ -168,7 +169,7 @@ const MovieDetailPage = () => {
               <li className="commentItem">
                 <div className="head">
                   <img src={photoPng} alt="" />
-                  <span className="name"> Melenie</span>
+                  <span className="name"> Melanie</span>
                   <span className="time"> a few seconds ago</span>
                 </div>
                 <div className="body">
@@ -188,7 +189,7 @@ const MovieDetailPage = () => {
               <li className="commentItem">
                 <div className="head">
                   <img src={photoPng} alt="" />
-                  <span className="name"> Melenie</span>
+                  <span className="name"> Melanie</span>
                   <span className="time"> a few seconds ago</span>
                 </div>
                 <div className="body">

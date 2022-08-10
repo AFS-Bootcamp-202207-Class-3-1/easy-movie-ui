@@ -28,7 +28,7 @@ const UserAvatar = () => {
         {
           key: '2',
           label: (
-            <a target="" href="/myOrder" className="user-avatar-dropdown-item">
+            <a target="" href="/orderHistory" className="user-avatar-dropdown-item">
               <SnippetsOutlined />My Order
             </a>
           ),
