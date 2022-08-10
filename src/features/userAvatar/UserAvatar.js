@@ -11,6 +11,9 @@ const UserAvatar = () => {
     const showModal = () => {
         setIsModalVisible(true);
     };
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
@@ -61,7 +64,7 @@ const UserAvatar = () => {
         <Avatar className="avatar" size={35} icon={<UserOutlined />} src={<img alt="avatar" src={useSelector(state=>state?.userInfo?.avatar)}></img>}/> <DownOutlined/>
       </span>
       </Dropdown>
-        <Modal className="user-avatar-modal" visible={isModalVisible} footer={[]}>
+        <Modal className="user-avatar-modal" visible={isModalVisible} onCancel={handleCancel} footer={null}>
             <div className="login">
                 <div className="user-avatar-modal-box">
                     <img className="user-avatar-modal-box-logo" src="/EasyMovie.png" alt="logo"/>
@@ -104,7 +107,7 @@ const UserAvatar = () => {
                         />
                     </Form.Item>
                     <Form.Item>
-                        <a className="login-form-forgot" href="">
+                        <a className="login-form-register" href="">
                             No Account？
                         </a>
                     </Form.Item>
