@@ -2,6 +2,7 @@ import { Steps, Card, BackTop, Row, Col } from "antd";
 import "./SelectSeatPage.less";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import SelectSeatPanel from "../../features/selectSeatPanel/SelectSeatPanel";
+import SeatDetailCard from "../../features/seatDetailCard/SeatDetailCard";
 
 const { Step } = Steps;
 
@@ -25,7 +26,9 @@ const SelectSeatPage = () => {
               </div>
             </Col>
             <Col span={10}>
-              <div className="select-seat-page-right">2</div>
+              <div className="select-seat-page-right">
+                <SeatDetailCard />
+              </div>
             </Col>
           </Row>
         </Card>
