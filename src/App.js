@@ -1,7 +1,7 @@
-
-import {useEffect } from 'react'
-import {findUserById} from './api/user'
-import {useDispatch} from 'react-redux'
+import { useEffect } from "react";
+import { findUserById } from "./api/user";
+import { getPurchasePointReq } from "./api/purchasePoint"
+import { useDispatch } from "react-redux";
 
 import "./App.less";
 import IndexHeader from "./layout/IndexHeader";
@@ -20,21 +20,24 @@ import PrepareOrderPage from "./pages/PrepareOrderPage";
 import AfterPayPage from "./pages/AfterPayPage";
 import OrderHistory from "./pages/OrderHistory";
 import AfterPayDetail from "./features/afterPayDetail/AfterPayDetail";
-import{saveUserData} from './features/userSlice'
+import { saveUserData } from "./features/userSlice";
+import {  savePurchasePoint } from "./features/purchasePointSlice";
 import SelectSeatPage from './pages/selectSeatPage/SelectSeatPage';
 
 const { Header, Footer, Content } = Layout;
 
 function App() {
-
-// *****假登录，完成登录功能后删除*****
-const dispatch = useDispatch();
-useEffect(() => {
-    findUserById(1).then((res)=>{
-      dispatch(saveUserData(res))
+  // *****假登录，完成登录功能后删除*****
+  const dispatch = useDispatch();
+  useEffect(() => {
+    findUserById(1).then(res=>{
+      dispatch(saveUserData(res));
+      getPurchasePointReq(1).then(res=>{
+        dispatch(savePurchasePoint(res.data.balance))
+      })
     })
-}, [dispatch])
-// **********************************
+  }, [dispatch]);
+  // **********************************
 
   return (
     <div className="app">
