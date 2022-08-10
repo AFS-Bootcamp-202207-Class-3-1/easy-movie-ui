@@ -106,22 +106,22 @@ const OrderHistory = () => {
         setCurrent(event);
     }
     const [orderDetail, setOrderDetail] = useState({});
-    useEffect(()=>{
-        const fetchData = async () => {
-          const { data } = await getUsedOrdersByUseId(1);
-          const { schedule, movie, theater, order} = data;
-            setOrderDetail({
-                id: order.id,
-                movieName: movie.name,
-                theater: theater.name,
-                number: order.votes,
-                price: schedule.price,
-                date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
-                url: movie.imageUrl
-            });
-        }
-        fetchData();
-    },[])
+    // useEffect(()=>{
+    //     const fetchData = async () => {
+    //       const { data } = await getUsedOrdersByUseId(1);
+    //       const { schedule, movie, theater, order} = data;
+    //         setOrderDetail({
+    //             id: order.id,
+    //             movieName: movie.name,
+    //             theater: theater.name,
+    //             number: order.votes,
+    //             price: schedule.price,
+    //             date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
+    //             url: movie.imageUrl
+    //         });
+    //     }
+    //     fetchData();
+    // },[])
     const handleMenuClick = ({key}) => {
         if(key === '/personal'){
           navigate(`/personal`);
