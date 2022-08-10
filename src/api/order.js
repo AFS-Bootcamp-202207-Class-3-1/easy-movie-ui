@@ -8,4 +8,8 @@ const getOrderById = (id) => {
   return request.get(`/orders/${id}`);
 };
 
-export { createOrder, getOrderById };
+const payTheOrder = (id) => {
+  return request.post(`/orders/payment/${id}`);
+};
+
+export { createOrder, getOrderById, payTheOrder };

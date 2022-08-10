@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getOrderById } from "../api/order";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import { payTheOrder } from "../api/order";
 
 const { Step } = Steps;
 
@@ -16,7 +17,8 @@ const PrepareOrderPage = () => {
 
   const [orderDetail, setOrderDetail] = useState({});
 
-  const goToAfterPayPage = () => {
+  const goToAfterPayPage = async () => {
+    await payTheOrder(orderId);
     navigate(`/afterPay/${orderId}`);
   };
 
