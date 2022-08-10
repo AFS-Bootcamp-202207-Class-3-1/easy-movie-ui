@@ -274,7 +274,7 @@ const UserAvatar = () => {
                 htmlType="submit"
                 className="login-form-button"
               >
-                Log in
+                Register
               </Button>
             </Form.Item>
           </Form>
