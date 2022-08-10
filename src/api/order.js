@@ -15,4 +15,14 @@ const payTheOrder = (id) => {
   return request.post(`/orders/payment/${id}`);
 };
 
-export { createOrder, getOrderById, payTheOrder, getUsedOrdersByUseId };
+const confirmSeats = (orderId, seats) => {
+  return request.post(`/orders/${orderId}/seats`, { seats });
+}
+
+export {
+  createOrder,
+  getOrderById,
+  payTheOrder,
+  getUsedOrdersByUseId,
+  confirmSeats,
+};

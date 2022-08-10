@@ -90,6 +90,7 @@ const SelectSeatPage = () => {
             <Col span={10}>
               <div className="select-seat-page-right">
                 <SeatDetailCard
+                  orderId={orderId}
                   movie={movie}
                   theater={theater}
                   schedule={schedule}

@@ -1,10 +1,12 @@
 import "./SeatDetailCard.less";
-import { Button, Divider } from "antd";
+import { Button, Divider, message } from "antd";
 import SeatDetailCardItem from "./SeatDetailCardItem";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import { join } from "lodash";
+import { confirmSeats } from "../../api/order";
 
-const SeatDetailCard = ({ movie, theater, schedule, selectSeats }) => {
+const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
   const seatDetailCardItems = selectSeats.map((seat, index) => {
     if (seat === "2") {
       return (
@@ -23,6 +25,19 @@ const SeatDetailCard = ({ movie, theater, schedule, selectSeats }) => {
 
   const count = selectSeats.filter((seat) => seat === "2").length;
   const totalPrice = count * schedule.price;
+
+  const confirmOrderSeats = async () => {
+    const seats = join(
+      selectSeats.map((seat) => (seat === "2" ? "1" : "0")),
+      ""
+    );
+    try {
+      await confirmSeats(orderId, seats);
+      message.success("Confirm seats successfully");
+    } catch (error) {
+      message.error(error.message);
+    }
+  };
 
   return (
     <div className="seat-detail-card">
@@ -79,6 +94,7 @@ const SeatDetailCard = ({ movie, theater, schedule, selectSeats }) => {
           className="seat-detail-card-confirm-button"
           type="primary"
           disabled={count === 0}
+          onClick={confirmOrderSeats}
         >
           Confirm
         </Button>
