@@ -1,11 +1,20 @@
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { createOrder } from "../../api/order";
+import { useSelector } from "react-redux";
 
 const MovieSessionItem = ({ session }) => {
   const navigate = useNavigate();
 
-  const toPrepareOrderPage = () => {
-    navigate("/prepareOrder/1");
+  const userInfo = useSelector((state) => state.userInfo);
+  const toPrepareOrderPage = async () => {
+    const { data } = await createOrder({
+      userId: userInfo.id,
+      scheduleId: session.id,
+      movieId: session.movieId,
+      theaterId: session.theaterId,
+    });
+    navigate(`/prepareOrder/${data.id}`);
   };
 
   return (

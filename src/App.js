@@ -21,6 +21,8 @@ import AfterPayPage from "./pages/AfterPayPage";
 import OrderHistory from "./pages/OrderHistory";
 import AfterPayDetail from "./features/afterPayDetail/AfterPayDetail";
 import{saveUserData} from './features/userSlice'
+import SelectSeatPage from './pages/selectSeatPage/SelectSeatPage';
+
 const { Header, Footer, Content } = Layout;
 
 function App() {
@@ -31,7 +33,7 @@ useEffect(() => {
     findUserById(1).then((res)=>{
       dispatch(saveUserData(res))
     })
-}, [])
+}, [dispatch])
 // **********************************
 
   return (
@@ -56,6 +58,7 @@ useEffect(() => {
                 <Route path="/movieDetail/:id" element={<MovieDetailPage />} />
                 <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
                 <Route path="/personal" element={<PersonalPage />} />
+                <Route path='/selectSeat/:orderId' element={<SelectSeatPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>

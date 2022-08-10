@@ -42,7 +42,7 @@ function MovieSessionList() {
           />
         </div>
         {sessionMap[currentDay]?.map((session) => (
-          <MovieSessionItem session={session} />
+          <MovieSessionItem key={session.id} session={session} />
         ))}
       </>
     );

@@ -5,7 +5,7 @@ import {useState} from "react";
 import "./OrderHistoryDetail.less"
 
 const OrderHistoryDetail = (props) => {
-  const [item, setItem] = useState(props.item);
+  const [item] = useState(props.item);
   const navigate = useNavigate();
   const onClickCard = (data) => {
     navigate(`/movieDetail/${data.id}`);
