@@ -23,6 +23,7 @@ import AfterPayDetail from "./features/afterPayDetail/AfterPayDetail";
 import { saveUserData } from "./features/userSlice";
 import {  savePurchasePoint } from "./features/purchasePointSlice";
 import SelectSeatPage from './pages/selectSeatPage/SelectSeatPage';
+import OrderHistoryDetail from "./features/orderHistoryDetail/OrderHistoryDetail";
 
 const { Header, Footer, Content } = Layout;
 
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/afterPay/:orderId" element={<AfterPayPage />} />
                 <Route path="/orderHistory/:orderId" element={<AfterPayDetail />} />
                 <Route path="/orderHistory" element={<OrderHistory />} />
+                <Route path="/orderHistoryDetail/:orderId" element={<OrderHistoryDetail />} />
                 <Route path="/movieDetail/:id" element={<MovieDetailPage />} />
                 <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
                 <Route path="/personal" element={<PersonalPage />} />

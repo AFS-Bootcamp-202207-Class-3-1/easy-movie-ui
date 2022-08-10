@@ -21,7 +21,9 @@ const AfterPayPage = () => {
             </Steps>
           </div>
           <div className="after-pay-page-content">
-            <AfterPayDetail orderId={orderId}/>
+            <div className="after-pay-page-card">
+              <AfterPayDetail orderId={orderId}/>
+            </div>
           </div>
         </Card>
       </div>
