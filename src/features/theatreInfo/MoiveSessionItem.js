@@ -18,7 +18,7 @@ const MovieSessionItem = ({ session }) => {
       </div>
       <div>
         <span className="movie-session-list-sessionItem-address">
-          英语2D 贵宾厅2
+          {session.screenText}
         </span>
       </div>
       <div>

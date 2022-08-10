@@ -1,4 +1,4 @@
-import { Divider, Space } from "antd";
+import { Divider, Space, Segmented } from "antd";
 import "../../pages/TheaterPage.css";
 import "../../pages/sessionList.less";
 import { useSelector } from "react-redux";
@@ -46,16 +46,12 @@ function MovieSessionList() {
     return (
       <>
         <div className="movie-session-list fix-center-width">
-          <Space
-            split={
-              <Divider
-                type="vertical"
-                className="movie-session-list-day-divider"
-              />
-            }
-          >
-            {dayComponetList}
-          </Space>
+          <Segmented
+            className="fix-center-width"
+            onChange={(day) => setCurrentDay(day)}
+            block
+            options={dayList}
+          />
         </div>
         {sessionMap[currentDay]?.map((session) => (
           <MovieSessionItem session={session} />
