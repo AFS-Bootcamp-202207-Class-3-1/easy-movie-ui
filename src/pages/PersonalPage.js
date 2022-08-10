@@ -9,13 +9,25 @@ import {
   AlertOutlined,
   CalendarOutlined,
   AccountBookOutlined,
+  BarcodeOutlined,
 } from "@ant-design/icons";
-import { Menu, Button, DatePicker, Radio } from "antd";
+import {
+  Menu,
+  Button,
+  DatePicker,
+  Radio,
+  Modal,
+  message,
+  Form,
+  Input,
+} from "antd";
 import { useSelector } from "react-redux";
 import moment from "moment";
-import{updateUser} from '../api/user'
-import{saveUserData} from '../features/userSlice'
-import {useDispatch} from 'react-redux'
+import { updateUser } from "../api/user";
+import { saveUserData } from "../features/userSlice";
+import {  savePurchasePoint } from "../features/purchasePointSlice";
+import { useDispatch } from "react-redux";
+import { setPurchasePointReq } from "../api/purchasePoint";
 
 import "./PersonalPage.less";
 
@@ -39,6 +51,7 @@ const PersonalPage = () => {
   const [current, setCurrent] = useState(location.pathname);
 
   const userInfo = useSelector((state) => state.userInfo);
+  const purchasePoint = useSelector((state) => state.purchasePoint);
 
   const [gender, setGender] = useState(userInfo.gender);
   const [birthday, setBirthday] = useState(moment(userInfo.birthday));
@@ -47,10 +60,6 @@ const PersonalPage = () => {
     setGender(userInfo.gender);
     setBirthday(moment(userInfo.birthday));
   }, [userInfo]);
-
-  //   setInterval(()=>{
-  //       console.log(birthday.isSame(moment(userInfo.birthday),'day'));
-  //   },1000)
 
   useEffect(() => {
     setCurrent(location.pathname);
@@ -64,18 +73,62 @@ const PersonalPage = () => {
     setGender(event.target.value);
   };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleSaveClicked = () => {
     if (
-        gender === userInfo.gender &&
-        birthday.isSame(moment(userInfo.birthday), "day")
-    ) return
-    updateUser(userInfo.id, {gender,birthday}).then(res=>{
-        dispatch(saveUserData(res))
-        console.log(res);
-    })
-    
+      gender === userInfo.gender &&
+      birthday.isSame(moment(userInfo.birthday), "day")
+    )
+      return;
+    updateUser(userInfo.id, { gender, birthday }).then((res) => {
+      dispatch(saveUserData(res));
+      message.success({
+        content: "save successfully!",
+        duration: 2,
+      });
+    });
+  };
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [redeemCode, setRedeemCode] = useState("");
+
+  const onChargeClicked = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleRedeemCodeChanged = (event) => {
+    console.log(event.target.value);
+    setRedeemCode(event.target.value);
+  };
+
+  const [form] = Form.useForm();
+
+  const handleOk = async () => {
+    if (redeemCode === "") return;
+    console.log("redeemCode", redeemCode);
+
+    try {
+      const { data } = await setPurchasePointReq(userInfo.id, redeemCode);
+      dispatch(savePurchasePoint(data.balance));
+      setRedeemCode("");
+      form.resetFields();
+      message.success({
+        content: "Charge account successfully!",
+      });
+      setIsModalVisible(false);
+    } catch (error) {
+      console.log(error);
+      if (error.errorMessage && error.errorMessage === "Code is wrong") {
+        message.error("Invalid redeem code");
+        return;
+      }
+    }
+  };
+
+  const handleCancel = () => {
+    setRedeemCode("");
+    setIsModalVisible(false);
   };
 
   return (
@@ -159,7 +212,44 @@ const PersonalPage = () => {
                     Account:
                   </div>
                   <div className="personal-box-right-info-list-item-content">
-                    $1000000.00
+                    ${purchasePoint.toFixed(2)}
+                    <Button
+                      type="default"
+                      onClick={onChargeClicked}
+                      className="redeem-btn"
+                    >
+                      <BarcodeOutlined /> Redeem
+                    </Button>
+                    <Modal
+                      title="Redeem Code"
+                      visible={isModalVisible}
+                      onOk={handleOk}
+                      onCancel={handleCancel}
+                    >
+                      <Form
+                        form={form}
+                        name="basic"
+                        labelCol={{ span: 6 }}
+                        wrapperCol={{ span: 18 }}
+                        autoComplete="off"
+                      >
+                        <Form.Item
+                          label="Redeem Code"
+                          name="redeemCode"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your Redeem Code",
+                            },
+                          ]}
+                        >
+                          <Input.Password
+                            placeholder="Input your redeem code here."
+                            onChange={handleRedeemCodeChanged}
+                          />
+                        </Form.Item>
+                      </Form>
+                    </Modal>
                   </div>
                 </div>
                 <div className="personal-box-right-info-list-item">

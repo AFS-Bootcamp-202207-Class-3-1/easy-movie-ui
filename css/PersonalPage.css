@@ -1,0 +1,83 @@
+.personal {
+  padding-bottom: 100px;
+  padding-top: 50px;
+}
+.personal .w {
+  width: 1200px;
+  margin: 0 auto;
+}
+.personal-box {
+  border: 1px solid #999;
+  overflow: hidden;
+  height: 750px;
+  margin-top: 50px;
+  border-radius: 50px;
+  background-color: #fff;
+  display: flex;
+}
+.personal-box-left {
+  flex: 1;
+  margin: 75px 0;
+  border-right: 1px solid #aaa;
+  height: 80%;
+  text-align: center;
+  padding: 50px 0 0 0;
+  overflow: hidden;
+}
+.personal-box-left .ant-menu {
+  float: right;
+  width: 300px;
+}
+.personal-box-right {
+  flex: 2;
+  margin: 75px 0;
+  padding: 0 30px;
+  height: 80%;
+}
+.personal-box-right-info {
+  height: 100%;
+  display: flex;
+}
+.personal-box-right-info-img {
+  flex: 1;
+}
+.personal-box-right-info-img img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.personal-box-right-info-list {
+  flex: 5;
+  height: 100%;
+  display: inline-block;
+}
+.personal-box-right-info-list .head {
+  height: 80px;
+}
+.personal-box-right-info-list-item {
+  display: flex;
+  height: 60px;
+  align-items: center;
+}
+.personal-box-right-info-list-item .nickname {
+  font-size: 24px;
+}
+.personal-box-right-info-list-item-title {
+  flex: 1;
+  text-align: left;
+}
+.personal-box-right-info-list-item-title .anticon {
+  margin-right: 10px;
+  color: #fa541c;
+}
+.personal-box-right-info-list-item-content {
+  flex: 2;
+  padding-left: 30px;
+}
+.personal-box-right-info-list-item-content .redeem-btn {
+  margin-left: 20px;
+  font-size: 10px;
+}
+.personal-box-right-info-list-item-content .redeem-btn .anticon {
+  font-size: 14px;
+}
