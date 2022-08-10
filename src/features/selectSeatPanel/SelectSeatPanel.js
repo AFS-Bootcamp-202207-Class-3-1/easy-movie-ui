@@ -2,57 +2,9 @@ import { Checkbox, Col, Row, Divider } from "antd";
 import SelectSeatExample from "./SelectSeatExample";
 import SelectSeatItem from "./SelectSeatItem";
 import "./SelectSeatPanel.less";
-import { useState } from "react";
 
-const SelectSeatPanel = () => {
-  const initSeats = [
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-    "1",
-    "0",
-  ];
-
-  const [seats, setSeats] = useState(initSeats);
-
-  const changeSeats = (index, status) => {
-    const newSeats = [...seats];
-    newSeats[index] = status;
-    setSeats(newSeats);
-  };
-
-  const checkboxGroup = seats.map((seat, index) => {
+const SelectSeatPanel = ({ initSeats, changeSeats }) => {
+  const checkboxGroup = initSeats.map((seat, index) => {
     return (
       <Col span={4} key={index}>
         <SelectSeatItem

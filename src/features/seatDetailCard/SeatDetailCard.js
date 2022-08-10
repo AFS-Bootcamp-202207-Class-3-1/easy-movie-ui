@@ -1,21 +1,42 @@
 import "./SeatDetailCard.less";
 import { Button, Divider } from "antd";
 import SeatDetailCardItem from "./SeatDetailCardItem";
+import moment from "moment";
+import { useSelector } from "react-redux";
 
-const SeatDetailCard = () => {
+const SeatDetailCard = ({ movie, theater, schedule, selectSeats }) => {
+  const seatDetailCardItems = selectSeats.map((seat, index) => {
+    if (seat === "2") {
+      return (
+        <SeatDetailCardItem
+          key={index}
+          row={Math.floor(index / 6) + 1}
+          col={index - Math.floor(index / 6) * 6 + 1}
+        />
+      );
+    } else {
+      return null;
+    }
+  });
+
+  const userInfo = useSelector((state) => state.userInfo);
+
+  const count = selectSeats.filter((seat) => seat === "2").length;
+  const totalPrice = count * schedule.price;
+
   return (
     <div className="seat-detail-card">
       <div className="seat-detail-card-movie">
         <img
           className="seat-detail-card-movie-img"
-          src="https://p0.pipi.cn/mmdb/25bfd6d72c992367cb537c020675f703a7045.jpg?imageView2/1/w/464/h/644"
+          src={movie.imageUrl}
           alt=""
         ></img>
         <div className="seat-detail-card-movie-info">
-          <div className="seat-detail-card-movie-info-title">电影名</div>
+          <div className="seat-detail-card-movie-info-title">{movie.name}</div>
           <div className="seat-detail-card-movie-info-detail">
-            <div>Type: XXX</div>
-            <div>Duration: XXX</div>
+            <div>Types: {movie.types}</div>
+            <div>Duration: {movie.duration} minutes</div>
           </div>
         </div>
       </div>
@@ -23,42 +44,42 @@ const SeatDetailCard = () => {
         <div className="seat-detail-card-others-theater">
           <span className="seat-detail-card-others-prefix">影院: </span>
           <span className="seat-detail-card-others-theater-name">
-            CGV影城 (for test)
+            {theater.name}
           </span>
         </div>
         <div className="seat-detail-card-others-schedule">
           <span className="seat-detail-card-others-prefix">场次: </span>
           <span className="seat-detail-card-others-schedule-name">
-            XXX (for test)
+            {moment(schedule.startTime).format("YYYY-MM-DD HH:mm")}{" "}
+            {schedule.screenText}
           </span>
         </div>
         <div className="seat-detail-card-others-price">
-          <span className="seat-detail-card-others-prefix">票价:</span>
+          <span className="seat-detail-card-others-prefix">票价: </span>
           <span className="seat-detail-card-others-price-detail">
-            ￥XXX (for test)
+            ￥{schedule.price}
           </span>
         </div>
       </div>
       <Divider dashed></Divider>
       <div className="seat-detail-card-select">
         <div className="seat-detail-card-select-title">Selected Seats: </div>
-        <SeatDetailCardItem />
-        <SeatDetailCardItem />
-        <SeatDetailCardItem />
-        <SeatDetailCardItem />
-        <SeatDetailCardItem />
-        <SeatDetailCardItem />
-        <SeatDetailCardItem />
-        <SeatDetailCardItem />
+        {seatDetailCardItems}
       </div>
       <div className="seat-detail-card-total">
         <div className="seat-detail-card-total-title">Total Price: </div>
-        <div className="seat-detail-card-total-price">xxx</div>
+        <div className="seat-detail-card-total-price">&yen; {totalPrice}</div>
       </div>
       <Divider dashed></Divider>
-      <div className="seat-detail-card-phone">Phone: 130xxxxxxxx</div>
+      <div className="seat-detail-card-phone">
+        Phone: {userInfo.phoneNumber}
+      </div>
       <div className="seat-detail-card-confirm">
-        <Button className="seat-detail-card-confirm-button" type="primary">
+        <Button
+          className="seat-detail-card-confirm-button"
+          type="primary"
+          disabled={count === 0}
+        >
           Confirm
         </Button>
       </div>
