@@ -21,9 +21,8 @@ const AfterPayDetail = (props) => {
     const [orderDetail, setOrderDetail] = useState({});
     useEffect(() => {
         const fetchData = async () => {
-            const { data } = await getOrderById(orderId);
-            const { schedule, movie, theater,order } = data;
-            console.log(data)
+            const {data} = await getOrderById(orderId);
+            const {schedule, movie, theater, order} = data;
             setOrderDetail({
                 key: "1",
                 orderId: order.id,
@@ -34,61 +33,61 @@ const AfterPayDetail = (props) => {
                 votes: order.votes,
                 seat: schedule.screenText,
                 price: schedule.price,
-                qrCode:order.quickMarkKey,
+                qrCode: order.quickMarkKey,
                 createTime: moment(order.createTime).format("YYYY-MM-DD HH:mm:ss")
             });
-
         }
         fetchData();
-    },[orderId]);
+    }, [orderId]);
     const onClickCard = () => {
         navigate(`/movieDetail/${orderDetail.orderId}`);
     };
 
-  return (
-      <>
-          <div className="after-pay-detail">
-              <div className="after-pay-detail-movieTicket">电影票</div>
-              <hr className="after-pay-detail-divider" />
-              <div className="after-pay-detail-movieInfo">
-                          <img alt="" width="200px" className="after-pay-detail-movieInfo-image" src={orderDetail.imageUrl} onClick={onClickCard}/>
-                          <div className="after-pay-detail-movieInfo-describe">
-                              <div className="after-pay-detail-movieInfo-describe-content">
-                                  <VideoCameraTwoTone twoToneColor="#FA541C" />&nbsp;&nbsp;
-                                  <span>{orderDetail.movieName}</span>
-                              </div>
-                              <div className="after-pay-detail-movieInfo-describe-content">
-                                  <CarryOutTwoTone twoToneColor="#FA541C" />&nbsp;&nbsp;
-                                  <span>{orderDetail.schedule}</span>
-                              </div>
-                              <div className="after-pay-detail-movieInfo-describe-content">
-                                  <EnvironmentTwoTone twoToneColor="#FA541C" />&nbsp;&nbsp;
-                                  <span>{orderDetail.theater}</span>
-                              </div>
-                              <div className="after-pay-detail-movieInfo-describe-content">
-                                  <ProfileTwoTone twoToneColor="#FA541C" />&nbsp;&nbsp;
-                                  <span>&times; {orderDetail.votes}</span>
-                              </div>
-                              <div className="after-pay-detail-movieInfo-describe-content">
-                                  <AppstoreTwoTone twoToneColor="#FA541C" />&nbsp;&nbsp;
-                                  <span>{orderDetail.seat}</span>
-                              </div>
-                              <div className="after-pay-detail-movieInfo-describe-content">
-                                  <PropertySafetyTwoTone twoToneColor="#FA541C" />&nbsp;&nbsp;
-                                  <span>{orderDetail.price}</span>
-                              </div>
-                          </div>
-              </div>
-              <div className="after-pay-detail-movieTicket">取票</div>
-              <hr className="after-pay-detail-divider" />
-              <div className="after-pay-detail-qrcode">
-                  <QRCodeSVG value={orderDetail.qrCode} />
-              </div>
-              <div className="after-pay-detail-movieTicket">订单号：{orderDetail.orderId}</div>
-              <div className="after-pay-detail-movieTicket">验证码：{orderDetail.qrCode}</div>
-              <div className="after-pay-detail-orderTime">下单时间：{orderDetail.createTime}</div>
-          </div>
-      </>
-  )
+    return (
+        <>
+            <div className="after-pay-detail">
+                <div className="after-pay-detail-movieTicket">电影票</div>
+                <hr className="after-pay-detail-divider"/>
+                <div className="after-pay-detail-movieInfo">
+                    <img alt="" width="30%" className="after-pay-detail-movieInfo-image" src={orderDetail.imageUrl}
+                         onClick={onClickCard}/>
+                    <div className="after-pay-detail-movieInfo-describe">
+                        <div className="after-pay-detail-movieInfo-describe-content">
+                            <VideoCameraTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
+                            <span>{orderDetail.movieName}</span>
+                        </div>
+                        <div className="after-pay-detail-movieInfo-describe-content">
+                            <CarryOutTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
+                            <span>{orderDetail.schedule}</span>
+                        </div>
+                        <div className="after-pay-detail-movieInfo-describe-content">
+                            <EnvironmentTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
+                            <span>{orderDetail.theater}</span>
+                        </div>
+                        <div className="after-pay-detail-movieInfo-describe-content">
+                            <ProfileTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
+                            <span>&times; {orderDetail.votes}</span>
+                        </div>
+                        <div className="after-pay-detail-movieInfo-describe-content">
+                            <AppstoreTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
+                            <span>{orderDetail.seat}</span>
+                        </div>
+                        <div className="after-pay-detail-movieInfo-describe-content">
+                            <PropertySafetyTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
+                            <span>{orderDetail.price}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="after-pay-detail-movieTicket">取票</div>
+                <hr className="after-pay-detail-divider"/>
+                <div className="after-pay-detail-qrcode">
+                    <QRCodeSVG value={orderDetail.qrCode}/>
+                </div>
+                <div className="after-pay-detail-movieTicket">订单号：{orderDetail.orderId}</div>
+                <div className="after-pay-detail-movieTicket">验证码：{orderDetail.qrCode}</div>
+                <div className="after-pay-detail-orderTime">下单时间：{orderDetail.createTime}</div>
+            </div>
+        </>
+    )
 }
 export default AfterPayDetail;
