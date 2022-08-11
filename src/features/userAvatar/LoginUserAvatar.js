@@ -6,7 +6,7 @@ import {
     Avatar,
     Button,
     Form,
-    Input,
+    Input, message,
     Modal,
 } from "antd";
 import {useDispatch} from "react-redux";
@@ -40,6 +40,7 @@ const LoginUserAvatar = () => {
                 dispatch(savePurchasePoint(res.balance))
             })
         })
+        message.success("login successfully!");
     };
 
     const GoToRegister = () => {
