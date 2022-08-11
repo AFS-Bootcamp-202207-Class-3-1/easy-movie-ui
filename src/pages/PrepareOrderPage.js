@@ -1,4 +1,4 @@
-import { Steps, Card, Button, BackTop } from "antd";
+import { Steps, Card, Button, BackTop, message } from "antd";
 import "./PrepareOrderPage.less";
 import PrepareOrderDetail from "../features/prepareOrderDetail/PrepareOrderDetail";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,8 +18,13 @@ const PrepareOrderPage = () => {
   const [orderDetail, setOrderDetail] = useState({});
 
   const goToAfterPayPage = async () => {
-    await payTheOrder(orderId);
-    navigate(`/afterPay/${orderId}`);
+    try {
+      await payTheOrder(orderId);
+      message.success("Successfully paid");
+      navigate(`/afterPay/${orderId}`);
+    } catch (error) {
+      message.error(error.errorMessage);
+    }
   };
 
   const userInfo = useSelector((state) => state.userInfo);
