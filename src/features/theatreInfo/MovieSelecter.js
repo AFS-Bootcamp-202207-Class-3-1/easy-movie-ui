@@ -8,11 +8,9 @@ const MovieSelecter = ({ movieList }) => {
   return (
     <div className="movie-selecter">
       <div className="movie-selecter-movie-list-container">
-        {/* <div className="movie-selecter-movie-list-container-movie-list"> */}
-          <PerfectScrollbar>
-            <TheatreOnMovieList movieList={movieList} />
-          </PerfectScrollbar>
-        {/* </div> */}
+        <PerfectScrollbar>
+          <TheatreOnMovieList movieList={movieList} />
+        </PerfectScrollbar>
       </div>
       <ChooseMovieInfo movieList={movieList} />
 

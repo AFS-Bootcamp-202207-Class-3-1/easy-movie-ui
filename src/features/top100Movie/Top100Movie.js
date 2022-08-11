@@ -1,7 +1,6 @@
 import "./Top100Movie.less";
 import { Card, message } from "antd";
 import TopMovieItem from "./TopMovieItem";
-import { RightOutlined } from "@ant-design/icons";
 import { getTop10Movie } from "../../api/movie";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
