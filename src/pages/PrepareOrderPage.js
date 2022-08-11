@@ -17,7 +17,7 @@ const PrepareOrderPage = () => {
   const navigate = useNavigate();
 
   const [orderDetail, setOrderDetail] = useState({});
-  const purchasePoint = useSelector((state) => state.purchasePoint);
+  const purchasePoint = useSelector((state) => state.purchasePoint.points);
 
   const showModal = () => {
     Modal.success({
@@ -134,7 +134,7 @@ const PrepareOrderPage = () => {
             <div>
               Your remaining points :{" "}
               <span className="prepare-order-page-remain-points-under">
-                $ {purchasePoint.toFixed(2)}
+                $ {purchasePoint?.toFixed(2)}
               </span>
             </div>
             <div>

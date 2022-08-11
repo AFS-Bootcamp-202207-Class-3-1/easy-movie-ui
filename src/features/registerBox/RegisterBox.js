@@ -1,39 +1,35 @@
-import {
-  UserOutlined,
-  LockOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
-import {  Button, Form, Input,  message } from "antd";
+import { UserOutlined, LockOutlined, PhoneOutlined, MailOutlined } from "@ant-design/icons";
+import { Button, Form, Input, message } from "antd";
 
-import {registerReq} from '../../api/user'
+import { registerReq } from "../../api/user";
 
-const RegisterBox =  (props) => {
-    
+const RegisterBox = (props) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     try {
-        if(values.register_password !== values.register_confirm_password) {
-            return message.error("The password and confirm password are different")
-        }
-        // 调用注册接口
-        const reqBody = {
-            username: values.register_username,
-            password: values.register_password,
-            telephone: values.register_phoneNum
-        }
-       const res = await registerReq(reqBody)
+      if (values.register_password !== values.register_confirm_password) {
+        return message.error("The password and confirm password are different");
+      }
+      // 调用注册接口
+      const reqBody = {
+        username: values.register_username,
+        password: values.register_password,
+        phoneNumber: values.register_phoneNum,
+        email: values.register_email
+      };
+      const res = await registerReq(reqBody);
       form.resetFields();
-       message.success(res.data)
-       
+      message.success(res.data);
+      backToLogin();
     } catch (error) {
-        message.error(error.errorMessage)
+      message.error(error.errorMessage);
     }
   };
 
   const backToLogin = () => {
     // 调用
-    props.onBackToLogin()
+    props.onBackToLogin();
   };
 
   return (
@@ -47,7 +43,7 @@ const RegisterBox =  (props) => {
         <h1 style={{ fontWeight: "bold" }}>Register</h1>
       </div>
       <Form
-                        form={form}
+        form={form}
         name="normal_register"
         className="login-form"
         initialValues={{
@@ -116,6 +112,22 @@ const RegisterBox =  (props) => {
             prefix={<PhoneOutlined className="site-form-item-icon" />}
             placeholder="Telephone"
             type="tel"
+          />
+        </Form.Item>
+        <Form.Item
+          name="register_email"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Telephone!",
+            },
+          ]}
+        >
+          <Input
+            size="large"
+            prefix={<MailOutlined className="site-form-item-icon" />}
+            placeholder="E-mail"
+            type="email"
           />
         </Form.Item>
         <Form.Item>

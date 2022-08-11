@@ -20,11 +20,11 @@ const payTheOrder = (id) => {
 
 const confirmSeats = (orderId, seats) => {
   return request.post(`/orders/${orderId}/seats`, { seats });
-}
+};
 
-const refundOrder=(id)=>{
+const refundOrder = (id) => {
   return request.post(`/orders/refund/${id}`);
-}
+};
 
 export {
   createOrder,
@@ -33,5 +33,5 @@ export {
   getUsedOrdersByUseId,
   confirmSeats,
   getPaidOrdersByUseId,
-  refundOrder
+  refundOrder,
 };
