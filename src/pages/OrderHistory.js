@@ -55,6 +55,7 @@ const OrderHistory = () => {
             const {schedule, movie, theater, order} = item;
             return {
               id: order.id,
+              movieId: movie.id,
               movieName: movie.name,
               theater: theater.name,
               number: order.seats.split("1").length - 1,
