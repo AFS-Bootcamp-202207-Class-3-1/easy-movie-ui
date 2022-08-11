@@ -1,24 +1,24 @@
-import {BackTop, Empty, Menu, Tabs} from "antd";
-import {SnippetsOutlined, UserOutlined} from "@ant-design/icons";
+import { BackTop, Empty, Menu, Tabs } from "antd";
+import { SnippetsOutlined, UserOutlined } from "@ant-design/icons";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import {useNavigate} from "react-router-dom";
-import "./OrderHistory.less"
-import {useEffect, useState} from "react";
-import {getPaidOrdersByUseId} from "../api/order";
+import { useNavigate } from "react-router-dom";
+import "./OrderHistory.less";
+import { useEffect, useState } from "react";
+import { getPaidOrdersByUseId } from "../api/order";
 import OrderHistoryItem from "../features/orderHistoryItem/OrderHistoryItem";
 import moment from "moment";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const menuItems = [
   {
     label: "Personal Information",
     key: "/personal",
-    icon: <UserOutlined/>,
+    icon: <UserOutlined />,
   },
   {
     label: "My Order",
     key: "/myOrder",
-    icon: <SnippetsOutlined/>,
+    icon: <SnippetsOutlined />,
   },
 ];
 const items = [
@@ -39,38 +39,37 @@ const items = [
   //     key: 4,
   // }
 ];
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
 
 const OrderHistory = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.userInfo);
-  console.log(user)
-  const onChange = () => {
-  }
+  console.log(user);
+  const onChange = () => {};
   const [orderDetail, setOrderDetail] = useState([]);
   useEffect(() => {
-      const fetchData = async () => {
-        const {data} = await getPaidOrdersByUseId(user.id);
-        let arr = data.reverse().map((item) => {
-            const {schedule, movie, theater, order} = item;
-            return {
-              id: order.id,
-              movieName: movie.name,
-              theater: theater.name,
-              number: order.seats.split("1").length - 1,
-              price: order.totalPrice,
-              date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
-              url: movie.imageUrl
-            };
-          }
-        )
-        setOrderDetail(arr);
-      }
+    const fetchData = async () => {
+      const { data } = await getPaidOrdersByUseId(user.id);
+      let arr = data.reverse().map((item) => {
+        const { schedule, movie, theater, order } = item;
+        return {
+          id: order.id,
+          movieName: movie.name,
+          theater: theater.name,
+          number: order.seats.split("1").length - 1,
+          price: order.totalPrice,
+          date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
+          url: movie.imageUrl,
+        };
+      });
+      setOrderDetail(arr);
+    };
+    if (user.id) {
       fetchData();
-    }, [user.id]
-  )
-  const handleMenuClick = ({key}) => {
-    if (key === '/personal') {
+    }
+  }, [user.id]);
+  const handleMenuClick = ({ key }) => {
+    if (key === "/personal") {
       navigate(`/personal`);
     }
   };
@@ -88,19 +87,16 @@ const OrderHistory = () => {
           </div>
           <div className="order-history-box-right">
             <Tabs centered={true} defaultActiveKey="3" onChange={onChange}>
-              {
-                items.map((item) => (
-                  <TabPane tab={item.label} key={item.key}>
-                    {
-                      orderDetail.map((item) => (
-                        <OrderHistoryItem key={item.id} item={item}/>
-                      ))
-                    }
-                    <div>
-                      {JSON.stringify(orderDetail) === '[]' ? <Empty/> : ''}
-                    </div>
-                  </TabPane>
-                ))}
+              {items.map((item) => (
+                <TabPane tab={item.label} key={item.key}>
+                  {orderDetail.map((item) => (
+                    <OrderHistoryItem key={item.id} item={item} />
+                  ))}
+                  <div>
+                    {JSON.stringify(orderDetail) === "[]" ? <Empty /> : ""}
+                  </div>
+                </TabPane>
+              ))}
             </Tabs>
           </div>
         </div>
@@ -110,6 +106,6 @@ const OrderHistory = () => {
         target={() => document.getElementById("app-main-scroller-bar")}
       />
     </PerfectScrollbar>
-  )
-}
+  );
+};
 export default OrderHistory;
