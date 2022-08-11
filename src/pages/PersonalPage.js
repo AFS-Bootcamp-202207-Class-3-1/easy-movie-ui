@@ -10,6 +10,7 @@ import {
   CalendarOutlined,
   AccountBookOutlined,
   BarcodeOutlined,
+  TrophyOutlined
 } from "@ant-design/icons";
 import {
   Menu,
@@ -175,7 +176,7 @@ const PersonalPage = () => {
                   <div className="personal-box-right-info-list-item-content">
                     <span className="nickname">
                       <strong>{userInfo?.username}</strong>
-                      <span className="level">Level.{level}</span>
+                      <span className="level"><TrophyOutlined />Level.{level}</span>
                     </span>
                   </div>
                 </div>
