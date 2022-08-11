@@ -25,6 +25,8 @@ import {  savePurchasePoint } from "./features/purchasePointSlice";
 import SelectSeatPage from './pages/selectSeatPage/SelectSeatPage';
 import OrderHistoryDetail from "./features/orderHistoryDetail/OrderHistoryDetail";
 
+import RegisterBox from './features/registerBox/RegisterBox'
+
 const { Header, Footer, Content } = Layout;
 
 function App() {
@@ -64,6 +66,7 @@ function App() {
                 <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
                 <Route path="/personal" element={<PersonalPage />} />
                 <Route path='/selectSeat/:orderId' element={<SelectSeatPage />} />
+                <Route path='/register' element={<RegisterBox />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>

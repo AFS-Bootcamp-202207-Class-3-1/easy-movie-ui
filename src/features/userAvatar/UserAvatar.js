@@ -2,58 +2,17 @@ import {
   UserOutlined,
   DownOutlined,
   SnippetsOutlined,
-  LoginOutlined,
-  LockOutlined,
-  PhoneOutlined, LogoutOutlined
 } from "@ant-design/icons";
 import {
   Avatar,
-  Button,
   Dropdown,
-  Form,
-  Input,
   Menu,
-  Modal,
 } from "antd";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 
 import "./UserAvatar.css";
-import { useState } from "react";
-import {findUserById, findUserByUsername} from "../../api/user";
-import {saveUserData} from "../userSlice";
-import {getPurchasePointReq} from "../../api/purchasePoint";
-import {savePurchasePoint} from "../purchasePointSlice";
 
 const UserAvatar = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const onFinish = (values) => {
-    // const dispatch = useDispatch();
-    // findUserByUsername(1).then(res=>{
-    //   dispatch(saveUserData(res));
-    //   getPurchasePointReq(1).then(res=>{
-    //     dispatch(savePurchasePoint(res.data.balance))
-    //   })
-    // })
-    sessionStorage.setItem("user",JSON.stringify(values));
-    // console.log("Received values of form: ", values);
-    console.log(JSON.parse(sessionStorage.getItem("user")));
-  };
-
-  const GoToRegister = () => {
-    setIsLogin(false)
-  };
-  const backToLogin = () => {
-    setIsLogin(true)};
-
   const menu = (
     <Menu
       items={[

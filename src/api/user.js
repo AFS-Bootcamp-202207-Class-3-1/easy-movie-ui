@@ -12,4 +12,8 @@ const findUserById = (id) => {
   return request.get(`/users/${id}`);
 };
 
-export { createUser, findUserById,updateUser };
+const registerReq = (body) =>{
+  return request.post('/users/user/register', body)
+}
+
+export { createUser, findUserById,updateUser,registerReq };
