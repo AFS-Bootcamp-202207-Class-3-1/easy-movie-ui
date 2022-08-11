@@ -4,11 +4,10 @@ import {
   SnippetsOutlined,
   LoginOutlined,
   LockOutlined,
-  PhoneOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, Form, Input, Menu, Modal } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import RegisterBox from "../../features/registerBox/RegisterBox";
 
 import "./UserAvatar.css";

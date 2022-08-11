@@ -1,16 +1,10 @@
 import {
   UserOutlined,
-  DownOutlined,
-  SnippetsOutlined,
-  LoginOutlined,
   LockOutlined,
   PhoneOutlined,
-  LogoutOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button, Dropdown, Form, Input, Menu, message, Modal } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import {  Button, Form, Input,  message } from "antd";
 
-import { useState } from "react";
 import {registerReq} from '../../api/user'
 
 const RegisterBox =  (props) => {
