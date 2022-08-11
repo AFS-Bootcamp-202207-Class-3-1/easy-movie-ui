@@ -43,7 +43,6 @@ const {TabPane} = Tabs;
 
 const OrderHistory = () => {
   const navigate = useNavigate();
-  let isEmpty = false;
   const user = useSelector((state) => state.userInfo);
   console.log(user)
   const onChange = () => {
@@ -52,7 +51,6 @@ const OrderHistory = () => {
   useEffect(() => {
       const fetchData = async () => {
         const {data} = await getPaidOrdersByUseId(user.id);
-        isEmpty = JSON.stringify(data) === '[]';
         let arr = data.reverse().map((item) => {
             const {schedule, movie, theater, order} = item;
             return {
@@ -99,7 +97,7 @@ const OrderHistory = () => {
                       ))
                     }
                     <div>
-                      {isEmpty ? <Empty/> : ''}
+                      {JSON.stringify(orderDetail) === '[]' ? <Empty/> : ''}
                     </div>
                   </TabPane>
                 ))}
