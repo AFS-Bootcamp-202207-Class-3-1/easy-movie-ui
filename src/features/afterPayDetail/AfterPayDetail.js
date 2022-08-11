@@ -16,15 +16,15 @@ import moment from "moment";
 const AfterPayDetail = (props) => {
   const navigate = useNavigate();
   const { orderId } = useParams() || props.orderId;
-
+  const { callbackIsUsed } = props;
   const [orderDetail, setOrderDetail] = useState({});
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getOrderById(orderId);
       const { schedule, movie, theater, order } = data;
-
       const seatsDetail = [];
       const splitSeats = order.seats.split("");
+      if (order.isTicketUsed === true) callbackIsUsed(true);
       splitSeats.forEach((seat, index) => {
         if (seat === "1") {
           seatsDetail.push(
@@ -117,7 +117,9 @@ const AfterPayDetail = (props) => {
               alt=""
               src="/assets/completed.png"
             ></img>
-          ) : <></>}
+          ) : (
+            <></>
+          )}
         </div>
         <div className="after-pay-detail-movieTicket">
           订单号：{orderDetail.orderId}
