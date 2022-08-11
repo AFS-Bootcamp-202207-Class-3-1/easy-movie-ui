@@ -4,7 +4,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import {useNavigate} from "react-router-dom";
 import "./OrderHistory.less"
 import {useEffect, useState} from "react";
-import {getUsedOrdersByUseId} from "../api/order";
+import {getPaidOrdersByUseId} from "../api/order";
 import OrderHistoryItem from "../features/orderHistoryItem/OrderHistoryItem";
 import moment from "moment";
 
@@ -47,16 +47,17 @@ const OrderHistory = () => {
     const [orderDetail, setOrderDetail] = useState([]);
     useEffect(() => {
             const fetchData = async () => {
-                const {data} = await getUsedOrdersByUseId(1);
+                const {data} = await getPaidOrdersByUseId(1);
                 isEmpty = JSON.stringify(data) === '[]';
-                let arr = data.map((item) => {
+                let arr = data.reverse().map((item) => {
                         const {schedule, movie, theater, order} = item;
+                    console.log(data)
                         return  {
                             id: order.id,
                             movieName: movie.name,
                             theater: theater.name,
-                            number: order.votes,
-                            price: schedule.price,
+                            number: order.seats.split("1").length - 1,
+                            price: order.totalPrice,
                             date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
                             url: movie.imageUrl
                         };

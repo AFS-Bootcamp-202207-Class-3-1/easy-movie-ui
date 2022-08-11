@@ -10,6 +10,9 @@ const getOrderById = (id) => {
 const getUsedOrdersByUseId = (id) => {
   return request.get(`/orders/used/${id}`);
 };
+const getPaidOrdersByUseId = (id) => {
+  return request.get(`/orders/paid/${id}`);
+};
 
 const payTheOrder = (id) => {
   return request.post(`/orders/payment/${id}`);
@@ -29,5 +32,6 @@ export {
   payTheOrder,
   getUsedOrdersByUseId,
   confirmSeats,
+  getPaidOrdersByUseId,
   refundOrder
 };
