@@ -66,11 +66,11 @@ const PersonalPage = () => {
     const [gender, setGender] = useState(userInfo.gender);
     const [birthday, setBirthday] = useState(moment(userInfo.birthday));
     const [level, setLevel] = useState(0)
-
+    console.log(userInfo);
     useEffect(() => {
         setGender(userInfo.gender);
         setBirthday(moment(userInfo.birthday));
-        getUserLevel(userInfo).then(res=>{
+        userInfo.id &&  getUserLevel(userInfo.id).then(res=>{
           setLevel(res.data.level)
         })
     }, [userInfo]);
@@ -121,7 +121,6 @@ const PersonalPage = () => {
 
   const handleOk = async () => {
     if (redeemCode === "") return;
-    console.log("redeemCode", redeemCode);
 
     try {
       const { data } = await setPurchasePointReq(userInfo.id, redeemCode);
@@ -131,6 +130,9 @@ const PersonalPage = () => {
       message.success({
         content: "Charge account successfully!",
       });
+      userInfo.id &&  getUserLevel(userInfo.id).then(res=>{
+        setLevel(res.data.level)
+      })
       setIsModalVisible(false);
     } catch (error) {
       console.log(error);
