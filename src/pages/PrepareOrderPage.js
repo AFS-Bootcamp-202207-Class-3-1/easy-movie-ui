@@ -134,7 +134,7 @@ const PrepareOrderPage = () => {
             <div>
               Your remaining points :{" "}
               <span className="prepare-order-page-remain-points-under">
-                $ {purchasePoint.toFixed(2)}
+                $ {purchasePoint?.toFixed(2)}
               </span>
             </div>
             <div>
