@@ -1,26 +1,47 @@
 import {
-  UserOutlined,
-  DownOutlined,
-  SnippetsOutlined,
+    UserOutlined,
+    DownOutlined,
+    SnippetsOutlined,
+    LogoutOutlined
 } from "@ant-design/icons";
 import {
-  Avatar,
-  Dropdown,
-  Menu,
+    Avatar,
+    Dropdown,
+    Menu,
+    Modal,
 } from "antd";
-import { useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import "./UserAvatar.css";
+import {useState} from "react";
+import {deleteUserData} from "../userSlice";
+
 
 const UserAvatar = () => {
-  const menu = (
-    <Menu
-      items={[
-        {
-          key: "0",
-          label: (
-            <span className="user-avatar-dropdown-item info">
-              <strong>{useSelector((state) => state.userInfo.username)}</strong>
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.userInfo);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+    const HandleOk = () => {
+        dispatch(deleteUserData())
+        setIsModalVisible(false)
+        localStorage.removeItem("user");
+    };
+    const HandleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    const menu = (
+        <Menu
+            items={[
+                {
+                    key: "0",
+                    label: (
+                        <span className="user-avatar-dropdown-item info">
+              <strong>{user.username}</strong>
             </span>
           ),
         },
@@ -46,6 +67,17 @@ const UserAvatar = () => {
             </a>
           ),
         },
+                {
+                    key: "3",
+                    label: (
+                        <div
+                            className="user-avatar-dropdown-item"
+                            onClick={showModal}
+                        ><LogoutOutlined />
+                           Logout
+                        </div>
+                    ),
+                },
       ]}
     />
   );
@@ -55,25 +87,28 @@ const UserAvatar = () => {
       <Dropdown overlay={menu} placement="bottomRight">
         <span
           className="user-avatar-a"
-          href=""
           onClick={(e) => e.preventDefault()}
         >
-          <Avatar
-            className="avatar"
-            size={35}
-            icon={<UserOutlined />}
-            src={
-              <img
-                alt="avatar"
-                src={useSelector((state) => state?.userInfo?.avatar)}
-              ></img>
-            }
-          />{" "}
-          <DownOutlined />
+            <Avatar
+                className="avatar"
+                size={35}
+                icon={<UserOutlined/>}
+                src={user.avatar}
+            />
+            <DownOutlined/>
         </span>
-      </Dropdown>
-    </div>
-  );
+            </Dropdown>
+            <Modal
+                className="user-avatar-modal"
+                visible={isModalVisible}
+                onOk={HandleOk}
+                onCancel={HandleCancel}
+                okText="Confirm"
+            >
+                <p style={{marginTop: "20px"}}>Are you sure logout of the current account?</p>
+            </Modal>
+        </div>
+    );
 };
 
 export default UserAvatar;

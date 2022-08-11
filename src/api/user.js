@@ -20,4 +20,8 @@ const getUserLevel = (id) => {
   return request.get(`/users/level/${id}`);
 };
 
-export { createUser, findUserById, updateUser,registerReq, getUserLevel };
+const login = (user) => {
+  return request.post(`/users/user/login`,user);
+};
+
+export { createUser, findUserById,updateUser, login,getUserLevel,registerReq };
