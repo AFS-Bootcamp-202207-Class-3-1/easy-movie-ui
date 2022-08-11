@@ -12,7 +12,7 @@ function TheatreOnMovieListItem(props) {
   const movieItemClickId = useSelector(
     (state) => state.theatreOnMovieClick.choosedMovieId
   );
-  const movieItemClick = movieItemClickId === props.MovieId;
+  const movieItemClick = parseInt(movieItemClickId) === parseInt(props.MovieId);
 
   const choiceMovie = () => {
     dispatch(updateChooseMovie(props.MovieId));
