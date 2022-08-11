@@ -4,9 +4,10 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import {useNavigate} from "react-router-dom";
 import "./OrderHistory.less"
 import {useEffect, useState} from "react";
-import {getUsedOrdersByUseId} from "../api/order";
+import {getPaidOrdersByUseId} from "../api/order";
 import OrderHistoryItem from "../features/orderHistoryItem/OrderHistoryItem";
 import moment from "moment";
+import {useSelector} from "react-redux";
 
 const menuItems = [
     {
@@ -20,64 +21,6 @@ const menuItems = [
         icon: <SnippetsOutlined/>,
     },
 ];
-const data = [
-    {
-        id: 1,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus:3
-    },
-    {
-        id: 2,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus:3
-    },
-    {
-        id: 3,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus:3
-    },
-    {
-        id: 4,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus:3
-    },
-    {
-        id: 5,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus:3
-    }
-];
-
 const items = [
     // {
     //     label: "All orders",
@@ -99,34 +42,39 @@ const items = [
 const {TabPane} = Tabs;
 
 const OrderHistory = () => {
-    const [current, setCurrent] = useState(3);
     const navigate = useNavigate();
-    const isEmpty = JSON.stringify(data) === '[]';
-    const onChange = (event) => {
-        setCurrent(event);
-    }
-    const [orderDetail, setOrderDetail] = useState({});
-    // useEffect(()=>{
-    //     const fetchData = async () => {
-    //       const { data } = await getUsedOrdersByUseId(1);
-    //       const { schedule, movie, theater, order} = data;
-    //         setOrderDetail({
-    //             id: order.id,
-    //             movieName: movie.name,
-    //             theater: theater.name,
-    //             number: order.votes,
-    //             price: schedule.price,
-    //             date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
-    //             url: movie.imageUrl
-    //         });
-    //     }
-    //     fetchData();
-    // },[])
+    let isEmpty = false;
+    const user = useSelector((state) => state.userInfo);
+    console.log(user)
+    const onChange = () => {}
+    const [orderDetail, setOrderDetail] = useState([]);
+    useEffect(() => {
+            const fetchData = async () => {
+                const {data} = await getPaidOrdersByUseId(user.id);
+                isEmpty = JSON.stringify(data) === '[]';
+                let arr = data.reverse().map((item) => {
+                        const {schedule, movie, theater, order} = item;
+                        return  {
+                            id: order.id,
+                            movieName: movie.name,
+                            theater: theater.name,
+                            number: order.seats.split("1").length - 1,
+                            price: order.totalPrice,
+                            date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
+                            url: movie.imageUrl
+                        };
+                    }
+                )
+                setOrderDetail(arr);
+            }
+            fetchData();
+        }, []
+    )
     const handleMenuClick = ({key}) => {
-        if(key === '/personal'){
-          navigate(`/personal`);
+        if (key === '/personal') {
+            navigate(`/personal`);
         }
-      };
+    };
     return (
         <PerfectScrollbar id="app-main-scroller-bar">
             <div className="order-history">
@@ -145,9 +93,7 @@ const OrderHistory = () => {
                                 items.map((item) => (
                                     <TabPane tab={item.label} key={item.key}>
                                         {
-                                            data.filter((item) => (
-                                                item.orderStatus === current
-                                            )).map((item) => (
+                                            orderDetail.map((item) => (
                                                 <OrderHistoryItem key={item.id} item={item}/>
                                             ))
                                         }

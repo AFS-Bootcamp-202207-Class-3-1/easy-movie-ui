@@ -23,6 +23,19 @@ const AfterPayDetail = (props) => {
         const fetchData = async () => {
             const {data} = await getOrderById(orderId);
             const {schedule, movie, theater, order} = data;
+
+            const seatsDetail = [];
+            const splitSeats = order.seats.split("");
+            splitSeats.forEach((seat, index) => {
+                if (seat === "1") {
+                seatsDetail.push(
+                    `${Math.floor(index / 6) + 1}排${
+                    index - Math.floor(index / 6) * 6 + 1
+                    }座`
+                );
+                }
+            });
+
             setOrderDetail({
                 key: "1",
                 orderId: order.id,
@@ -34,7 +47,9 @@ const AfterPayDetail = (props) => {
                 seat: schedule.screenText,
                 price: schedule.price,
                 qrCode: order.quickMarkKey,
-                createTime: moment(order.createTime).format("YYYY-MM-DD HH:mm:ss")
+                createTime: moment(order.createTime).format("YYYY-MM-DD HH:mm:ss"),
+                orderSeats: seatsDetail.join(" | "),
+                orderTotalPrice: order.totalPrice
             });
         }
         fetchData();
@@ -66,7 +81,7 @@ const AfterPayDetail = (props) => {
                         </div>
                         <div className="after-pay-detail-movieInfo-describe-content">
                             <ProfileTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
-                            <span>&times; {orderDetail.votes}</span>
+                            <span>{orderDetail.orderSeats}</span>
                         </div>
                         <div className="after-pay-detail-movieInfo-describe-content">
                             <AppstoreTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
@@ -74,7 +89,7 @@ const AfterPayDetail = (props) => {
                         </div>
                         <div className="after-pay-detail-movieInfo-describe-content">
                             <PropertySafetyTwoTone twoToneColor="#FA541C"/>&nbsp;&nbsp;
-                            <span>{orderDetail.price}</span>
+                            <span>{orderDetail.orderTotalPrice}</span>
                         </div>
                     </div>
                 </div>
