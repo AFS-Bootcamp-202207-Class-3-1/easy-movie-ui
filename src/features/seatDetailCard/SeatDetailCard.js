@@ -5,8 +5,11 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { join } from "lodash";
 import { confirmSeats } from "../../api/order";
+import { useNavigate } from "react-router-dom";
 
 const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
+  const navigate = useNavigate();
+
   const seatDetailCardItems = selectSeats.map((seat, index) => {
     if (seat === "2") {
       return (
@@ -34,6 +37,7 @@ const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
     try {
       await confirmSeats(orderId, seats);
       message.success("Confirm seats successfully");
+      navigate("/prepareOrder/" + orderId);
     } catch (error) {
       message.error(error.message);
     }
