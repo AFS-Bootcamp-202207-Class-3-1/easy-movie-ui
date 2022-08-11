@@ -6,7 +6,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     saveUserData: (state, action) => action.payload,
-    deleteUserData:() => initialState,
+    deleteUserData:() => ({}),
   },
 });
 export const { saveUserData, deleteUserData } = userSlice.actions;
