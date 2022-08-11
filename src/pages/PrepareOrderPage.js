@@ -18,7 +18,6 @@ const PrepareOrderPage = () => {
 
   const [orderDetail, setOrderDetail] = useState({});
   const purchasePoint = useSelector((state) => state.purchasePoint);
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
     Modal.success({
@@ -31,29 +30,21 @@ const PrepareOrderPage = () => {
           }}
         >
           <p>
-            When user has prepay 200&lt;= <span>VIP Level</span> &lt;500, then
+            When user has prepay 200&lt;= <span>Points</span> &lt;500, then
             define his/her VIP level as 1;
           </p>
           <p>
-            When user has prepay 500&lt;= <span>VIP Level</span> &lt;800, then
+            When user has prepay 500&lt;= <span>Points</span> &lt;800, then
             define his/her VIP level as 2;
           </p>
           <p>
-            When user has prepay 800&lt;= <span>VIP Level</span> , then define
+            When user has prepay 800&lt;= <span>Points</span> , then define
             his/her VIP level as 3;
           </p>
         </div>
       ),
       onOk() {},
     });
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
   };
 
   const goToAfterPayPage = async () => {
@@ -175,26 +166,6 @@ const PrepareOrderPage = () => {
           </div>
         </Card>
       </div>
-      <Modal
-        title="VIP Rules"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        width={600}
-      >
-        <p>
-          When user has prepay 200&lt;= <span>VIP Level</span> &lt;500, then
-          define his/her VIP level as 1;
-        </p>
-        <p>
-          When user has prepay 500&lt;= <span>VIP Level</span> &lt;800, then
-          define his/her VIP level as 2;
-        </p>
-        <p>
-          When user has prepay 800&lt;= <span>VIP Level</span> , then define
-          his/her VIP level as 3;
-        </p>
-      </Modal>
       <BackTop
         className="app-back-to-top"
         target={() => document.getElementById("app-main-scroller-bar")}
