@@ -29,6 +29,8 @@ import { saveUserData } from "../features/userSlice";
 import {  savePurchasePoint } from "../features/purchasePointSlice";
 import { useDispatch } from "react-redux";
 import { setPurchasePointReq } from "../api/purchasePoint";
+import {getUserLevel} from '../api/user'
+// import defaultAvatar from '../../public/default/defaultAvatar'
 
 import "./PersonalPage.less";
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -63,15 +65,20 @@ const PersonalPage = () => {
 
     const [gender, setGender] = useState(userInfo.gender);
     const [birthday, setBirthday] = useState(moment(userInfo.birthday));
+    const [level, setLevel] = useState(0)
 
     useEffect(() => {
         setGender(userInfo.gender);
         setBirthday(moment(userInfo.birthday));
+        getUserLevel(userInfo).then(res=>{
+          setLevel(res.data.level)
+        })
     }, [userInfo]);
 
   useEffect(() => {
     setCurrent(location.pathname);
   }, [location.pathname]);
+
 
     const handleDateChanged = (date, dateString) => {
         setBirthday(date);
@@ -156,7 +163,7 @@ const PersonalPage = () => {
           <div className="personal-box-right">
             <div className="personal-box-right-info">
               <div className="personal-box-right-info-img">
-                <img className="" src={userInfo?.avatar} alt="" />
+                <img className="" src={userInfo?.avatar === null?'/default/defaultAvatar.png':userInfo?.avatar} alt="" />
               </div>
               <div className="personal-box-right-info-list">
                 <div className="personal-box-right-info-list-item head">
@@ -166,6 +173,7 @@ const PersonalPage = () => {
                   <div className="personal-box-right-info-list-item-content">
                     <span className="nickname">
                       <strong>{userInfo?.username}</strong>
+                      <span className="level">Level.{level}</span>
                     </span>
                   </div>
                 </div>

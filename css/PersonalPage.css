@@ -9,7 +9,7 @@
 .personal-box {
   border: 1px solid #999;
   overflow: hidden;
-  height: 750px;
+  height: 100%;
   margin-top: 50px;
   border-radius: 50px;
   background-color: #fff;
@@ -61,6 +61,11 @@
 }
 .personal-box-right-info-list-item .nickname {
   font-size: 24px;
+}
+.personal-box-right-info-list-item .level {
+  margin-left: 30px;
+  font-size: 10px;
+  color: #fa541c;
 }
 .personal-box-right-info-list-item-title {
   flex: 1;

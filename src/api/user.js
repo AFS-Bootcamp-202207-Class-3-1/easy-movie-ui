@@ -12,16 +12,23 @@ const findUserById = (id) => {
   return request.get(`/users/${id}`);
 };
 
-const registerReq = (body) =>{
-  return request.post('/users/user/register', body)
-}
+const registerReq = (body) => {
+  return request.post("/users/user/register", body);
+};
 
 const getUserLevel = (id) => {
   return request.get(`/users/level/${id}`);
 };
 
 const login = (user) => {
-  return request.post(`/users/user/login`,user);
+  return request.post(`/users/user/login`, user);
 };
 
-export { createUser, findUserById,updateUser, login,getUserLevel,registerReq };
+export {
+  createUser,
+  findUserById,
+  updateUser,
+  login,
+  getUserLevel,
+  registerReq,
+};
