@@ -9,6 +9,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { payTheOrder } from "../api/order";
 import { getUserLevel } from "../api/user";
+import { getPurchasePointReq } from "../api/purchasePoint";
 
 const { Step } = Steps;
 
@@ -17,7 +18,19 @@ const PrepareOrderPage = () => {
   const navigate = useNavigate();
 
   const [orderDetail, setOrderDetail] = useState({});
+  const [points, setPoints] = useState(0);
   const purchasePoint = useSelector((state) => state.purchasePoint.points);
+  const userInfo = useSelector((state) => state.userInfo);
+
+  useEffect(() => {
+    async function fetchData() {
+      const {data} = await getPurchasePointReq(userInfo.id);
+      setPoints(data.balance);
+    }
+    if (userInfo.id) {
+      fetchData();
+    }
+  }, [userInfo.id]);
 
   const showModal = () => {
     Modal.success({
@@ -65,7 +78,6 @@ const PrepareOrderPage = () => {
     }
   };
 
-  const userInfo = useSelector((state) => state.userInfo);
   const [userLevel, setUserLevel] = useState({});
   const [ticketCount, setTicketCount] = useState(0);
 
@@ -134,7 +146,7 @@ const PrepareOrderPage = () => {
             <div>
               Your remaining points :{" "}
               <span className="prepare-order-page-remain-points-under">
-                $ {purchasePoint?.toFixed(2)}
+                $ {points?.toFixed(2)}
               </span>
             </div>
             <div>

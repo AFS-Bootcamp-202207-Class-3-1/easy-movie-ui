@@ -54,6 +54,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Outlet />}>
                 <Route index element={<IndexPage />} />
+                <Route path="/movie/:query" element={<MoviePage />} />
                 <Route path="/movie" element={<MoviePage />} />
                 <Route path="/theater" element={<TheaterPage />} />
                 <Route path="/theaterDetail/:theaterId/:movieId" element={<TheaterPageDetail />} />

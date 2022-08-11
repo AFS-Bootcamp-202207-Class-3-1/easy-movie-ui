@@ -1,5 +1,5 @@
-import {BackTop, Empty, Menu, Tabs} from "antd";
-import {SnippetsOutlined, UserOutlined} from "@ant-design/icons";
+import { BackTop, Empty, Menu, Tabs } from "antd";
+import { SnippetsOutlined, UserOutlined } from "@ant-design/icons";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import {useNavigate} from "react-router-dom";
 import "./OrderHistory.less"
@@ -8,18 +8,18 @@ import {getToBeEvaluatedOrderReq,getPaidOrdersByUseId} from "../api/order";
 import OrderHistoryItem from "../features/orderHistoryItem/OrderHistoryItem";
 import OrderHistoryToBeEvaluatedItem from "../features/orderHistoryItem/OrderHistoryToBeEvaluatedItem";
 import moment from "moment";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const menuItems = [
   {
     label: "Personal Information",
     key: "/personal",
-    icon: <UserOutlined/>,
+    icon: <UserOutlined />,
   },
   {
     label: "My Order",
     key: "/myOrder",
-    icon: <SnippetsOutlined/>,
+    icon: <SnippetsOutlined />,
   },
 ];
 const items = [
@@ -40,7 +40,7 @@ const items = [
     key: 4,
   },
 ];
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
 
 const OrderHistory = () => {
   const navigate = useNavigate();
@@ -84,7 +84,7 @@ const OrderHistory = () => {
         )
         setOrderToBeEvaluatedDetail(arr);
       }
-      fetchData();
+      user.id && fetchData();
       user.id && fetchEvaluatedDetailData();
     }, [user.id]
   )
@@ -134,6 +134,6 @@ const OrderHistory = () => {
         target={() => document.getElementById("app-main-scroller-bar")}
       />
     </PerfectScrollbar>
-  )
-}
+  );
+};
 export default OrderHistory;
