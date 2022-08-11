@@ -9,7 +9,7 @@ function ChooseMovieInfo(props) {
   );
 
   const chooseMovie = props.movieList.find(
-    (item) => item.id === movieItemClickId
+    (item) => item.id === parseInt(movieItemClickId)
   );
 
   if (chooseMovie) {

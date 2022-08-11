@@ -22,7 +22,9 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build"
+    "build": "craco build",
+    "build-prod": "REACT_APP_BASE_URL=http://119.29.38.17:28080/api craco build",
+    "build-dev": "REACT_APP_BASE_URL=http://119.29.38.17:18080/api craco build"
   },
   "eslintConfig": {
     "extends": [

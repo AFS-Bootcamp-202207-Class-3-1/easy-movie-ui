@@ -58,6 +58,9 @@ const AfterPayDetail = (props) => {
         navigate(`/movieDetail/${orderDetail.orderId}`);
     };
 
+    const ticketRedemptionUrl = `${process.env.REACT_APP_BASE_URL}/orders/ticket-redemption?key=${orderDetail.qrCode}`;
+    console.log(ticketRedemptionUrl);
+
     return (
         <>
             <div className="after-pay-detail">
@@ -96,7 +99,7 @@ const AfterPayDetail = (props) => {
                 <div className="after-pay-detail-movieTicket">取票</div>
                 <hr className="after-pay-detail-divider"/>
                 <div className="after-pay-detail-qrcode">
-                    <QRCodeSVG value={orderDetail.qrCode}/>
+                    <QRCodeSVG value={ticketRedemptionUrl}/>
                 </div>
                 <div className="after-pay-detail-movieTicket">订单号：{orderDetail.orderId}</div>
                 <div className="after-pay-detail-movieTicket">验证码：{orderDetail.qrCode}</div>

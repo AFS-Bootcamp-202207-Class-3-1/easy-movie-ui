@@ -8,17 +8,21 @@ const MovieSessionItem = ({ session }) => {
 
   const userInfo = useSelector((state) => state.userInfo);
   const toPrepareOrderPage = async () => {
-    try {
-      const { data } = await createOrder({
-        userId: userInfo.id,
-        scheduleId: session.id,
-        movieId: session.movieId,
-        theaterId: session.theaterId,
-      });
-      message.success("Successfully created order");
-      navigate(`/selectSeat/${data.id}`);
-    } catch (error) {
-      message.error(error.errorMessage);
+    if (userInfo && userInfo.id) {
+      try {
+        const { data } = await createOrder({
+          userId: userInfo.id,
+          scheduleId: session.id,
+          movieId: session.movieId,
+          theaterId: session.theaterId,
+        });
+        message.success("Successfully created order");
+        navigate(`/selectSeat/${data.id}`);
+      } catch (error) {
+        message.error(error.errorMessage);
+      }
+    } else {
+      message.error("Please login first");
     }
   };
 

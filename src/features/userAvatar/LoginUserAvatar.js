@@ -6,7 +6,7 @@ import {
     Avatar,
     Button,
     Form,
-    Input,
+    Input, message,
     Modal,
 } from "antd";
 import {useDispatch} from "react-redux";
@@ -32,14 +32,18 @@ const LoginUserAvatar = () => {
         setIsModalVisible(false);
         setIsLogin(true)
     };
-    const onFinish = (user) => {
-        login(user).then(res => {
+    const onFinish = async (user) => {
+        try {
+            const res = await login(user);
             dispatch(saveUserData(res));
             localStorage.setItem("user",JSON.stringify(res))
             getPurchasePointReq(res.id).then(res => {
                 dispatch(savePurchasePoint(res.balance))
             })
-        })
+            message.success("login successfully!");
+        }catch (error){
+            message.error(error.errorMessage)
+        }
     };
 
     const GoToRegister = () => {
