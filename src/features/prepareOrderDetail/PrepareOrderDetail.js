@@ -37,7 +37,7 @@ const PrepareOrderDetail = ({ orderDetail, ticketCount }) => {
       key: "price",
       render: (text) => (
         <span>
-          &yen; {text} &times; {ticketCount}
+          $ {text} &times; {ticketCount}
         </span>
       ),
     },

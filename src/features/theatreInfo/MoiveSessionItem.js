@@ -40,7 +40,7 @@ const MovieSessionItem = ({ session }) => {
         </span>
       </div>
       <div>
-        <span>{session.price}￥</span>
+        <span>{session.price}$</span>
       </div>
       <div>
         <Button type="primary" onClick={toPrepareOrderPage}>

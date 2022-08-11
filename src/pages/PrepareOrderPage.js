@@ -171,10 +171,10 @@ const PrepareOrderPage = () => {
             <div className="prepare-order-page-payment-price">
               Total Price:
               <span className="prepare-order-page-payment-price-yen">
-                &yen; {totalPrice.toFixed(2)}
+                $ {totalPrice.toFixed(2)}
               </span>
               <span className="prepare-order-page-payment-price-final">
-                &yen; {discountPrice.toFixed(2)}
+                $ {discountPrice.toFixed(2)}
               </span>
             </div>
             <Button type="primary" onClick={goToAfterPayPage}>

@@ -76,7 +76,7 @@ const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
         <div className="seat-detail-card-others-price">
           <span className="seat-detail-card-others-prefix">票价: </span>
           <span className="seat-detail-card-others-price-detail">
-            ￥{schedule.price}
+            ${schedule.price}
           </span>
         </div>
       </div>
@@ -87,7 +87,7 @@ const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
       </div>
       <div className="seat-detail-card-total">
         <div className="seat-detail-card-total-title">Total Price: </div>
-        <div className="seat-detail-card-total-price">&yen; {totalPrice}</div>
+        <div className="seat-detail-card-total-price">$ {totalPrice}</div>
       </div>
       <Divider dashed></Divider>
       <div className="seat-detail-card-phone">
