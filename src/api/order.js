@@ -19,10 +19,15 @@ const confirmSeats = (orderId, seats) => {
   return request.post(`/orders/${orderId}/seats`, { seats });
 }
 
+const refundOrder=(id)=>{
+  return request.post(`/orders/refund/${id}`);
+}
+
 export {
   createOrder,
   getOrderById,
   payTheOrder,
   getUsedOrdersByUseId,
   confirmSeats,
+  refundOrder
 };

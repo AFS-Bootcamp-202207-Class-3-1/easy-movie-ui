@@ -1,60 +1,135 @@
-import {BackTop, Menu} from "antd";
 import {
   SnippetsOutlined,
   UserOutlined,
+  ClockCircleOutlined,
+  MinusCircleOutlined,
+  ExclamationCircleOutlined,
 } from "@ant-design/icons";
-import {useNavigate, useParams} from "react-router-dom";
-import "./OrderHistoryDetail.less"
+import { BackTop, Menu, Button, Modal, message } from "antd";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { useNavigate, useParams } from "react-router-dom";
 import AfterPayDetail from "../afterPayDetail/AfterPayDetail";
+import "./OrderHistoryDetail.less";
+import { refundOrder } from "../../api/order";
+import { get } from "lodash";
+const { confirm } = Modal;
 
 const menuItems = [
   {
     label: "Personal Information",
     key: "/personal",
-    icon: <UserOutlined/>,
+    icon: <UserOutlined />,
   },
   {
     label: "My Order",
     key: "/myOrder",
-    icon: <SnippetsOutlined/>,
+    icon: <SnippetsOutlined />,
   },
 ];
 const OrderHistoryDetail = () => {
   const navigate = useNavigate();
-  const {orderId} = useParams();
-  const handleMenuClick = ({key}) => {
-    if(key === '/personal'){
+  const { orderId } = useParams();
+  const handleMenuClick = ({ key }) => {
+    if (key === "/personal") {
       navigate(`/personal`);
     }
-    if(key === '/myOrder'){
+    if (key === "/myOrder") {
       navigate(`/orderHistory`);
     }
   };
+  const onclickRefund = () => {
+    showPromiseConfirm();
+  };
+
+  const showPromiseConfirm = () => {
+    confirm({
+      title: "Do you want to refund?",
+      icon: <ExclamationCircleOutlined />,
+      content:
+        "Once you click Refund, the bill's deduction will be returned to your balance, and this operation is not reversible",
+
+      onOk() {
+        return new Promise((resolve, reject) => {
+          refundOrder(orderId).then((response) => {
+            console.log("res", response, orderId);
+            if (get(response, "status") === "success") {
+              resolve();
+              return;
+            }
+            reject();
+          });
+        })
+          .then(() => {
+            //成功退款
+            const key = "RefundSuccess";
+            message
+              .loading("Refunding...", 1.0)
+              .then(() => message.success(key, 1.0))
+              .then(() => navigate(`/orderHistory`));
+          })
+          .catch(() => {
+            //失败退款
+            const key = "RefundFail";
+            message
+              .loading("Refunding...", 1.0)
+              .then(() => message.error(key, 1.0))
+              .then(() => navigate(`/orderHistory`));
+          });
+      },
+      onCancel() {},
+    });
+  };
+
   return (
-      <PerfectScrollbar id="app-main-scroller-bar">
-        <div className="order-history-detail">
-          <div className="order-history-detail-box w">
-            <div className="order-history-detail-box-left">
-              <Menu
-                  onClick={handleMenuClick}
-                  selectedKeys="/myOrder"
-                  mode="inline"
-                  items={menuItems}
-              />
+    <PerfectScrollbar id="app-main-scroller-bar">
+      <div className="order-history-detail">
+        <div className="order-history-detail-box w">
+          <div className="order-history-detail-box-left">
+            <Menu
+              onClick={handleMenuClick}
+              selectedKeys="/myOrder"
+              mode="inline"
+              items={menuItems}
+            />
+          </div>
+          <div className="order-history-detail-box-right">
+            <div style={{ width: "600px" }}>
+              <AfterPayDetail orderId={orderId} />
             </div>
-            <div className="order-history-detail-box-right">
-              <div style={{width: "600px"}}>
-                <AfterPayDetail orderId={orderId} />
+
+            <div className="order-history-detail-box-button">
+              <div>
+                <Button
+                  className="order-history-detail-box-button-changeTime"
+                  type="primary"
+                  shape="round"
+                  icon={<ClockCircleOutlined />}
+                  size="large"
+                >
+                  ChangeTime
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className="order-history-detail-box-button-refund"
+                  type="primary"
+                  shape="round"
+                  icon={<MinusCircleOutlined />}
+                  size="large"
+                  onClick={onclickRefund}
+                >
+                  Refund
+                </Button>
               </div>
             </div>
           </div>
         </div>
-        <BackTop
-            className="app-back-to-top"
-            target={() => document.getElementById("app-main-scroller-bar")}
-        />
-      </PerfectScrollbar>
+      </div>
+      <BackTop
+        className="app-back-to-top"
+        target={() => document.getElementById("app-main-scroller-bar")}
+      />
+    </PerfectScrollbar>
   );
-}
+};
 export default OrderHistoryDetail;
