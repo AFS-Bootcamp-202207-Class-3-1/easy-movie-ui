@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {getPaidOrdersByUseId} from "../api/order";
 import OrderHistoryItem from "../features/orderHistoryItem/OrderHistoryItem";
 import moment from "moment";
+import {useSelector} from "react-redux";
 
 const menuItems = [
     {
@@ -43,15 +44,16 @@ const {TabPane} = Tabs;
 const OrderHistory = () => {
     const navigate = useNavigate();
     let isEmpty = false;
+    const user = useSelector((state) => state.userInfo);
+    console.log(user)
     const onChange = () => {}
     const [orderDetail, setOrderDetail] = useState([]);
     useEffect(() => {
             const fetchData = async () => {
-                const {data} = await getPaidOrdersByUseId(1);
+                const {data} = await getPaidOrdersByUseId(user.id);
                 isEmpty = JSON.stringify(data) === '[]';
                 let arr = data.reverse().map((item) => {
                         const {schedule, movie, theater, order} = item;
-                    console.log(data)
                         return  {
                             id: order.id,
                             movieName: movie.name,
