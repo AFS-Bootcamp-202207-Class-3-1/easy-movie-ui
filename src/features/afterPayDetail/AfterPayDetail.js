@@ -59,7 +59,6 @@ const AfterPayDetail = (props) => {
   };
 
   const ticketRedemptionUrl = `${process.env.REACT_APP_BASE_URL}/orders/ticket-redemption?key=${orderDetail.qrCode}`;
-  console.log(ticketRedemptionUrl);
 
   return (
     <>

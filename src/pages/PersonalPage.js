@@ -67,7 +67,6 @@ const PersonalPage = () => {
     const [gender, setGender] = useState(userInfo.gender);
     const [birthday, setBirthday] = useState(moment(userInfo.birthday));
     const [level, setLevel] = useState(0)
-    console.log(userInfo);
     useEffect(() => {
         setGender(userInfo.gender);
         setBirthday(moment(userInfo.birthday));
@@ -114,7 +113,6 @@ const PersonalPage = () => {
   };
 
   const handleRedeemCodeChanged = (event) => {
-    console.log(event.target.value);
     setRedeemCode(event.target.value);
   };
 
@@ -136,7 +134,6 @@ const PersonalPage = () => {
       })
       setIsModalVisible(false);
     } catch (error) {
-      console.log(error);
       if (error.errorMessage && error.errorMessage === "Code is wrong") {
         message.error("Invalid redeem code");
         return;

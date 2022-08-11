@@ -25,6 +25,11 @@ const confirmSeats = (orderId, seats) => {
 const refundOrder = (id) => {
   return request.post(`/orders/refund/${id}`);
 };
+;
+
+const getToBeEvaluatedOrderReq = (id) => {
+  return request.get(`/orders/used/${id}`);
+};
 
 export {
   createOrder,
@@ -34,4 +39,5 @@ export {
   confirmSeats,
   getPaidOrdersByUseId,
   refundOrder,
+  getToBeEvaluatedOrderReq
 };

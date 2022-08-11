@@ -51,7 +51,6 @@ const OrderHistoryDetail = () => {
       onOk() {
         return new Promise((resolve, reject) => {
           refundOrder(orderId).then((response) => {
-            console.log("res", response, orderId);
             if (get(response, "status") === "success") {
               resolve();
               return;
