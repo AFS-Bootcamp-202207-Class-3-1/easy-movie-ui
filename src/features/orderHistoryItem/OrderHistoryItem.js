@@ -51,7 +51,7 @@ const OrderHistoryItem = (props) => {
                                     fontSize: "24px",
                                     color: "#FA541C"
                                 }}>&nbsp;¥&nbsp;</span>
-                                <span>{item.price}</span>
+                                <span style={{color:"#FA541C"}}>{item.price}</span>
                             </div>
                         </div>
                     </Col>
