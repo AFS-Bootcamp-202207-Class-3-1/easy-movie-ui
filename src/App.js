@@ -25,18 +25,24 @@ import {  savePurchasePoint } from "./features/purchasePointSlice";
 import SelectSeatPage from './pages/selectSeatPage/SelectSeatPage';
 import OrderHistoryDetail from "./features/orderHistoryDetail/OrderHistoryDetail";
 
+import RegisterBox from './features/registerBox/RegisterBox'
+
 const { Header, Footer, Content } = Layout;
 
 function App() {
   // *****假登录，完成登录功能后删除*****
   const dispatch = useDispatch();
   useEffect(() => {
-    findUserById(1).then(res=>{
-      dispatch(saveUserData(res));
-      getPurchasePointReq(1).then(res=>{
-        dispatch(savePurchasePoint(res.data.balance))
+    let user = localStorage.getItem("user");
+    if (user !== null){
+      user = JSON.parse(user);
+      findUserById(user.id).then(res=>{
+        dispatch(saveUserData(res));
+        getPurchasePointReq(1).then(res=>{
+          dispatch(savePurchasePoint(res.data.balance))
+        })
       })
-    })
+    }
   }, [dispatch]);
   // **********************************
 
@@ -64,6 +70,7 @@ function App() {
                 <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
                 <Route path="/personal" element={<PersonalPage />} />
                 <Route path='/selectSeat/:orderId' element={<SelectSeatPage />} />
+                <Route path='/register' element={<RegisterBox />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>

@@ -1,67 +1,47 @@
 import {
-  UserOutlined,
-  DownOutlined,
-  SnippetsOutlined,
-  LoginOutlined,
-  LockOutlined,
-  PhoneOutlined, LogoutOutlined
+    UserOutlined,
+    DownOutlined,
+    SnippetsOutlined,
+    LogoutOutlined
 } from "@ant-design/icons";
 import {
-  Avatar,
-  Button,
-  Dropdown,
-  Form,
-  Input,
-  Menu,
-  Modal,
+    Avatar,
+    Dropdown,
+    Menu,
+    Modal,
 } from "antd";
 import {useDispatch, useSelector} from "react-redux";
 
 import "./UserAvatar.css";
-import { useState } from "react";
-import {findUserById, findUserByUsername} from "../../api/user";
-import {saveUserData} from "../userSlice";
-import {getPurchasePointReq} from "../../api/purchasePoint";
-import {savePurchasePoint} from "../purchasePointSlice";
+import {useState} from "react";
+import {deleteUserData} from "../userSlice";
+
 
 const UserAvatar = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.userInfo);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+    const HandleOk = () => {
+        dispatch(deleteUserData())
+        setIsModalVisible(false)
+        localStorage.removeItem("user");
+    };
+    const HandleCancel = () => {
+        setIsModalVisible(false);
+    };
 
-  const onFinish = (values) => {
-    // const dispatch = useDispatch();
-    // findUserByUsername(1).then(res=>{
-    //   dispatch(saveUserData(res));
-    //   getPurchasePointReq(1).then(res=>{
-    //     dispatch(savePurchasePoint(res.data.balance))
-    //   })
-    // })
-    sessionStorage.setItem("user",JSON.stringify(values));
-    // console.log("Received values of form: ", values);
-    console.log(JSON.parse(sessionStorage.getItem("user")));
-  };
-
-  const GoToRegister = () => {
-    setIsLogin(false)
-  };
-  const backToLogin = () => {
-    setIsLogin(true)};
-
-  const menu = (
-    <Menu
-      items={[
-        {
-          key: "0",
-          label: (
-            <span className="user-avatar-dropdown-item info">
-              <strong>{useSelector((state) => state.userInfo.username)}</strong>
+    const menu = (
+        <Menu
+            items={[
+                {
+                    key: "0",
+                    label: (
+                        <span className="user-avatar-dropdown-item info">
+              <strong>{user.username}</strong>
             </span>
           ),
         },
@@ -87,6 +67,17 @@ const UserAvatar = () => {
             </a>
           ),
         },
+                {
+                    key: "3",
+                    label: (
+                        <div
+                            className="user-avatar-dropdown-item"
+                            onClick={showModal}
+                        ><LogoutOutlined />
+                           Logout
+                        </div>
+                    ),
+                },
       ]}
     />
   );
@@ -96,25 +87,28 @@ const UserAvatar = () => {
       <Dropdown overlay={menu} placement="bottomRight">
         <span
           className="user-avatar-a"
-          href=""
           onClick={(e) => e.preventDefault()}
         >
-          <Avatar
-            className="avatar"
-            size={35}
-            icon={<UserOutlined />}
-            src={
-              <img
-                alt="avatar"
-                src={useSelector((state) => state?.userInfo?.avatar)}
-              ></img>
-            }
-          />{" "}
-          <DownOutlined />
+            <Avatar
+                className="avatar"
+                size={35}
+                icon={<UserOutlined/>}
+                src={user.avatar}
+            />
+            <DownOutlined/>
         </span>
-      </Dropdown>
-    </div>
-  );
+            </Dropdown>
+            <Modal
+                className="user-avatar-modal"
+                visible={isModalVisible}
+                onOk={HandleOk}
+                onCancel={HandleCancel}
+                okText="Confirm"
+            >
+                <p style={{marginTop: "20px"}}>Are you sure logout of the current account?</p>
+            </Modal>
+        </div>
+    );
 };
 
 export default UserAvatar;
