@@ -1,4 +1,4 @@
-import { Steps, Card, Button, BackTop, message, Modal } from "antd";
+import { Steps, Card, Button, BackTop, message, Modal, Tag } from "antd";
 import "./PrepareOrderPage.less";
 import PrepareOrderDetail from "../features/prepareOrderDetail/PrepareOrderDetail";
 import { useNavigate, useParams } from "react-router-dom";
@@ -22,7 +22,7 @@ const PrepareOrderPage = () => {
   const showModal = () => {
     Modal.success({
       title: "VIP Rules",
-      width: 600,
+      width: 500,
       content: (
         <div
           style={{
@@ -30,16 +30,24 @@ const PrepareOrderPage = () => {
           }}
         >
           <p>
-            When user has prepay 200&lt;= <span>Points</span> &lt;500, then
-            define his/her VIP level as 1;
+            <Tag color="magenta">1</Tag>
+            When you have charged less than 200, your VIP level will be 0 and
+            get no discount.
           </p>
           <p>
-            When user has prepay 500&lt;= <span>Points</span> &lt;800, then
-            define his/her VIP level as 2;
+            <Tag color="red">2</Tag>
+            When you have charged equal to or more than 200 and less than 500,
+            your VIP level will be 1 and get 95% discount.
           </p>
           <p>
-            When user has prepay 800&lt;= <span>Points</span> , then define
-            his/her VIP level as 3;
+            <Tag color="volcano">3</Tag>
+            When you have charged equal to or more than 500 and less than 800,
+            your VIP level will be 2 and get 90% discount.
+          </p>
+          <p>
+            <Tag color="orange">4</Tag>
+            When you have charged equal to or more than 800, your VIP level will
+            be 3 and get 85% discount.
           </p>
         </div>
       ),
