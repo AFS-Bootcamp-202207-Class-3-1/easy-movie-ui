@@ -30,7 +30,7 @@ const data = [
         date: "2022-08-08 09:09",
         url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
         orderId: 1234567890,
-        orderStatus:3
+        orderStatus: 3
     },
     {
         id: 2,
@@ -41,7 +41,7 @@ const data = [
         date: "2022-08-08 09:09",
         url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
         orderId: 1234567890,
-        orderStatus:3
+        orderStatus: 3
     },
     {
         id: 3,
@@ -52,7 +52,7 @@ const data = [
         date: "2022-08-08 09:09",
         url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
         orderId: 1234567890,
-        orderStatus:3
+        orderStatus: 3
     },
     {
         id: 4,
@@ -63,7 +63,7 @@ const data = [
         date: "2022-08-08 09:09",
         url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
         orderId: 1234567890,
-        orderStatus:3
+        orderStatus: 3
     },
     {
         id: 5,
@@ -74,7 +74,7 @@ const data = [
         date: "2022-08-08 09:09",
         url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
         orderId: 1234567890,
-        orderStatus:3
+        orderStatus: 3
     }
 ];
 
@@ -99,34 +99,36 @@ const items = [
 const {TabPane} = Tabs;
 
 const OrderHistory = () => {
-    const [current, setCurrent] = useState(3);
     const navigate = useNavigate();
     const isEmpty = JSON.stringify(data) === '[]';
-    const onChange = (event) => {
-        setCurrent(event);
-    }
-    const [orderDetail, setOrderDetail] = useState({});
-    // useEffect(()=>{
-    //     const fetchData = async () => {
-    //       const { data } = await getUsedOrdersByUseId(1);
-    //       const { schedule, movie, theater, order} = data;
-    //         setOrderDetail({
-    //             id: order.id,
-    //             movieName: movie.name,
-    //             theater: theater.name,
-    //             number: order.votes,
-    //             price: schedule.price,
-    //             date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
-    //             url: movie.imageUrl
-    //         });
-    //     }
-    //     fetchData();
-    // },[])
+    const onChange = () => {}
+    const [orderDetail, setOrderDetail] = useState([]);
+    useEffect(() => {
+            const fetchData = async () => {
+                const {data} = await getUsedOrdersByUseId(1);
+                let arr = data.map((item) => {
+                        const {schedule, movie, theater, order} = item;
+                        return  {
+                            id: order.id,
+                            movieName: movie.name,
+                            theater: theater.name,
+                            number: order.votes,
+                            price: schedule.price,
+                            date: moment(schedule.startTime).format("YYYY-MM-DD HH:mm"),
+                            url: movie.imageUrl
+                        };
+                    }
+                )
+                setOrderDetail(arr);
+            }
+            fetchData();
+        }, []
+    )
     const handleMenuClick = ({key}) => {
-        if(key === '/personal'){
-          navigate(`/personal`);
+        if (key === '/personal') {
+            navigate(`/personal`);
         }
-      };
+    };
     return (
         <PerfectScrollbar id="app-main-scroller-bar">
             <div className="order-history">
@@ -145,9 +147,7 @@ const OrderHistory = () => {
                                 items.map((item) => (
                                     <TabPane tab={item.label} key={item.key}>
                                         {
-                                            data.filter((item) => (
-                                                item.orderStatus === current
-                                            )).map((item) => (
+                                            orderDetail.map((item) => (
                                                 <OrderHistoryItem key={item.id} item={item}/>
                                             ))
                                         }
