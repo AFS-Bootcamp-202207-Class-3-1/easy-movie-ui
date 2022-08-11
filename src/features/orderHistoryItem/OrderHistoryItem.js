@@ -8,7 +8,7 @@ const OrderHistoryItem = (props) => {
     const [item] = useState(props.item);
     const navigate = useNavigate();
     const onClickCard = (data) => {
-        navigate(`/movieDetail/${data.id}`);
+        navigate(`/movieDetail/${data.movieId}`);
     }
     const goToOrderDetail = (data) => {
         navigate(`/orderHistoryDetail/${data.id}`);

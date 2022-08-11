@@ -14,7 +14,7 @@ const MovieSearchBar = () => {
     setKeyWord(keyWordInput);
   }
   const onClickSearch=()=>{
-    navigate(items[1].key, {state:{keyWord}})
+    navigate(items[1].key+`/${keyWord}`)
   }
   return (
     <div className="movie-search-bar">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pagination, Empty, BackTop } from "antd";
 import MovieGroup from "../features/movieList/MovieGroup";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { get, has } from "lodash";
 import { fetchAllMovieList } from "../api/movie";
 import { RollbackOutlined } from "@ant-design/icons";
@@ -18,18 +18,21 @@ const MoviePage = () => {
   const [content, setContent] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
   const navigate = useNavigate();
-  
+
   const onChange = (page, pageSize) => {
     setCurrentPage(page);
     setPageSize(pageSize);
   };
+
+  const query = useParams().query || "";
+
   useEffect(() => {
     //拉去列表
-    setKeyword(has(location, "state.keyWord") ? location.state.keyWord : "");
+    setKeyword(query);
     const params = {
       page: currentPage,
       pageSize: pageSize,
-      keyword: keyword,
+      keyword: query,
     };
     fetchAllMovieList(params).then((response) => {
       setTotal(get(response, "data.totalElements"));
@@ -43,7 +46,7 @@ const MoviePage = () => {
       }
       setIsEmpty(false);
     });
-  }, [currentPage, keyword, pageSize, location]);
+  }, [currentPage, pageSize, location, query]);
 
   const returnMovieList = (event) => {
     event.preventDefault();
@@ -56,17 +59,21 @@ const MoviePage = () => {
           <div className="RollbackOutlinedDev">
             <RollbackOutlined />
             <a href="/#" onClick={returnMovieList}>
-              返回电影列表
+              Back To Movie List
             </a>
           </div>
         )}
         {isEmpty && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
         {!isEmpty && <MovieGroup movieList={content}></MovieGroup>}
         <div
-          style={{ textAlign: "center", marginTop: "68px", marginBottom: "30px" }}
+          style={{
+            textAlign: "center",
+            marginTop: "68px",
+            marginBottom: "30px",
+          }}
         >
           <Pagination
-            defaultCurrent={currentPage}
+            current={currentPage}
             total={total}
             defaultPageSize={pageSize}
             onChange={onChange}
