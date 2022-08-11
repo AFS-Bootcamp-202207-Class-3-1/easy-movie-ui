@@ -17,7 +17,7 @@ const PrepareOrderPage = () => {
   const navigate = useNavigate();
 
   const [orderDetail, setOrderDetail] = useState({});
-  const purchasePoint = useSelector((state) => state.purchasePoint);
+  const purchasePoint = useSelector((state) => state.purchasePoint.points);
 
   const showModal = () => {
     Modal.success({

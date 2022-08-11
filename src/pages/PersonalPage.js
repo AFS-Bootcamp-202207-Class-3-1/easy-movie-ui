@@ -61,7 +61,7 @@ const PersonalPage = () => {
     const [current, setCurrent] = useState(location.pathname);
 
   const userInfo = useSelector((state) => state.userInfo);
-  const purchasePoint = useSelector((state) => state.purchasePoint);
+  const purchasePoint = useSelector((state) => state.purchasePoint.points);
 
     const [gender, setGender] = useState(userInfo.gender);
     const [birthday, setBirthday] = useState(moment(userInfo.birthday));
