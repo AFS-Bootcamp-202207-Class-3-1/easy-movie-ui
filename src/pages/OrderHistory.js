@@ -20,64 +20,6 @@ const menuItems = [
         icon: <SnippetsOutlined/>,
     },
 ];
-const data = [
-    {
-        id: 1,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus: 3
-    },
-    {
-        id: 2,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus: 3
-    },
-    {
-        id: 3,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus: 3
-    },
-    {
-        id: 4,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus: 3
-    },
-    {
-        id: 5,
-        movieName: "流浪地球",
-        theater: "中影国际影城",
-        number: 3,
-        price: "25.00",
-        date: "2022-08-08 09:09",
-        url: "https://scpic.chinaz.net/files/pic/pic9/202009/apic27858.jpg",
-        orderId: 1234567890,
-        orderStatus: 3
-    }
-];
-
 const items = [
     // {
     //     label: "All orders",
@@ -100,12 +42,13 @@ const {TabPane} = Tabs;
 
 const OrderHistory = () => {
     const navigate = useNavigate();
-    const isEmpty = JSON.stringify(data) === '[]';
+    let isEmpty = false;
     const onChange = () => {}
     const [orderDetail, setOrderDetail] = useState([]);
     useEffect(() => {
             const fetchData = async () => {
                 const {data} = await getUsedOrdersByUseId(1);
+                isEmpty = JSON.stringify(data) === '[]';
                 let arr = data.map((item) => {
                         const {schedule, movie, theater, order} = item;
                         return  {
