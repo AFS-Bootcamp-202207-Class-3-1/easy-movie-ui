@@ -20,4 +20,14 @@ const getMovieDataReq = (id) => {
   return request.get("/movies/" + id);
 };
 
-export { getHotMovies, getNextMovies, fetchAllMovieList, getMovieDataReq };
+const getTop10Movie = () => {
+  return request.get("/movies/top");
+};
+
+export {
+  getHotMovies,
+  getNextMovies,
+  fetchAllMovieList,
+  getMovieDataReq,
+  getTop10Movie,
+};
