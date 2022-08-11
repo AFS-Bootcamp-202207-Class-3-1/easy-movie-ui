@@ -1,7 +1,7 @@
-
-import {useEffect } from 'react'
-import {findUserById} from './api/user'
-import {useDispatch} from 'react-redux'
+import { useEffect } from "react";
+import { findUserById } from "./api/user";
+import { getPurchasePointReq } from "./api/purchasePoint"
+import { useDispatch } from "react-redux";
 
 import "./App.less";
 import IndexHeader from "./layout/IndexHeader";
@@ -18,20 +18,27 @@ import { Route, Routes, Outlet } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage";
 import PrepareOrderPage from "./pages/PrepareOrderPage";
 import AfterPayPage from "./pages/AfterPayPage";
-import{saveUserData} from './features/userSlice'
+import OrderHistory from "./pages/OrderHistory";
+import AfterPayDetail from "./features/afterPayDetail/AfterPayDetail";
+import { saveUserData } from "./features/userSlice";
+import {  savePurchasePoint } from "./features/purchasePointSlice";
+import SelectSeatPage from './pages/selectSeatPage/SelectSeatPage';
+import OrderHistoryDetail from "./features/orderHistoryDetail/OrderHistoryDetail";
+
 const { Header, Footer, Content } = Layout;
 
-
 function App() {
-
-// *****假登录，完成登录功能后删除*****
-const dispatch = useDispatch();
-useEffect(() => {
-    findUserById(1).then((res)=>{
-      dispatch(saveUserData(res))
+  // *****假登录，完成登录功能后删除*****
+  const dispatch = useDispatch();
+  useEffect(() => {
+    findUserById(1).then(res=>{
+      dispatch(saveUserData(res));
+      getPurchasePointReq(1).then(res=>{
+        dispatch(savePurchasePoint(res.data.balance))
+      })
     })
-}, [])
-// **********************************
+  }, [dispatch]);
+  // **********************************
 
   return (
     <div className="app">
@@ -50,9 +57,13 @@ useEffect(() => {
                 <Route path="/theaterDetail/:theaterId" element={<TheaterPageDetail />} />
                 <Route path="/prepareOrder/:orderId" element={<PrepareOrderPage />} />
                 <Route path="/afterPay/:orderId" element={<AfterPayPage />} />
+                <Route path="/orderHistory/:orderId" element={<AfterPayDetail />} />
+                <Route path="/orderHistory" element={<OrderHistory />} />
+                <Route path="/orderHistoryDetail/:orderId" element={<OrderHistoryDetail />} />
                 <Route path="/movieDetail/:id" element={<MovieDetailPage />} />
                 <Route path="/chooseTheater/:id" element={<ChooseTheaterPage />} />
                 <Route path="/personal" element={<PersonalPage />} />
+                <Route path='/selectSeat/:orderId' element={<SelectSeatPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>

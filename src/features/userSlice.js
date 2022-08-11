@@ -6,7 +6,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     saveUserData: (state, action) => action.payload,
-    
   },
 });
 export const { saveUserData } = userSlice.actions;

@@ -1,4 +1,4 @@
-import { Table, Descriptions } from "antd";
+import { Table } from "antd";
 
 const columns = [
   {
@@ -29,21 +29,10 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    schedule: "2022-08-08 20:48",
-    movieName: "流浪地球",
-    theater: "Coffee Studio",
-    seat: "贵宾厅2",
-    price: "55",
-  },
-];
-
-const PrepareOrderDetail = () => {
+const PrepareOrderDetail = ({orderDetail}) => {
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={[orderDetail]} pagination={false}/>
       {/* <Descriptions
         column={1}
         title={
