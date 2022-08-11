@@ -29,7 +29,7 @@ const Top100Movie = () => {
 
   const top10MovieList = topMovies.map((movie, index) => {
     return (
-      <div key={movie} className="top-100-movie-item" onClick={() => toMoviePage(movie.id)}>
+      <div key={movie.id} className="top-100-movie-item" onClick={() => toMoviePage(movie.id)}>
         <TopMovieItem index={index + 1} name={movie.name} score={movie.score} />
       </div>
     );

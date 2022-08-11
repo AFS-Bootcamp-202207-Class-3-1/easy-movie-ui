@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Pagination, Empty, BackTop } from "antd";
 import MovieGroup from "../features/movieList/MovieGroup";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import { get, has } from "lodash";
+import { get } from "lodash";
 import { fetchAllMovieList } from "../api/movie";
 import { RollbackOutlined } from "@ant-design/icons";
 import { items } from "../layout/Navbar";

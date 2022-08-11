@@ -46,21 +46,6 @@ const PrepareOrderDetail = ({ orderDetail, ticketCount }) => {
   return (
     <div>
       <Table columns={columns} dataSource={[orderDetail]} pagination={false} />
-      {/* <Descriptions
-        column={1}
-        title={
-          <div
-            style={{
-              textAlign: "left",
-            }}
-          >
-            Additional Charges
-          </div>
-        }
-      >
-        <Descriptions.Item label="爆米花&times;2">&yen;25</Descriptions.Item>
-        <Descriptions.Item label="可乐&times;2">&yen;20</Descriptions.Item>
-      </Descriptions> */}
     </div>
   );
 };
