@@ -78,7 +78,7 @@ const UserAvatar = () => {
               className="user-avatar-dropdown-item"
               onClick={showModal}
             ><LogoutOutlined/>
-              Logout
+              LoginOut
             </div>
           ),
         },
