@@ -102,7 +102,7 @@ const AfterPayDetail = (props) => {
             <div className="after-pay-detail-movieInfo-describe-content">
               <PropertySafetyTwoTone twoToneColor="#FA541C"/>
               &nbsp;&nbsp;
-              <span>{orderDetail.orderTotalPrice}</span>
+              <span>{orderDetail.orderTotalPrice?.toFixed(2)}</span>
             </div>
           </div>
         </div>

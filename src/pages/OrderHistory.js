@@ -24,11 +24,11 @@ const menuItems = [
 ];
 const items = [
   {
-    label: "To be used",
+    label: "Paid",
     key: 3,
   },
   {
-    label: "To be evaluated",
+    label: "Used",
     key: 4,
   },
 ];
