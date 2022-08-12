@@ -109,7 +109,7 @@ const OrderHistory = () => {
                     <div>
                       {JSON.stringify(orderDetail) === '[]' ? <Empty/> : ''}
                     </div>
-                      )</>:<></>
+                      </>:<></>
                     }
                     {item.key === 4?
                       <>{orderToBeEvaluatedDetail.map((item) => (
@@ -118,7 +118,7 @@ const OrderHistory = () => {
                     <div>
                       {JSON.stringify(orderToBeEvaluatedDetail) === '[]' ? <Empty/> : ''}
                     </div>
-                      )</>:<></>
+                      </>:<></>
                     }
                   </TabPane>
                 ))}
