@@ -23,14 +23,6 @@ const menuItems = [
   },
 ];
 const items = [
-  // {
-  //     label: "All orders",
-  //     key: 1
-  // },
-  // {
-  //     label: "To be payed",
-  //     key: 2,
-  // },
   {
     label: "To be used",
     key: 3,
@@ -111,18 +103,23 @@ const OrderHistory = () => {
                 items.map((item) => (
                   <TabPane tab={item.label} key={item.key}>
                     {item.key === 3?
-                      orderDetail.map((item) => (
+                      <>{orderDetail.map((item) => (
                         <OrderHistoryItem key={item.id} item={item}/>
-                      )):<></>
-                    }
-                    {item.key === 4?
-                      orderToBeEvaluatedDetail.map((item) => (
-                        <OrderHistoryToBeEvaluatedItem key={item.id} item={item}/>
-                      )):<></>
-                    }
+                      ))}
                     <div>
                       {JSON.stringify(orderDetail) === '[]' ? <Empty/> : ''}
                     </div>
+                      )</>:<></>
+                    }
+                    {item.key === 4?
+                      <>{orderToBeEvaluatedDetail.map((item) => (
+                        <OrderHistoryToBeEvaluatedItem key={item.id} item={item}/>
+                      ))}
+                    <div>
+                      {JSON.stringify(orderToBeEvaluatedDetail) === '[]' ? <Empty/> : ''}
+                    </div>
+                      )</>:<></>
+                    }
                   </TabPane>
                 ))}
             </Tabs>
