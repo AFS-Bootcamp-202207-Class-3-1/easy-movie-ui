@@ -10,6 +10,7 @@ import {
   CalendarOutlined,
   AccountBookOutlined,
   BarcodeOutlined,
+  TrophyOutlined
 } from "@ant-design/icons";
 import {
   Menu,
@@ -29,6 +30,8 @@ import { saveUserData } from "../features/userSlice";
 import {  savePurchasePoint } from "../features/purchasePointSlice";
 import { useDispatch } from "react-redux";
 import { setPurchasePointReq } from "../api/purchasePoint";
+import {getUserLevel} from '../api/user'
+// import defaultAvatar from '../../public/default/defaultAvatar'
 
 import "./PersonalPage.less";
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -59,19 +62,23 @@ const PersonalPage = () => {
     const [current, setCurrent] = useState(location.pathname);
 
   const userInfo = useSelector((state) => state.userInfo);
-  const purchasePoint = useSelector((state) => state.purchasePoint);
+  const purchasePoint = useSelector((state) => state.purchasePoint.points);
 
     const [gender, setGender] = useState(userInfo.gender);
     const [birthday, setBirthday] = useState(moment(userInfo.birthday));
-
+    const [level, setLevel] = useState(0)
     useEffect(() => {
         setGender(userInfo.gender);
         setBirthday(moment(userInfo.birthday));
+        userInfo.id &&  getUserLevel(userInfo.id).then(res=>{
+          setLevel(res.data.level)
+        })
     }, [userInfo]);
 
   useEffect(() => {
     setCurrent(location.pathname);
   }, [location.pathname]);
+
 
     const handleDateChanged = (date, dateString) => {
         setBirthday(date);
@@ -106,7 +113,6 @@ const PersonalPage = () => {
   };
 
   const handleRedeemCodeChanged = (event) => {
-    console.log(event.target.value);
     setRedeemCode(event.target.value);
   };
 
@@ -114,7 +120,6 @@ const PersonalPage = () => {
 
   const handleOk = async () => {
     if (redeemCode === "") return;
-    console.log("redeemCode", redeemCode);
 
     try {
       const { data } = await setPurchasePointReq(userInfo.id, redeemCode);
@@ -124,9 +129,11 @@ const PersonalPage = () => {
       message.success({
         content: "Charge account successfully!",
       });
+      userInfo.id &&  getUserLevel(userInfo.id).then(res=>{
+        setLevel(res.data.level)
+      })
       setIsModalVisible(false);
     } catch (error) {
-      console.log(error);
       if (error.errorMessage && error.errorMessage === "Code is wrong") {
         message.error("Invalid redeem code");
         return;
@@ -156,7 +163,7 @@ const PersonalPage = () => {
           <div className="personal-box-right">
             <div className="personal-box-right-info">
               <div className="personal-box-right-info-img">
-                <img className="" src={userInfo?.avatar} alt="" />
+                <img className="" src={userInfo?.avatar === null?'/default/defaultAvatar.png':userInfo?.avatar} alt="" />
               </div>
               <div className="personal-box-right-info-list">
                 <div className="personal-box-right-info-list-item head">
@@ -166,6 +173,7 @@ const PersonalPage = () => {
                   <div className="personal-box-right-info-list-item-content">
                     <span className="nickname">
                       <strong>{userInfo?.username}</strong>
+                      <span className="level"><TrophyOutlined />Level.{level}</span>
                     </span>
                   </div>
                 </div>

@@ -13,7 +13,22 @@
   &-remain-points {
     margin-top: 100px;
     padding: 0 100px;
-    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    &-under{
+      text-decoration: underline;
+    }
+
+    &-rules {
+      .ant-btn-link {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
   }
 
   &-payment {
@@ -28,6 +43,13 @@
 
       &-yen {
         color: @primary-color;
+        margin-left: 10px;
+        text-decoration: line-through;
+      }
+
+      &-final {
+        color: @primary-color;
+        margin-left: 10px;
       }
     }
   }

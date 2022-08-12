@@ -47,7 +47,7 @@ function MovieSessionList() {
       </>
     );
   } else {
-    <div className="sessionItem fix-center-width">暂无放映场次</div>;
+    <div className="sessionItem fix-center-width">No movie schedules at this time</div>;
   }
 }
 export default MovieSessionList;

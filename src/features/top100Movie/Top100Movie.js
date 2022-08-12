@@ -1,26 +1,36 @@
 import "./Top100Movie.less";
-import { Card } from "antd";
+import { Card, message } from "antd";
 import TopMovieItem from "./TopMovieItem";
-import {RightOutlined} from '@ant-design/icons';
+import { getTop10Movie } from "../../api/movie";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Top100Movie = () => {
-  const top10Movies = [
-    "我不是药神",
-    "肖申克的救赎",
-    "绿皮书",
-    "海上钢琴师",
-    "霸王别姬",
-    "美丽人生",
-    "阿甘正传",
-    "怦然心动",
-    "哪吒之魔童降世",
-    "这个杀手不太冷",
-  ];
+  const navigate = useNavigate();
 
-  const top10MovieList = top10Movies.map((movie, index) => {
+  const [topMovies, setTopMovies] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await getTop10Movie();
+        setTopMovies(data);
+      } catch (error) {
+        message.error(error.message);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const toMoviePage = (movieId) => {
+    navigate(`/movieDetail/${movieId}`);
+  }
+
+  useEffect(() => {});
+
+  const top10MovieList = topMovies.map((movie, index) => {
     return (
-      <div key={movie} className="top-100-movie-item">
-        <TopMovieItem index={index + 1} name={movie} score="5.0" />
+      <div key={movie.id} className="top-100-movie-item" onClick={() => toMoviePage(movie.id)}>
+        <TopMovieItem index={index + 1} name={movie.name} score={movie.score} />
       </div>
     );
   });
@@ -28,8 +38,9 @@ const Top100Movie = () => {
   return (
     <Card className="top-100-movie">
       <div className="top-100-movie-header">
-        <div className="top-100-movie-header-title">Top 100</div>
-        <div className="top-100-movie-header-more">More <RightOutlined /></div>
+        <div className="top-100-movie-header-title">Top 10</div>
+        <div className="top-100-movie-header-more">
+        </div>
       </div>
       {top10MovieList}
     </Card>

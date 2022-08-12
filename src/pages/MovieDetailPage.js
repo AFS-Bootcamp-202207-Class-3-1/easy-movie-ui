@@ -12,7 +12,6 @@ import {
 import moment from 'moment'
 import PerfectScrollbar from "react-perfect-scrollbar";
 import "./MovieDetail.less";
-import photoPng from "../static/photo.png";
 import BackToMovieList from "../features/backToMovieList/BackToMovieList";
 import { getMovieDataReq } from "../api/movie";
 
@@ -59,7 +58,7 @@ const MovieDetailPage = () => {
                 <span>{data?.movie?.releaseDate}</span>
                 <span className="runtime">
                   <FieldTimeOutlined />
-                  <span>{data?.movie?.duration}分钟</span>
+                  <span>{data?.movie?.duration}Minutes</span>
                 </span>
               </div>
             </div>
@@ -91,9 +90,9 @@ const MovieDetailPage = () => {
               <span className="titleName">Stage Photo</span>
             </div>
             <div className="content photo">
-              <Image src={photoPng} alt="" />
-              <Image src={photoPng} alt="" />
-              <Image src={photoPng} alt="" />
+              <Image src={'/default/state(1).jpg'} alt="" />
+              <Image src={'/default/state(2).jpg'} alt="" />
+              <Image src={'/default/state(3).jpg'} alt="" />
             </div>
           </li>
           {/* 剧照 结束 */}
@@ -121,7 +120,7 @@ const MovieDetailPage = () => {
                     <img src={director.imgUrl} alt="" />
                     <span className="name">{director.name}</span>
                     <br />
-                    <span className="position">导演</span>
+                    <span className="position">Director</span>
                   </div>
                 );
               })}
@@ -131,7 +130,7 @@ const MovieDetailPage = () => {
                     <img src={actor.imgUrl} alt="" />
                     <span className="name">{actor.name}</span>
                     <br />
-                    <span className="position">演员</span>
+                    <span className="position">Actor</span>
                   </div>
                 );
               })}
@@ -148,7 +147,7 @@ const MovieDetailPage = () => {
               {/* 单条评价 开始 */}
               <li className="commentItem">
                 <div className="head">
-                  <img src={photoPng} alt="" />
+                  <img src={'/default/Melanie.jpg'} alt="" />
                   <span className="name"> Melanie</span>
                   <span className="time"> a few seconds ago</span>
                 </div>
@@ -165,10 +164,10 @@ const MovieDetailPage = () => {
                 </div>
               </li>
               {/* 单条评价 结束 */}
-              {/* 单条评价 开始 */}
-              <li className="commentItem">
+                            {/* 单条评价 开始 */}
+                            <li className="commentItem">
                 <div className="head">
-                  <img src={photoPng} alt="" />
+                  <img src={'/default/Melanie.jpg'} alt="" />
                   <span className="name"> Melanie</span>
                   <span className="time"> a few seconds ago</span>
                 </div>
@@ -185,10 +184,10 @@ const MovieDetailPage = () => {
                 </div>
               </li>
               {/* 单条评价 结束 */}
-              {/* 单条评价 开始 */}
-              <li className="commentItem">
+                            {/* 单条评价 开始 */}
+                            <li className="commentItem">
                 <div className="head">
-                  <img src={photoPng} alt="" />
+                  <img src={'/default/Melanie.jpg'} alt="" />
                   <span className="name"> Melanie</span>
                   <span className="time"> a few seconds ago</span>
                 </div>

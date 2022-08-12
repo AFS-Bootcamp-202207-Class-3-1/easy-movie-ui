@@ -18,7 +18,7 @@ const MovieItem = ({ movie }) => {
     >
       <Meta
         title={movie.name}
-        description={<Rate defaultValue={5} disabled={true} />}
+        description={<Rate defaultValue={movie.score} disabled={true} />}
       />
     </Card>
   );

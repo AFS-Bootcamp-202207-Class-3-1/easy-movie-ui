@@ -20,6 +20,7 @@ const TheaterPageDetail = (props) => {
   const params = useParams();
   const theaterId = params.theaterId;
   const movieId = params.movieId || 1;
+  dispatch(updateChooseMovie(movieId));
 
   useEffect(() => {
     async function fetchData() {
@@ -33,13 +34,6 @@ const TheaterPageDetail = (props) => {
     }
     fetchData();
   }, [theaterId, movieId, dispatch]);
-
-  if (movieList[0]) {
-    if (props.choosedMovieId) {
-    } else {
-      dispatch(updateChooseMovie(movieList[0].id));
-    }
-  }
 
   return (
     <PerfectScrollbar id="app-main-scroller-bar">

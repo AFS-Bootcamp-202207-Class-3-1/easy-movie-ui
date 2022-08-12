@@ -25,20 +25,23 @@ import {  savePurchasePoint } from "./features/purchasePointSlice";
 import SelectSeatPage from './pages/selectSeatPage/SelectSeatPage';
 import OrderHistoryDetail from "./features/orderHistoryDetail/OrderHistoryDetail";
 
+
 const { Header, Footer, Content } = Layout;
 
 function App() {
-  // *****假登录，完成登录功能后删除*****
   const dispatch = useDispatch();
   useEffect(() => {
-    findUserById(1).then(res=>{
-      dispatch(saveUserData(res));
-      getPurchasePointReq(1).then(res=>{
-        dispatch(savePurchasePoint(res.data.balance))
+    let user = localStorage.getItem("user");
+    if (user !== null){
+      user = JSON.parse(user);
+      findUserById(user.id).then(res=>{
+        dispatch(saveUserData(res));
+        getPurchasePointReq(user.id).then(res=>{
+          dispatch(savePurchasePoint(res.data.balance))
+        })
       })
-    })
+    }
   }, [dispatch]);
-  // **********************************
 
   return (
     <div className="app">
@@ -51,6 +54,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Outlet />}>
                 <Route index element={<IndexPage />} />
+                <Route path="/movie/:query" element={<MoviePage />} />
                 <Route path="/movie" element={<MoviePage />} />
                 <Route path="/theater" element={<TheaterPage />} />
                 <Route path="/theaterDetail/:theaterId/:movieId" element={<TheaterPageDetail />} />

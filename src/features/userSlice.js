@@ -6,7 +6,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     saveUserData: (state, action) => action.payload,
+    deleteUserData:() => ({}),
   },
 });
-export const { saveUserData } = userSlice.actions;
+export const { saveUserData, deleteUserData } = userSlice.actions;
 export default userSlice.reducer;

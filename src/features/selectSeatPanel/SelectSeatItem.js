@@ -1,6 +1,6 @@
 import "./SelectSeatItem.less";
 
-const SelectSeatItem = ({ index, initStatus, setCurrentStatus }) => {
+const SelectSeatItem = ({index, initStatus, setCurrentStatus}) => {
   const imgSrc = ["/seat/gray.png", "/seat/red.png", "/seat/green.png"];
 
   const onClickItem = () => {
@@ -17,7 +17,7 @@ const SelectSeatItem = ({ index, initStatus, setCurrentStatus }) => {
         src={imgSrc[parseInt(initStatus)]}
         className="select-seat-item-img"
         alt=""
-      ></img>
+      />
     </div>
   );
 };
