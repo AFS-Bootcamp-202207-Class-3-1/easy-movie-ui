@@ -48,7 +48,7 @@ const OrderHistoryToBeEvaluatedItem = (props) => {
                                     fontSize: "24px",
                                     color: "#FA541C"
                                 }}>&nbsp;¥&nbsp;</span>
-                                <span style={{color:"#FA541C"}}>{item.price}</span>
+                                <span style={{color:"#FA541C"}}>{item.price.toFixed(2)}</span>
                             </div>
                         </div>
                     </Col>
