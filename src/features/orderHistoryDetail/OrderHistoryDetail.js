@@ -1,7 +1,6 @@
 import {
   SnippetsOutlined,
   UserOutlined,
-  ClockCircleOutlined,
   MinusCircleOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";

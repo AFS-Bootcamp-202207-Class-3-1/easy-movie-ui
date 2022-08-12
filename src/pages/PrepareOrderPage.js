@@ -19,7 +19,7 @@ const PrepareOrderPage = () => {
 
   const [orderDetail, setOrderDetail] = useState({});
   const [points, setPoints] = useState(0);
-  const purchasePoint = useSelector((state) => state.purchasePoint.points);
+  // const purchasePoint = useSelector((state) => state.purchasePoint.points);
   const userInfo = useSelector((state) => state.userInfo);
 
   useEffect(() => {
