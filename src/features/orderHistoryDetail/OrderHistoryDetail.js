@@ -12,6 +12,7 @@ import AfterPayDetail from "../afterPayDetail/AfterPayDetail";
 import "./OrderHistoryDetail.less";
 import { refundOrder } from "../../api/order";
 import { get } from "lodash";
+import { useState } from "react";
 const { confirm } = Modal;
 
 const menuItems = [
@@ -29,6 +30,7 @@ const menuItems = [
 const OrderHistoryDetail = () => {
   const navigate = useNavigate();
   const { orderId } = useParams();
+  const [isUsed, setIsUsed] = useState(false);
   const handleMenuClick = ({ key }) => {
     if (key === "/personal") {
       navigate(`/personal`);
@@ -50,13 +52,23 @@ const OrderHistoryDetail = () => {
 
       onOk() {
         return new Promise((resolve, reject) => {
-          refundOrder(orderId).then((response) => {
-            if (get(response, "status") === "success") {
-              resolve();
-              return;
-            }
-            reject();
-          });
+          refundOrder(orderId)
+            .then((response) => {
+              if (get(response, "status") === "success") {
+                resolve();
+                return;
+              }
+              reject();
+            })
+            .catch(() => {
+              //失败退款
+              const key = "RefundFail";
+              message
+                .loading("Refunding...", 1.0)
+                .then(() => message.error(key, 1.0))
+                .then(() => reject())
+                .then(() => navigate(`/orderHistory`));
+            });
         })
           .then(() => {
             //成功退款
@@ -66,19 +78,14 @@ const OrderHistoryDetail = () => {
               .then(() => message.success(key, 1.0))
               .then(() => navigate(`/orderHistory`));
           })
-          .catch(() => {
-            //失败退款
-            const key = "RefundFail";
-            message
-              .loading("Refunding...", 1.0)
-              .then(() => message.error(key, 1.0))
-              .then(() => navigate(`/orderHistory`));
-          });
+          .catch(() => {});
       },
       onCancel() {},
     });
   };
-
+  const callbackIsUsed = (isUsed) => {
+    setIsUsed(isUsed);
+  };
   return (
     <PerfectScrollbar id="app-main-scroller-bar">
       <div className="order-history-detail">
@@ -93,34 +100,38 @@ const OrderHistoryDetail = () => {
           </div>
           <div className="order-history-detail-box-right">
             <div style={{ width: "600px" }}>
-              <AfterPayDetail orderId={orderId} />
+              <AfterPayDetail
+                orderId={orderId}
+                callbackIsUsed={callbackIsUsed}
+              />
             </div>
-
-            <div className="order-history-detail-box-button">
-              <div>
-                <Button
-                  className="order-history-detail-box-button-changeTime"
-                  type="primary"
-                  shape="round"
-                  icon={<ClockCircleOutlined />}
-                  size="large"
-                >
-                  ChangeTime
-                </Button>
+            {!isUsed && (
+              <div className="order-history-detail-box-button">
+                <div>
+                  <Button
+                    className="order-history-detail-box-button-changeTime"
+                    type="primary"
+                    shape="round"
+                    icon={<ClockCircleOutlined />}
+                    size="large"
+                  >
+                    ChangeTime
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    className="order-history-detail-box-button-refund"
+                    type="primary"
+                    shape="round"
+                    icon={<MinusCircleOutlined />}
+                    size="large"
+                    onClick={onclickRefund}
+                  >
+                    Refund
+                  </Button>
+                </div>
               </div>
-              <div>
-                <Button
-                  className="order-history-detail-box-button-refund"
-                  type="primary"
-                  shape="round"
-                  icon={<MinusCircleOutlined />}
-                  size="large"
-                  onClick={onclickRefund}
-                >
-                  Refund
-                </Button>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
