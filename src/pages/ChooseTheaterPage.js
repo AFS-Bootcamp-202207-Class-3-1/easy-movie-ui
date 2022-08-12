@@ -67,7 +67,7 @@ const ChooseTheaterPage = () => {
                 </span>
                 <span className="runtime">
                   <FieldTimeOutlined />
-                  <span>{data?.movie?.duration}分钟</span>
+                  <span>{data?.movie?.duration}Minutes</span>
                 </span>
               </div>
             </div>

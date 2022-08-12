@@ -6,7 +6,7 @@ const SeatDetailCardItem = ({row, col}) => {
         src="/seat/ticket.png"
         alt=""
       />
-      <div className="seat-detail-card-select-item-text">{row}排{col}座</div>
+      <div className="seat-detail-card-select-item-text">{row} row {col} seat </div>
     </div>
   );
 };

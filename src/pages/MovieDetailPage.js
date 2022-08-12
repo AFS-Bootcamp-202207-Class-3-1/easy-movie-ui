@@ -58,7 +58,7 @@ const MovieDetailPage = () => {
                 <span>{data?.movie?.releaseDate}</span>
                 <span className="runtime">
                   <FieldTimeOutlined />
-                  <span>{data?.movie?.duration}分钟</span>
+                  <span>{data?.movie?.duration}Minutes</span>
                 </span>
               </div>
             </div>
@@ -120,7 +120,7 @@ const MovieDetailPage = () => {
                     <img src={director.imgUrl} alt="" />
                     <span className="name">{director.name}</span>
                     <br />
-                    <span className="position">导演</span>
+                    <span className="position">Director</span>
                   </div>
                 );
               })}
@@ -130,7 +130,7 @@ const MovieDetailPage = () => {
                     <img src={actor.imgUrl} alt="" />
                     <span className="name">{actor.name}</span>
                     <br />
-                    <span className="position">演员</span>
+                    <span className="position">Actor</span>
                   </div>
                 );
               })}
