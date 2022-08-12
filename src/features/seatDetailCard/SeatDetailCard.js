@@ -1,13 +1,13 @@
 import "./SeatDetailCard.less";
-import { Button, Divider, message } from "antd";
+import {Button, Divider, message} from "antd";
 import SeatDetailCardItem from "./SeatDetailCardItem";
 import moment from "moment";
-import { useSelector } from "react-redux";
-import { join } from "lodash";
-import { confirmSeats } from "../../api/order";
-import { useNavigate } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {join} from "lodash";
+import {confirmSeats} from "../../api/order";
+import {useNavigate} from "react-router-dom";
 
-const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
+const SeatDetailCard = ({movie, theater, schedule, selectSeats, orderId}) => {
   const navigate = useNavigate();
 
   const seatDetailCardItems = selectSeats.map((seat, index) => {
@@ -50,7 +50,7 @@ const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
           className="seat-detail-card-movie-img"
           src={movie.imageUrl}
           alt=""
-        ></img>
+        />
         <div className="seat-detail-card-movie-info">
           <div className="seat-detail-card-movie-info-title">{movie.name}</div>
           <div className="seat-detail-card-movie-info-detail">
@@ -61,20 +61,20 @@ const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
       </div>
       <div className="seat-detail-card-others">
         <div className="seat-detail-card-others-theater">
-          <span className="seat-detail-card-others-prefix">影院: </span>
+          <span className="seat-detail-card-others-prefix">Theater: </span>
           <span className="seat-detail-card-others-theater-name">
             {theater.name}
           </span>
         </div>
         <div className="seat-detail-card-others-schedule">
-          <span className="seat-detail-card-others-prefix">场次: </span>
+          <span className="seat-detail-card-others-prefix">Schedule: </span>
           <span className="seat-detail-card-others-schedule-name">
             {moment(schedule.startTime).format("YYYY-MM-DD HH:mm")}{" "}
             {schedule.screenText}
           </span>
         </div>
         <div className="seat-detail-card-others-price">
-          <span className="seat-detail-card-others-prefix">票价: </span>
+          <span className="seat-detail-card-others-prefix">Ticket Fare: </span>
           <span className="seat-detail-card-others-price-detail">
             ${schedule.price}
           </span>
@@ -82,11 +82,11 @@ const SeatDetailCard = ({ movie, theater, schedule, selectSeats, orderId }) => {
       </div>
       <Divider dashed></Divider>
       <div className="seat-detail-card-select">
-        <div className="seat-detail-card-select-title">Selected Seats: </div>
+        <div className="seat-detail-card-select-title">Selected Seats:</div>
         {seatDetailCardItems}
       </div>
       <div className="seat-detail-card-total">
-        <div className="seat-detail-card-total-title">Total Price: </div>
+        <div className="seat-detail-card-total-title">Total Price:</div>
         <div className="seat-detail-card-total-price">$ {totalPrice}</div>
       </div>
       <Divider dashed></Divider>

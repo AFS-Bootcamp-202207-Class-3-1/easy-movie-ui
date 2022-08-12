@@ -2,8 +2,8 @@ import {
   updateChooseMovie,
   updateMoviewSession,
 } from "./TheatreOnMovieClickSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { getSessionInfoById } from "../../api/cinemaInfo";
+import {useSelector, useDispatch} from "react-redux";
+import {getSessionInfoById} from "../../api/cinemaInfo";
 import "./TheatreOnMovieListItem.less";
 import {useParams} from "react-router-dom";
 
@@ -24,6 +24,7 @@ function TheatreOnMovieListItem(props) {
         dispatch(updateMoviewSession(res1.data));
       }
     }
+
     fetchData();
   };
   return (
@@ -38,7 +39,7 @@ function TheatreOnMovieListItem(props) {
           onClick={choiceMovie}
           src={props.imageUrl}
           alt="example"
-        ></img>
+        />
       }
     </>
   );

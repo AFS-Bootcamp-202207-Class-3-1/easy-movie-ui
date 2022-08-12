@@ -11,7 +11,7 @@ function TheatreOnMovieList(props) {
           MovieId={item.id}
           imageUrl={item.imageUrl}
           key={index}
-        ></TheatreOnMovieListItem>
+        />
       ))}
     </>
   );

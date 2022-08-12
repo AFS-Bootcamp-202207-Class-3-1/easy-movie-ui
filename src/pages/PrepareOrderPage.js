@@ -100,9 +100,9 @@ const PrepareOrderPage = () => {
       splitSeats.forEach((seat, index) => {
         if (seat === "1") {
           seatsDetail.push(
-            `${Math.floor(index / 6) + 1}排${
+            `${Math.floor(index / 6) + 1} row ${
               index - Math.floor(index / 6) * 6 + 1
-            }座`
+            } seat `
           );
         }
       });

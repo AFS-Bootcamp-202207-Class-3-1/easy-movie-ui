@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import {Col, Row} from "antd";
 import "./SelectSeatExample.less";
 
 const SelectSeatExample = () => {
@@ -10,7 +10,7 @@ const SelectSeatExample = () => {
             src="/seat/gray.png"
             className="select-seat-example-col-img"
             alt=""
-          ></img>
+          />
           <div className="select-seat-example-col-text">Available</div>
         </Col>
         <Col span={8} className="select-seat-example-col">
@@ -18,7 +18,7 @@ const SelectSeatExample = () => {
             src="/seat/green.png"
             className="select-seat-example-col-img"
             alt=""
-          ></img>
+          />
           <div className="select-seat-example-col-text">Selected</div>
         </Col>
         <Col span={8} className="select-seat-example-col">
@@ -26,7 +26,7 @@ const SelectSeatExample = () => {
             src="/seat/red.png"
             className="select-seat-example-col-img"
             alt=""
-          ></img>
+          />
           <div className="select-seat-example-col-text">Reserved</div>
         </Col>
       </Row>
