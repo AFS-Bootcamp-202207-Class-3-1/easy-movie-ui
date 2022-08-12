@@ -107,7 +107,7 @@ const OrderHistoryDetail = () => {
             </div>
             {!isUsed && (
               <div className="order-history-detail-box-button">
-                <div>
+                {/* <div>
                   <Button
                     className="order-history-detail-box-button-changeTime"
                     type="primary"
@@ -117,7 +117,7 @@ const OrderHistoryDetail = () => {
                   >
                     ChangeTime
                   </Button>
-                </div>
+                </div> */}
                 <div>
                   <Button
                     className="order-history-detail-box-button-refund"
